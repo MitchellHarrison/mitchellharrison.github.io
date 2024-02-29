@@ -5,6 +5,13 @@ project:
 website: 
   title: "Mitch's Website"
   navbar:
+    tools:
+      - icon: github
+        menu:
+          - text: "This site's code"
+            url: https://github.com/mitchellharrison/mitchellharrison.github.io
+          - text: "My GitHub"
+            url: https://github.com/mitchellharrison
     left:
       - text: "Blog"
         file: blog.qmd
