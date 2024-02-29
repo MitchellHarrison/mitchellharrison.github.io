@@ -1,0 +1,16 @@
+{
+  "hash": "f73fc891620c0b31df5e89c2356c7aa2",
+  "result": {
+    "markdown": "---\ntitle: \"Dummy project\"\n---\n\n\nHere is a sample code block!\n\n::: {.cell}\n\n```{.r .cell-code}\nhist(faithful[,2])\n```\n\n::: {.cell-output-display}\n![](dummy_project_files/figure-html/dummy-code-block-1.png){width=672}\n:::\n:::",
+    "supporting": [
+      "dummy_project_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -2,4 +2,9 @@
 title: "Dummy project"
 ---
 
-Maybe someone will see something here that they find neat!
+Here is a sample code block!
+```{r}
+#| label: dummy-code-block
+
+hist(faithful[,2])
+```

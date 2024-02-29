@@ -23,6 +23,10 @@ website:
 format: 
   html: 
     theme: flatly
+    code-fold: true
+
+language:
+  code-summary: "Click here for code"
     
 execute: 
   freeze: auto
