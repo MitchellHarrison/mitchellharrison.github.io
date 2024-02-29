@@ -1,0 +1,6 @@
+---
+title: "Blog"
+---
+
+We can browse blog posts here. For example, [clicking this](blogs/demo_blog.qmd)
+will take you do a dummy blog post full of nothing (yet).
