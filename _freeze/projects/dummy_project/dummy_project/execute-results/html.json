@@ -1,0 +1,16 @@
+{
+  "hash": "8f81c776638739421568916d90fd340a",
+  "result": {
+    "markdown": "---\ntitle: \"Dummy project\"\n---\n\n\nHere is a sample code block!\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\ndata <- read_csv(paste0(getwd(), \"/data/data.csv\"))\ndata |>\n  ggplot(aes(x = x, y = y)) +\n  geom_line(color = \"red\")\n```\n\n::: {.cell-output-display}\n![](dummy_project_files/figure-html/dummy-code-block-1.png){width=672}\n:::\n:::",
+    "supporting": [
+      "dummy_project_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

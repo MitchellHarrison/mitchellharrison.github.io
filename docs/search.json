@@ -56,10 +56,10 @@
     "text": "We can browse blog posts here. For example, clicking this will take you do a dummy blog post full of nothing (yet)."
   },
   {
-    "objectID": "projects/dummy_project.html",
-    "href": "projects/dummy_project.html",
+    "objectID": "projects/dummy_project/dummy_project.html",
+    "href": "projects/dummy_project/dummy_project.html",
     "title": "Dummy project",
     "section": "",
-    "text": "Here is a sample code block!\n\n\nClick here for code\nhist(faithful[,2])"
+    "text": "Here is a sample code block!\n\n\nClick here for code\nlibrary(tidyverse)\ndata &lt;- read_csv(paste0(getwd(), \"/data/data.csv\"))\ndata |&gt;\n  ggplot(aes(x = x, y = y)) +\n  geom_line(color = \"red\")"
   }
 ]

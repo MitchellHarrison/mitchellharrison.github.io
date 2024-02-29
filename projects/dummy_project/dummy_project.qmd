@@ -1,0 +1,14 @@
+---
+title: "Dummy project"
+---
+
+Here is a sample code block!
+```{r}
+#| label: dummy-code-block
+
+library(tidyverse)
+data <- read_csv(paste0(getwd(), "/data/data.csv"))
+data |>
+  ggplot(aes(x = x, y = y)) +
+  geom_line(color = "red")
+```
