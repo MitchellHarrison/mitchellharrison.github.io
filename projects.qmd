@@ -1,0 +1,6 @@
+---
+title: "Projects"
+---
+
+This is where my projects will be listed! Kind of like 
+[this](projects/dummy_project.qmd) dummy project!

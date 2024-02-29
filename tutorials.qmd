@@ -1,0 +1,6 @@
+---
+title: "Tutorials"
+---
+
+Here is a place to browse my tutorials! See a filler one
+[here](tutorials/dummy_tutorial.qmd)!

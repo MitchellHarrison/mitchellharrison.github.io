@@ -1,0 +1,5 @@
+---
+title: "Dummy project"
+---
+
+Maybe someone will see something here that they find neat!
