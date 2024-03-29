@@ -4,7 +4,7 @@ listing:
   contents: projects
   type: grid
   sort: "date desc"
-  categories: false
+  categories: true
   feed: true
 ---
 

@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Fri, 29 Mar 2024 03:46:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 29 Mar 2024 04:04:24 GMT</lastBuildDate>
 <item>
   <title>Dummy tutorial</title>
   <link>https://mitchellharrison.github.io/tutorials/dummy_tutorial/dummy_tutorial.html</link>
@@ -24,7 +24,7 @@
 
  ]]></description>
   <guid>https://mitchellharrison.github.io/tutorials/dummy_tutorial/dummy_tutorial.html</guid>
-  <pubDate>Fri, 29 Mar 2024 03:46:00 GMT</pubDate>
+  <pubDate>Fri, 29 Mar 2024 04:04:24 GMT</pubDate>
 </item>
 </channel>
 </rss>

@@ -1,5 +1,6 @@
 ---
 title: "About me"
+toc: false
 ---
 
 ## The about me page.
