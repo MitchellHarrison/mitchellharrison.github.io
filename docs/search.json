@@ -1,35 +1,35 @@
 [
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
+    "objectID": "tutorials/dummy_tutorial/dummy_tutorial.html",
+    "href": "tutorials/dummy_tutorial/dummy_tutorial.html",
+    "title": "Dummy tutorial",
     "section": "",
-    "text": "We can browse blog posts here. For example, clicking this will take you do a dummy blog post full of nothing (yet)."
+    "text": "This could be a place where people can learn things!"
   },
   {
     "objectID": "tutorials.html",
     "href": "tutorials.html",
     "title": "Tutorials",
     "section": "",
-    "text": "Here is a place to browse my tutorials! See a filler one here!"
+    "text": "Here is a place to browse my tutorials! See a filler one!\n\n\n\n\n\n\n\n\n\n\n\n\nDummy tutorial\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "This is where my projects will be listed! Kind of like this dummy project!"
+    "text": "This is where my projects will be listed… soon!\n\n\n\n\n\n\n\n\n\n\n\n\nDummy project\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "blogs/demo_blog.html",
-    "href": "blogs/demo_blog.html",
+    "objectID": "blogs/demo_blog/demo_blog.html",
+    "href": "blogs/demo_blog/demo_blog.html",
     "title": "Demo blog post",
     "section": "",
     "text": "This is where I may do some writing."
   },
   {
-    "objectID": "blogs/demo_blog.html#demo-blog",
-    "href": "blogs/demo_blog.html#demo-blog",
+    "objectID": "blogs/demo_blog/demo_blog.html#demo-blog",
+    "href": "blogs/demo_blog/demo_blog.html#demo-blog",
     "title": "Demo blog post",
     "section": "",
     "text": "This is where I may do some writing."
@@ -56,10 +56,10 @@
     "text": "This is where readers will see information about me, Mitch Harrison."
   },
   {
-    "objectID": "tutorials/dummy_tutorial.html",
-    "href": "tutorials/dummy_tutorial.html",
-    "title": "Dummy tutorial",
+    "objectID": "blogs.html",
+    "href": "blogs.html",
+    "title": "Blog",
     "section": "",
-    "text": "This could be a place where people can learn things!"
+    "text": "We can browse blog posts here. For example, will take you do a dummy blog post full of nothing (yet).\n\n\n\n\n\n\n\n\n\n\n\n\nDemo blog post\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

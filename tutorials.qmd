@@ -1,6 +1,11 @@
 ---
 title: "Tutorials"
+listing:
+  contents: tutorials
+  type: grid
+  sort: "date desc"
+  categories: true
+  feed: true
 ---
 
-Here is a place to browse my tutorials! See a filler one
-[here](tutorials/dummy_tutorial.qmd)!
+Here is a place to browse my tutorials! See a filler one!

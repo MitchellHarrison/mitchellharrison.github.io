@@ -1,0 +1,20 @@
+[
+  {
+    "listing": "/tutorials.html",
+    "items": [
+      "/tutorials/dummy_tutorial/dummy_tutorial.html"
+    ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/dummy_project/dummy_project.html"
+    ]
+  },
+  {
+    "listing": "/blogs.html",
+    "items": [
+      "/blogs/demo_blog/demo_blog.html"
+    ]
+  }
+]

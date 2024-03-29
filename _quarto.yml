@@ -4,12 +4,13 @@ project:
   
 website: 
   title: "Mitch's Website"
+  site-url: https://mitchellharrison.github.io
   repo-url: https://github.com/MitchellHarrison/mitchellharrison.github.io
   repo-actions: [edit, issue]
   navbar:
     left:
       - text: "Blog"
-        file: blog.qmd
+        file: blogs.qmd
       - text: "Tutorials"
         file: tutorials.qmd
       - text: "Projects"
