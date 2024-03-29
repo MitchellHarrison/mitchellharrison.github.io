@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "We can browse blog posts here. For example, clicking this will take you do a dummy blog post full of nothing (yet)."
+  },
+  {
     "objectID": "tutorials.html",
     "href": "tutorials.html",
     "title": "Tutorials",
@@ -7,18 +14,11 @@
     "text": "Here is a place to browse my tutorials! See a filler one here!"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "About me",
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
     "section": "",
-    "text": "This is where readers will see information about me, Mitch Harrison."
-  },
-  {
-    "objectID": "index.html#the-about-me-page.",
-    "href": "index.html#the-about-me-page.",
-    "title": "About me",
-    "section": "",
-    "text": "This is where readers will see information about me, Mitch Harrison."
+    "text": "This is where my projects will be listed! Kind of like this dummy project!"
   },
   {
     "objectID": "blogs/demo_blog.html",
@@ -35,11 +35,25 @@
     "text": "This is where I may do some writing."
   },
   {
-    "objectID": "projects.html",
-    "href": "projects.html",
-    "title": "Projects",
+    "objectID": "projects/dummy_project/dummy_project.html",
+    "href": "projects/dummy_project/dummy_project.html",
+    "title": "Dummy project",
     "section": "",
-    "text": "This is where my projects will be listed! Kind of like this dummy project!"
+    "text": "Here is a sample code block!\n\n\nClick here for code\nlibrary(tidyverse)\ndata &lt;- read_csv(paste0(getwd(), \"/data/data.csv\"))\ndata |&gt;\n  ggplot(aes(x = x, y = y)) +\n  geom_line(color = \"red\")"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About me",
+    "section": "",
+    "text": "This is where readers will see information about me, Mitch Harrison."
+  },
+  {
+    "objectID": "index.html#the-about-me-page.",
+    "href": "index.html#the-about-me-page.",
+    "title": "About me",
+    "section": "",
+    "text": "This is where readers will see information about me, Mitch Harrison."
   },
   {
     "objectID": "tutorials/dummy_tutorial.html",
@@ -47,19 +61,5 @@
     "title": "Dummy tutorial",
     "section": "",
     "text": "This could be a place where people can learn things!"
-  },
-  {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
-    "section": "",
-    "text": "We can browse blog posts here. For example, clicking this will take you do a dummy blog post full of nothing (yet)."
-  },
-  {
-    "objectID": "projects/dummy_project/dummy_project.html",
-    "href": "projects/dummy_project/dummy_project.html",
-    "title": "Dummy project",
-    "section": "",
-    "text": "Here is a sample code block!\n\n\nClick here for code\nlibrary(tidyverse)\ndata &lt;- read_csv(paste0(getwd(), \"/data/data.csv\"))\ndata |&gt;\n  ggplot(aes(x = x, y = y)) +\n  geom_line(color = \"red\")"
   }
 ]

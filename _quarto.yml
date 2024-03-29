@@ -4,14 +4,9 @@ project:
   
 website: 
   title: "Mitch's Website"
+  repo-url: https://github.com/MitchellHarrison/mitchellharrison.github.io
+  repo-actions: [edit, issue]
   navbar:
-    tools:
-      - icon: github
-        menu:
-          - text: "This site's code"
-            url: https://github.com/mitchellharrison/mitchellharrison.github.io
-          - text: "My GitHub"
-            url: https://github.com/mitchellharrison
     left:
       - text: "Blog"
         file: blog.qmd
@@ -19,11 +14,18 @@ website:
         file: tutorials.qmd
       - text: "Projects"
         file: projects.qmd
-  
+        
+  page-footer:
+    left: 
+      - icon: github
+        href: "https://github.com/MitchellHarrison/mitchellharrison.github.io"
+    right: "This page is built with 💙 and [Quarto](https://quarto.org/)."
+    
 format: 
   html: 
     theme: flatly
     code-fold: true
+    toc: true
 
 language:
   code-summary: "Click here for code"
