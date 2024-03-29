@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/projects.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Fri, 29 Mar 2024 03:42:54 GMT</lastBuildDate>
+<lastBuildDate>Fri, 29 Mar 2024 03:45:59 GMT</lastBuildDate>
 <item>
   <title>Dummy project</title>
   <link>https://mitchellharrison.github.io/projects/dummy_project/dummy_project.html</link>
@@ -67,7 +67,7 @@ font-style: inherit;">"red"</span>)</span></code></pre></div>
 
  ]]></description>
   <guid>https://mitchellharrison.github.io/projects/dummy_project/dummy_project.html</guid>
-  <pubDate>Fri, 29 Mar 2024 03:42:54 GMT</pubDate>
+  <pubDate>Fri, 29 Mar 2024 03:45:59 GMT</pubDate>
 </item>
 </channel>
 </rss>

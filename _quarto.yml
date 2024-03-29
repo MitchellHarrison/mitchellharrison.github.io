@@ -9,12 +9,12 @@ website:
   repo-actions: [edit, issue]
   navbar:
     left:
-      - text: "Blog"
-        file: blogs.qmd
-      - text: "Tutorials"
-        file: tutorials.qmd
       - text: "Projects"
         file: projects.qmd
+      - text: "Tutorials"
+        file: tutorials.qmd
+      - text: "Blog"
+        file: blogs.qmd
         
   page-footer:
     left: 
