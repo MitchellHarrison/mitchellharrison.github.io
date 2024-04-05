@@ -1,5 +1,0 @@
----
-title: "Dummy tutorial"
----
-
-This could be a place where people can learn things!

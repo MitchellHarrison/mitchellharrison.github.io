@@ -8,4 +8,5 @@ listing:
   feed: true
 ---
 
-Here is a place to browse my tutorials! See a filler one!
+Here is a place to browse my tutorials! Feel free to browse or sort by
+category on the right side of the page.

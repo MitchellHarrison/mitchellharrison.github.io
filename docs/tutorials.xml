@@ -10,21 +10,42 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Fri, 29 Mar 2024 04:04:24 GMT</lastBuildDate>
+<lastBuildDate>Fri, 05 Apr 2024 20:15:17 GMT</lastBuildDate>
 <item>
-  <title>Dummy tutorial</title>
-  <link>https://mitchellharrison.github.io/tutorials/dummy_tutorial/dummy_tutorial.html</link>
+  <title>Welcome to Stats! | Mathematical Statistics 1</title>
+  <dc:creator>Mitch Harrison</dc:creator>
+  <link>https://mitchellharrison.github.io/tutorials/math_stat_1.html</link>
   <description><![CDATA[ 
 
 
 
-<p>This could be a place where people can learn things!</p>
+<section id="welcome" class="level1">
+<h1>Welcome!</h1>
+<p>At the time of this writing, I’m a senior at Duke, just wrapping up my undergrad journey. I’m in an upper-level course called “STA432: Statistical Learning and Inference,” and its vague title hides the fact that it’s basically a mathematical statistics course. I’ll be aggregating my notes into a series of articles both to help the mathematically curious and to help me retain what I’m learning.</p>
+<p>Because this is an upper-level undergraduate course, some previous mathematical training will be required. Specifically, the algebra can get kind of rough (recall your logarithm/exponent rules) and there will be some calculus (mostly derivatives and some series). I’ll try to parenthetically mention what’s happening with the calculus as we go, but I won’t be showing each step of the derivatives I take, etc. Also, I’ll assume some basic statistical knowledge, mostly understanding of distributions, expectation, variance, and PDFs/CDFs. If there is sufficient demand for me to explain these more basic statistical concepts, I’d be happy to. Feel free to put in a GitHub issue with the link in the bottom of every page to request these changes.</p>
+</section>
+<section id="resources" class="level1">
+<h1>Resources</h1>
+<p>The syllabus for my STA432 course lists <a href="https://www.amazon.com/Probability-Statistics-4th-Morris-DeGroot/dp/0321500466">Probability and Statistics (4th Ed) by DeGroot and Mark J. Schervish</a> as a primary text. I think that learning with a textbook alongside a course is almost always helpful for supplementing learning, but it is certainly not a requirement.</p>
+<p>I won’t be directly quoting my lectures or sharing the recordings due to my personal ethics and (probably) Duke terms of service. Everything you see on this website will be my attempt to aggregate the knowledge shared in class and share it in my own words. For the curious, my professor for this course is <a href="https://scholars.duke.edu/person/alexander.volfovsky">Alexander Volfovsky</a>.</p>
+</section>
+<section id="goals" class="level1">
+<h1>Goals</h1>
+<p>The course is split into roughly three broad strokes, and so too will these articles be. The first third will be dedicated to choosing an <a href="https://en.wikipedia.org/wiki/Estimator">estimator</a> (i.e., some way of estimating an unknown reality using a function of observed data). We’ll discuss how we choose an estimator, how we judge the quality of that estimator, and some <em>very</em> common methods for choosing estimators, provided that we are working with nice enough distributions.</p>
+<p>The second third of the course discusses <a href="https://en.wikipedia.org/wiki/Confidence_interval">confidence</a>. That is, once we choose an estimator, how confident can we be that our estimator is a sound one. Of course, we can never be 100% certain of our estimate because we are dealing with statistics and statics are never that kind to us. But, we can try our best to be as confident as possible.</p>
+<p>Finally, we will conduct <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_test">hypothesis tests</a>. For example, if I’m wondering whether or not some population parameter <img src="https://latex.codecogs.com/png.latex?%5Cmu"> (e.g., the true average height of everyone in town) is <img src="https://latex.codecogs.com/png.latex?%5Cmu%20=%2065"> or <img src="https://latex.codecogs.com/png.latex?%5Cmu%20=%2069"> inches, we can use our observed height data to quantify how likely either of those two options are. This is a trivial (and arguably unhelpful) example, but testing our hypotheses is a crucial and exciting part of statistical analysis.</p>
+</section>
+<section id="lets-go" class="level1">
+<h1>Let’s go!</h1>
+<p>If you have any questions, feel free to reach out. If not, I hope you’re ready (and honestly, I hope <em>I’m</em> ready) to get started!</p>
 
 
+</section>
 
  ]]></description>
-  <guid>https://mitchellharrison.github.io/tutorials/dummy_tutorial/dummy_tutorial.html</guid>
-  <pubDate>Fri, 29 Mar 2024 04:04:24 GMT</pubDate>
+  <category>Statistics</category>
+  <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
+  <pubDate>Fri, 05 Apr 2024 20:15:17 GMT</pubDate>
 </item>
 </channel>
 </rss>

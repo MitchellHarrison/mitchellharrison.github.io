@@ -1,0 +1,63 @@
+---
+title: "Welcome to Stats! | Mathematical Statistics 1"
+author: "Mitch Harrison"
+categories:
+  - "Statistics"
+---
+
+# Welcome!
+At the time of this writing, I'm a senior at Duke, just wrapping up my
+undergrad journey. I'm in an upper-level course called "STA432: Statistical
+Learning and Inference," and its vague title hides the fact that it's
+basically a mathematical statistics course. I'll be aggregating my notes into
+a series of articles both to help the mathematically curious and to help me
+retain what I'm learning. 
+
+Because this is an upper-level undergraduate course, some previous mathematical
+training will be required. Specifically, the algebra can get kind of rough
+(recall your logarithm/exponent rules) and there will be some calculus (mostly
+derivatives and some series). I'll try to parenthetically mention what's 
+happening with the calculus as we go, but I won't be showing each step of the
+derivatives I take, etc. Also, I'll assume some basic statistical knowledge,
+mostly understanding of distributions, expectation, variance, and PDFs/CDFs. If
+there is sufficient demand for me to explain these more basic statistical
+concepts, I'd be happy to. Feel free to put in a GitHub issue with the link in
+the bottom of every page to request these changes.
+
+# Resources
+The syllabus for my STA432 course lists [Probability and Statistics (4th Ed) by DeGroot and Mark J. Schervish](https://www.amazon.com/Probability-Statistics-4th-Morris-DeGroot/dp/0321500466)
+as a primary text. I think that learning with a textbook alongside a course is
+almost always helpful for supplementing learning, but it is certainly not a 
+requirement.
+
+I won't be directly quoting my lectures or sharing the recordings due to my
+personal ethics and (probably) Duke terms of service. Everything you see on this
+website will be my attempt to aggregate the knowledge shared in class and share
+it in my own words. For the curious, my professor for this course is
+[Alexander Volfovsky](https://scholars.duke.edu/person/alexander.volfovsky).
+
+# Goals
+The course is split into roughly three broad strokes, and so too will these
+articles be. The first third will be dedicated to choosing an
+[estimator](https://en.wikipedia.org/wiki/Estimator) (i.e., some way of
+estimating an unknown reality using a function of observed data). We'll discuss
+how we choose an estimator, how we judge the quality of that estimator, and
+some *very* common methods for choosing estimators, provided that we are working
+with nice enough distributions.
+
+The second third of the course discusses [confidence](https://en.wikipedia.org/wiki/Confidence_interval). 
+That is, once we choose an estimator, how confident can we be that our 
+estimator is a sound one. Of course, we can never be 100% certain of our 
+estimate because we are dealing with statistics and statics are never that kind 
+to us. But, we can try our best to be as confident as possible.
+
+Finally, we will conduct [hypothesis tests](https://en.wikipedia.org/wiki/Statistical_hypothesis_test). 
+For example, if I'm wondering whether or not some population parameter $\mu$
+(e.g., the true average height of everyone in town) is $\mu = 65$ or $\mu = 69$
+inches, we can use our observed height data to quantify how likely either of 
+those two options are. This is a trivial (and arguably unhelpful) example, but 
+testing our hypotheses is a crucial and exciting part of statistical analysis.
+
+# Let's go!
+If you have any questions, feel free to reach out. If not, I hope you're ready
+(and honestly, I hope *I'm* ready) to get started!

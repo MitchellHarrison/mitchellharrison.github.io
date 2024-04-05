@@ -22,8 +22,8 @@ website:
         href: "https://github.com/MitchellHarrison/mitchellharrison.github.io"
     right: "This page is built with 💙 and [Quarto](https://quarto.org/)."
     
-format: 
-  html: 
+format:
+  html:
     theme: flatly
     code-fold: true
     toc: true
