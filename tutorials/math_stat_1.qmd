@@ -1,63 +1,112 @@
 ---
-title: "Welcome to Stats! | Mathematical Statistics 1"
+title: "Welcome to Estimators | Mathematical Statistics 1"
 author: "Mitch Harrison"
 categories:
   - "Statistics"
 ---
 
-# Welcome!
-At the time of this writing, I'm a senior at Duke, just wrapping up my
-undergrad journey. I'm in an upper-level course called "STA432: Statistical
-Learning and Inference," and its vague title hides the fact that it's
-basically a mathematical statistics course. I'll be aggregating my notes into
-a series of articles both to help the mathematically curious and to help me
-retain what I'm learning. 
+# Introduction to Point Estimation
+Say we have some data $\mathbf{X}$. It's a vector, so just think of it like a
+list of $n$ numbers. We want to learn something about how these data came to
+be. First, we will aggregate our data using a **statistic**.
 
-Because this is an upper-level undergraduate course, some previous mathematical
-training will be required. Specifically, the algebra can get kind of rough
-(recall your logarithm/exponent rules) and there will be some calculus (mostly
-derivatives and some series). I'll try to parenthetically mention what's 
-happening with the calculus as we go, but I won't be showing each step of the
-derivatives I take, etc. Also, I'll assume some basic statistical knowledge,
-mostly understanding of distributions, expectation, variance, and PDFs/CDFs. If
-there is sufficient demand for me to explain these more basic statistical
-concepts, I'd be happy to. Feel free to put in a GitHub issue with the link in
-the bottom of every page to request these changes.
+::: {.callout-important}
+### Definition
+Let $X_1, \cdots, X_n$ be our data. A **statistic** is a function of that data.
+We will denote that statistic with $\delta$. Crucially, this function cannot
+contain anything that we don't know. It is purely a function of known 
+quantities.
+:::
 
-# Resources
-The syllabus for my STA432 course lists [Probability and Statistics (4th Ed) by DeGroot and Mark J. Schervish](https://www.amazon.com/Probability-Statistics-4th-Morris-DeGroot/dp/0321500466)
-as a primary text. I think that learning with a textbook alongside a course is
-almost always helpful for supplementing learning, but it is certainly not a 
-requirement.
+## Statistics
+Let's say that our data comes from a normal distribution (a "bell curve"). We
+denote this with $X \sim N(\mu, \sigma^2)$, where $\mu$ is the mean of the
+distribution and $\sigma^2$ is the variance. Also, to make our life easier, say
+we know the variance $\sigma^2$. In practice, this will basically never be the
+case, but it will simplify our math for now.
 
-I won't be directly quoting my lectures or sharing the recordings due to my
-personal ethics and (probably) Duke terms of service. Everything you see on this
-website will be my attempt to aggregate the knowledge shared in class and share
-it in my own words. For the curious, my professor for this course is
-[Alexander Volfovsky](https://scholars.duke.edu/person/alexander.volfovsky).
+We have infinitely many options for statistics that we can choose. For example,
+we could use $X_1$ (that is, the first data point in our vector). While we
+leave some data on the table in that case, it is certainly a statistic
+since $\delta = X_1$ is a function of our data, and there are no unknowns.
 
-# Goals
-The course is split into roughly three broad strokes, and so too will these
-articles be. The first third will be dedicated to choosing an
-[estimator](https://en.wikipedia.org/wiki/Estimator) (i.e., some way of
-estimating an unknown reality using a function of observed data). We'll discuss
-how we choose an estimator, how we judge the quality of that estimator, and
-some *very* common methods for choosing estimators, provided that we are working
-with nice enough distributions.
+Alternatively, we could use the observed mean of our data. We will call it
+$\overline{X}$ (pronounced "$X$ bar"), and it is denoted with
+$$
+\delta(\mathbf{X}) = \overline{X} = \frac{1}{n}\sum_{i=1}^n X_i.
+$$
 
-The second third of the course discusses [confidence](https://en.wikipedia.org/wiki/Confidence_interval). 
-That is, once we choose an estimator, how confident can we be that our 
-estimator is a sound one. Of course, we can never be 100% certain of our 
-estimate because we are dealing with statistics and statics are never that kind 
-to us. But, we can try our best to be as confident as possible.
+Notice that this is also a statistic! Although it looks much more
+complicated, we are still using our data and no unknowns. Here, $n$ is the
+number of data points that we have, which we know. And we know every $X_i$
+because each is part of our data vector $\mathbf{X}$.
 
-Finally, we will conduct [hypothesis tests](https://en.wikipedia.org/wiki/Statistical_hypothesis_test). 
-For example, if I'm wondering whether or not some population parameter $\mu$
-(e.g., the true average height of everyone in town) is $\mu = 65$ or $\mu = 69$
-inches, we can use our observed height data to quantify how likely either of 
-those two options are. This is a trivial (and arguably unhelpful) example, but 
-testing our hypotheses is a crucial and exciting part of statistical analysis.
+::: {.callout-note}
+Constants (e.g., 7) are also statistics, although no data are involved in
+the calculation. If it feels like you're just guessing at random if you do this,
+you're right.
+:::
 
-# Let's go!
-If you have any questions, feel free to reach out. If not, I hope you're ready
-(and honestly, I hope *I'm* ready) to get started!
+Now let's look at an example of a function that is *not* a statistic:
+$$
+\delta(\mathbf{X}) = T = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}}.
+$$
+This function will come back in future articles, but for now, recall that
+we said that we already know the variance $sigma^2$. So that means we already
+know $\sigma$. We also know $n$, as we mentioned earlier. But $\mu$ is
+unknown to us. Because we have an unknown value $\mu$ in the numerator, $T$ is
+*not* a statistic.
+
+___
+
+# Point Estimators
+To use a plain-language term that is largely despised among statisticians, we
+want to "guess" (\**gasp*\*) at the value of our unknown parameter. In the 
+previous example, that parameter was $\mu$. To be more general, we will use
+the Greek letter $\theta$ (pronounced "theta") since $\mu$ is often saved for
+the mean of a normal distribution. 
+
+::: {.callout-important}
+### Definition
+Say we have data $\mathbf{X}$ that comes from some probability distribution with
+an unknown parameter $\theta$ that has some *true* fixed value. A
+**point estimator** is a statistic that estimates the true value of $\theta$,
+and is denoted by $\hat{\theta}$. That is,
+$$
+\hat{\theta} = \delta(\mathbf{X}).
+$$
+:::
+
+## Point estimator example
+Let's keep going with our data, which comes from a normal distribution. But, to
+get used to using $\theta$, say that $X \sim N(\theta, \sigma^2)$. One possible
+estimator is the example mean $\overline{X}$ from earlier (i.e., the mean of the
+observed data). Alternatively, we can use a constant: say 5. Intuitively, it 
+feels like $\hat{\theta} = \overline{X}$ would be a better guess than a simple
+$\hat{\theta} = 5$, because it is actually informed by the data. But how do we
+quantify that intuition? We will calculate and compare both *bias* and 
+*precision* for each.
+
+### Bias
+**Bias** tells us how often, on average, we get the correct value of our
+unknown parameter $\theta$. Mathematically, we hope that the following 
+quantity is as small as possible:
+$$
+\mathbb{E}[\delta(\mathbf{X}) | \theta] - \theta.
+$$
+
+The confusing-looking term $\mathbb{E}[\cdot]$ is the expected value of our 
+estimator, given the value of the unknown parameter $\theta$. Basically, this is
+the expected value of $\hat{\theta}$. If our estimator $\hat{\theta}$ is 
+expected to be exactly correct on average, then this whole term will be 0, which
+is the smallest possible bias. 
+
+### Variance
+**Variance** describes the variability of our estimator. Ideally, variance is
+also small. Intuitively we are less "sure" about our estimate if we have a wider
+variance. We denote variance with $Var(\delta(\mathbf{X})|\theta)$.
+
+However, notice that both bias and variance are conditional on the true value of
+our unknown parameter $\theta$. Thus, we cannot calculate these quantities 
+directly. To deal with this, we will introduce the concept of **loss** in the
+next article!

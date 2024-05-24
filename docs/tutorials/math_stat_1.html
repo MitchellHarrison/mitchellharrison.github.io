@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.333">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Mitch Harrison">
 
-<title>Mitch’s Website - Welcome to Stats! | Mathematical Statistics 1</title>
+<title>Mitch’s Website - Welcome to Estimators | Mathematical Statistics 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -56,8 +56,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -111,10 +110,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  <li><a href="#goals" id="toc-goals" class="nav-link" data-scroll-target="#goals">Goals</a></li>
-  <li><a href="#lets-go" id="toc-lets-go" class="nav-link" data-scroll-target="#lets-go">Let’s go!</a></li>
+  <li><a href="#introduction-to-point-estimation" id="toc-introduction-to-point-estimation" class="nav-link active" data-scroll-target="#introduction-to-point-estimation">Introduction to Point Estimation</a>
+  <ul class="collapse">
+  <li><a href="#statistics" id="toc-statistics" class="nav-link" data-scroll-target="#statistics">Statistics</a></li>
+  </ul></li>
+  <li><a href="#point-estimators" id="toc-point-estimators" class="nav-link" data-scroll-target="#point-estimators">Point Estimators</a>
+  <ul class="collapse">
+  <li><a href="#point-estimator-example" id="toc-point-estimator-example" class="nav-link" data-scroll-target="#point-estimator-example">Point estimator example</a>
+  <ul class="collapse">
+  <li><a href="#bias" id="toc-bias" class="nav-link" data-scroll-target="#bias">Bias</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance">Variance</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/edit/main/tutorials/math_stat_1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -123,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to Stats! | Mathematical Statistics 1</h1>
+<h1 class="title">Welcome to Estimators | Mathematical Statistics 1</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Statistics</div>
   </div>
@@ -147,27 +154,85 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="welcome" class="level1">
-<h1>Welcome!</h1>
-<p>At the time of this writing, I’m a senior at Duke, just wrapping up my undergrad journey. I’m in an upper-level course called “STA432: Statistical Learning and Inference,” and its vague title hides the fact that it’s basically a mathematical statistics course. I’ll be aggregating my notes into a series of articles both to help the mathematically curious and to help me retain what I’m learning.</p>
-<p>Because this is an upper-level undergraduate course, some previous mathematical training will be required. Specifically, the algebra can get kind of rough (recall your logarithm/exponent rules) and there will be some calculus (mostly derivatives and some series). I’ll try to parenthetically mention what’s happening with the calculus as we go, but I won’t be showing each step of the derivatives I take, etc. Also, I’ll assume some basic statistical knowledge, mostly understanding of distributions, expectation, variance, and PDFs/CDFs. If there is sufficient demand for me to explain these more basic statistical concepts, I’d be happy to. Feel free to put in a GitHub issue with the link in the bottom of every page to request these changes.</p>
+<section id="introduction-to-point-estimation" class="level1">
+<h1>Introduction to Point Estimation</h1>
+<p>Say we have some data <span class="math inline">\(\mathbf{X}\)</span>. It’s a vector, so just think of it like a list of <span class="math inline">\(n\)</span> numbers. We want to learn something about how these data came to be. First, we will aggregate our data using a <strong>statistic</strong>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be our data. A <strong>statistic</strong> is a function of that data. We will denote that statistic with <span class="math inline">\(\delta\)</span>. Crucially, this function cannot contain anything that we don’t know. It is purely a function of known quantities.</p>
+</div>
+</div>
+<section id="statistics" class="level2">
+<h2 class="anchored" data-anchor-id="statistics">Statistics</h2>
+<p>Let’s say that our data comes from a normal distribution (a “bell curve”). We denote this with <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, where <span class="math inline">\(\mu\)</span> is the mean of the distribution and <span class="math inline">\(\sigma^2\)</span> is the variance. Also, to make our life easier, say we know the variance <span class="math inline">\(\sigma^2\)</span>. In practice, this will basically never be the case, but it will simplify our math for now.</p>
+<p>We have infinitely many options for statistics that we can choose. For example, we could use <span class="math inline">\(X_1\)</span> (that is, the first data point in our vector). While we leave some data on the table in that case, it is certainly a statistic since <span class="math inline">\(\delta = X_1\)</span> is a function of our data, and there are no unknowns.</p>
+<p>Alternatively, we could use the observed mean of our data. We will call it <span class="math inline">\(\overline{X}\)</span> (pronounced “<span class="math inline">\(X\)</span> bar”), and it is denoted with <span class="math display">\[
+\delta(\mathbf{X}) = \overline{X} = \frac{1}{n}\sum_{i=1}^n X_i.
+\]</span></p>
+<p>Notice that this is also a statistic! Although it looks much more complicated, we are still using our data and no unknowns. Here, <span class="math inline">\(n\)</span> is the number of data points that we have, which we know. And we know every <span class="math inline">\(X_i\)</span> because each is part of our data vector <span class="math inline">\(\mathbf{X}\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Constants (e.g., 7) are also statistics, although no data are involved in the calculation. If it feels like you’re just guessing at random if you do this, you’re right.</p>
+</div>
+</div>
+<p>Now let’s look at an example of a function that is <em>not</em> a statistic: <span class="math display">\[
+\delta(\mathbf{X}) = T = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}}.
+\]</span> This function will come back in future articles, but for now, recall that we said that we already know the variance <span class="math inline">\(sigma^2\)</span>. So that means we already know <span class="math inline">\(\sigma\)</span>. We also know <span class="math inline">\(n\)</span>, as we mentioned earlier. But <span class="math inline">\(\mu\)</span> is unknown to us. Because we have an unknown value <span class="math inline">\(\mu\)</span> in the numerator, <span class="math inline">\(T\)</span> is <em>not</em> a statistic.</p>
+<hr>
 </section>
-<section id="resources" class="level1">
-<h1>Resources</h1>
-<p>The syllabus for my STA432 course lists <a href="https://www.amazon.com/Probability-Statistics-4th-Morris-DeGroot/dp/0321500466">Probability and Statistics (4th Ed) by DeGroot and Mark J. Schervish</a> as a primary text. I think that learning with a textbook alongside a course is almost always helpful for supplementing learning, but it is certainly not a requirement.</p>
-<p>I won’t be directly quoting my lectures or sharing the recordings due to my personal ethics and (probably) Duke terms of service. Everything you see on this website will be my attempt to aggregate the knowledge shared in class and share it in my own words. For the curious, my professor for this course is <a href="https://scholars.duke.edu/person/alexander.volfovsky">Alexander Volfovsky</a>.</p>
 </section>
-<section id="goals" class="level1">
-<h1>Goals</h1>
-<p>The course is split into roughly three broad strokes, and so too will these articles be. The first third will be dedicated to choosing an <a href="https://en.wikipedia.org/wiki/Estimator">estimator</a> (i.e., some way of estimating an unknown reality using a function of observed data). We’ll discuss how we choose an estimator, how we judge the quality of that estimator, and some <em>very</em> common methods for choosing estimators, provided that we are working with nice enough distributions.</p>
-<p>The second third of the course discusses <a href="https://en.wikipedia.org/wiki/Confidence_interval">confidence</a>. That is, once we choose an estimator, how confident can we be that our estimator is a sound one. Of course, we can never be 100% certain of our estimate because we are dealing with statistics and statics are never that kind to us. But, we can try our best to be as confident as possible.</p>
-<p>Finally, we will conduct <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_test">hypothesis tests</a>. For example, if I’m wondering whether or not some population parameter <span class="math inline">\(\mu\)</span> (e.g., the true average height of everyone in town) is <span class="math inline">\(\mu = 65\)</span> or <span class="math inline">\(\mu = 69\)</span> inches, we can use our observed height data to quantify how likely either of those two options are. This is a trivial (and arguably unhelpful) example, but testing our hypotheses is a crucial and exciting part of statistical analysis.</p>
+<section id="point-estimators" class="level1">
+<h1>Point Estimators</h1>
+<p>To use a plain-language term that is largely despised among statisticians, we want to “guess” (*<em>gasp</em>*) at the value of our unknown parameter. In the previous example, that parameter was <span class="math inline">\(\mu\)</span>. To be more general, we will use the Greek letter <span class="math inline">\(\theta\)</span> (pronounced “theta”) since <span class="math inline">\(\mu\)</span> is often saved for the mean of a normal distribution.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Say we have data <span class="math inline">\(\mathbf{X}\)</span> that comes from some probability distribution with an unknown parameter <span class="math inline">\(\theta\)</span> that has some <em>true</em> fixed value. A <strong>point estimator</strong> is a statistic that estimates the true value of <span class="math inline">\(\theta\)</span>, and is denoted by <span class="math inline">\(\hat{\theta}\)</span>. That is, <span class="math display">\[
+\hat{\theta} = \delta(\mathbf{X}).
+\]</span></p>
+</div>
+</div>
+<section id="point-estimator-example" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimator-example">Point estimator example</h2>
+<p>Let’s keep going with our data, which comes from a normal distribution. But, to get used to using <span class="math inline">\(\theta\)</span>, say that <span class="math inline">\(X \sim N(\theta, \sigma^2)\)</span>. One possible estimator is the example mean <span class="math inline">\(\overline{X}\)</span> from earlier (i.e., the mean of the observed data). Alternatively, we can use a constant: say 5. Intuitively, it feels like <span class="math inline">\(\hat{\theta} = \overline{X}\)</span> would be a better guess than a simple <span class="math inline">\(\hat{\theta} = 5\)</span>, because it is actually informed by the data. But how do we quantify that intuition? We will calculate and compare both <em>bias</em> and <em>precision</em> for each.</p>
+<section id="bias" class="level3">
+<h3 class="anchored" data-anchor-id="bias">Bias</h3>
+<p><strong>Bias</strong> tells us how often, on average, we get the correct value of our unknown parameter <span class="math inline">\(\theta\)</span>. Mathematically, we hope that the following quantity is as small as possible: <span class="math display">\[
+\mathbb{E}[\delta(\mathbf{X}) | \theta] - \theta.
+\]</span></p>
+<p>The confusing-looking term <span class="math inline">\(\mathbb{E}[\cdot]\)</span> is the expected value of our estimator, given the value of the unknown parameter <span class="math inline">\(\theta\)</span>. Basically, this is the expected value of <span class="math inline">\(\hat{\theta}\)</span>. If our estimator <span class="math inline">\(\hat{\theta}\)</span> is expected to be exactly correct on average, then this whole term will be 0, which is the smallest possible bias.</p>
 </section>
-<section id="lets-go" class="level1">
-<h1>Let’s go!</h1>
-<p>If you have any questions, feel free to reach out. If not, I hope you’re ready (and honestly, I hope <em>I’m</em> ready) to get started!</p>
+<section id="variance" class="level3">
+<h3 class="anchored" data-anchor-id="variance">Variance</h3>
+<p><strong>Variance</strong> describes the variability of our estimator. Ideally, variance is also small. Intuitively we are less “sure” about our estimate if we have a wider variance. We denote variance with <span class="math inline">\(Var(\delta(\mathbf{X})|\theta)\)</span>.</p>
+<p>However, notice that both bias and variance are conditional on the true value of our unknown parameter <span class="math inline">\(\theta\)</span>. Thus, we cannot calculate these quantities directly. To deal with this, we will introduce the concept of <strong>loss</strong> in the next article!</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

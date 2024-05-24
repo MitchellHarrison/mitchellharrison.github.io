@@ -9,43 +9,93 @@
 <link>https://mitchellharrison.github.io/tutorials.html</link>
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.450</generator>
-<lastBuildDate>Fri, 05 Apr 2024 20:15:17 GMT</lastBuildDate>
+<generator>quarto-1.3.333</generator>
+<lastBuildDate>Fri, 24 May 2024 21:22:08 GMT</lastBuildDate>
 <item>
-  <title>Welcome to Stats! | Mathematical Statistics 1</title>
+  <title>Welcome to Estimators | Mathematical Statistics 1</title>
   <dc:creator>Mitch Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/tutorials/math_stat_1.html</link>
   <description><![CDATA[ 
 
 
 
-<section id="welcome" class="level1">
-<h1>Welcome!</h1>
-<p>At the time of this writing, I’m a senior at Duke, just wrapping up my undergrad journey. I’m in an upper-level course called “STA432: Statistical Learning and Inference,” and its vague title hides the fact that it’s basically a mathematical statistics course. I’ll be aggregating my notes into a series of articles both to help the mathematically curious and to help me retain what I’m learning.</p>
-<p>Because this is an upper-level undergraduate course, some previous mathematical training will be required. Specifically, the algebra can get kind of rough (recall your logarithm/exponent rules) and there will be some calculus (mostly derivatives and some series). I’ll try to parenthetically mention what’s happening with the calculus as we go, but I won’t be showing each step of the derivatives I take, etc. Also, I’ll assume some basic statistical knowledge, mostly understanding of distributions, expectation, variance, and PDFs/CDFs. If there is sufficient demand for me to explain these more basic statistical concepts, I’d be happy to. Feel free to put in a GitHub issue with the link in the bottom of every page to request these changes.</p>
+<section id="introduction-to-point-estimation" class="level1">
+<h1>Introduction to Point Estimation</h1>
+<p>Say we have some data <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D">. It’s a vector, so just think of it like a list of <img src="https://latex.codecogs.com/png.latex?n"> numbers. We want to learn something about how these data came to be. First, we will aggregate our data using a <strong>statistic</strong>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <img src="https://latex.codecogs.com/png.latex?X_1,%20%5Ccdots,%20X_n"> be our data. A <strong>statistic</strong> is a function of that data. We will denote that statistic with <img src="https://latex.codecogs.com/png.latex?%5Cdelta">. Crucially, this function cannot contain anything that we don’t know. It is purely a function of known quantities.</p>
+</div>
+</div>
+<section id="statistics" class="level2">
+<h2 class="anchored" data-anchor-id="statistics">Statistics</h2>
+<p>Let’s say that our data comes from a normal distribution (a “bell curve”). We denote this with <img src="https://latex.codecogs.com/png.latex?X%20%5Csim%20N(%5Cmu,%20%5Csigma%5E2)">, where <img src="https://latex.codecogs.com/png.latex?%5Cmu"> is the mean of the distribution and <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2"> is the variance. Also, to make our life easier, say we know the variance <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2">. In practice, this will basically never be the case, but it will simplify our math for now.</p>
+<p>We have infinitely many options for statistics that we can choose. For example, we could use <img src="https://latex.codecogs.com/png.latex?X_1"> (that is, the first data point in our vector). While we leave some data on the table in that case, it is certainly a statistic since <img src="https://latex.codecogs.com/png.latex?%5Cdelta%20=%20X_1"> is a function of our data, and there are no unknowns.</p>
+<p>Alternatively, we could use the observed mean of our data. We will call it <img src="https://latex.codecogs.com/png.latex?%5Coverline%7BX%7D"> (pronounced “<img src="https://latex.codecogs.com/png.latex?X"> bar”), and it is denoted with <img src="https://latex.codecogs.com/png.latex?%0A%5Cdelta(%5Cmathbf%7BX%7D)%20=%20%5Coverline%7BX%7D%20=%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5En%20X_i.%0A"></p>
+<p>Notice that this is also a statistic! Although it looks much more complicated, we are still using our data and no unknowns. Here, <img src="https://latex.codecogs.com/png.latex?n"> is the number of data points that we have, which we know. And we know every <img src="https://latex.codecogs.com/png.latex?X_i"> because each is part of our data vector <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D">.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Constants (e.g., 7) are also statistics, although no data are involved in the calculation. If it feels like you’re just guessing at random if you do this, you’re right.</p>
+</div>
+</div>
+<p>Now let’s look at an example of a function that is <em>not</em> a statistic: <img src="https://latex.codecogs.com/png.latex?%0A%5Cdelta(%5Cmathbf%7BX%7D)%20=%20T%20=%20%5Cfrac%7B%5Coverline%7BX%7D%20-%20%5Cmu%7D%7B%5Csigma/%5Csqrt%7Bn%7D%7D.%0A"> This function will come back in future articles, but for now, recall that we said that we already know the variance <img src="https://latex.codecogs.com/png.latex?sigma%5E2">. So that means we already know <img src="https://latex.codecogs.com/png.latex?%5Csigma">. We also know <img src="https://latex.codecogs.com/png.latex?n">, as we mentioned earlier. But <img src="https://latex.codecogs.com/png.latex?%5Cmu"> is unknown to us. Because we have an unknown value <img src="https://latex.codecogs.com/png.latex?%5Cmu"> in the numerator, <img src="https://latex.codecogs.com/png.latex?T"> is <em>not</em> a statistic.</p>
+<hr>
 </section>
-<section id="resources" class="level1">
-<h1>Resources</h1>
-<p>The syllabus for my STA432 course lists <a href="https://www.amazon.com/Probability-Statistics-4th-Morris-DeGroot/dp/0321500466">Probability and Statistics (4th Ed) by DeGroot and Mark J. Schervish</a> as a primary text. I think that learning with a textbook alongside a course is almost always helpful for supplementing learning, but it is certainly not a requirement.</p>
-<p>I won’t be directly quoting my lectures or sharing the recordings due to my personal ethics and (probably) Duke terms of service. Everything you see on this website will be my attempt to aggregate the knowledge shared in class and share it in my own words. For the curious, my professor for this course is <a href="https://scholars.duke.edu/person/alexander.volfovsky">Alexander Volfovsky</a>.</p>
 </section>
-<section id="goals" class="level1">
-<h1>Goals</h1>
-<p>The course is split into roughly three broad strokes, and so too will these articles be. The first third will be dedicated to choosing an <a href="https://en.wikipedia.org/wiki/Estimator">estimator</a> (i.e., some way of estimating an unknown reality using a function of observed data). We’ll discuss how we choose an estimator, how we judge the quality of that estimator, and some <em>very</em> common methods for choosing estimators, provided that we are working with nice enough distributions.</p>
-<p>The second third of the course discusses <a href="https://en.wikipedia.org/wiki/Confidence_interval">confidence</a>. That is, once we choose an estimator, how confident can we be that our estimator is a sound one. Of course, we can never be 100% certain of our estimate because we are dealing with statistics and statics are never that kind to us. But, we can try our best to be as confident as possible.</p>
-<p>Finally, we will conduct <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_test">hypothesis tests</a>. For example, if I’m wondering whether or not some population parameter <img src="https://latex.codecogs.com/png.latex?%5Cmu"> (e.g., the true average height of everyone in town) is <img src="https://latex.codecogs.com/png.latex?%5Cmu%20=%2065"> or <img src="https://latex.codecogs.com/png.latex?%5Cmu%20=%2069"> inches, we can use our observed height data to quantify how likely either of those two options are. This is a trivial (and arguably unhelpful) example, but testing our hypotheses is a crucial and exciting part of statistical analysis.</p>
+<section id="point-estimators" class="level1">
+<h1>Point Estimators</h1>
+<p>To use a plain-language term that is largely despised among statisticians, we want to “guess” (*<em>gasp</em>*) at the value of our unknown parameter. In the previous example, that parameter was <img src="https://latex.codecogs.com/png.latex?%5Cmu">. To be more general, we will use the Greek letter <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> (pronounced “theta”) since <img src="https://latex.codecogs.com/png.latex?%5Cmu"> is often saved for the mean of a normal distribution.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Say we have data <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D"> that comes from some probability distribution with an unknown parameter <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> that has some <em>true</em> fixed value. A <strong>point estimator</strong> is a statistic that estimates the true value of <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, and is denoted by <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Ctheta%7D">. That is, <img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7B%5Ctheta%7D%20=%20%5Cdelta(%5Cmathbf%7BX%7D).%0A"></p>
+</div>
+</div>
+<section id="point-estimator-example" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimator-example">Point estimator example</h2>
+<p>Let’s keep going with our data, which comes from a normal distribution. But, to get used to using <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, say that <img src="https://latex.codecogs.com/png.latex?X%20%5Csim%20N(%5Ctheta,%20%5Csigma%5E2)">. One possible estimator is the example mean <img src="https://latex.codecogs.com/png.latex?%5Coverline%7BX%7D"> from earlier (i.e., the mean of the observed data). Alternatively, we can use a constant: say 5. Intuitively, it feels like <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Ctheta%7D%20=%20%5Coverline%7BX%7D"> would be a better guess than a simple <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Ctheta%7D%20=%205">, because it is actually informed by the data. But how do we quantify that intuition? We will calculate and compare both <em>bias</em> and <em>precision</em> for each.</p>
+<section id="bias" class="level3">
+<h3 class="anchored" data-anchor-id="bias">Bias</h3>
+<p><strong>Bias</strong> tells us how often, on average, we get the correct value of our unknown parameter <img src="https://latex.codecogs.com/png.latex?%5Ctheta">. Mathematically, we hope that the following quantity is as small as possible: <img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B%5Cdelta(%5Cmathbf%7BX%7D)%20%7C%20%5Ctheta%5D%20-%20%5Ctheta.%0A"></p>
+<p>The confusing-looking term <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D%5B%5Ccdot%5D"> is the expected value of our estimator, given the value of the unknown parameter <img src="https://latex.codecogs.com/png.latex?%5Ctheta">. Basically, this is the expected value of <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Ctheta%7D">. If our estimator <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Ctheta%7D"> is expected to be exactly correct on average, then this whole term will be 0, which is the smallest possible bias.</p>
 </section>
-<section id="lets-go" class="level1">
-<h1>Let’s go!</h1>
-<p>If you have any questions, feel free to reach out. If not, I hope you’re ready (and honestly, I hope <em>I’m</em> ready) to get started!</p>
+<section id="variance" class="level3">
+<h3 class="anchored" data-anchor-id="variance">Variance</h3>
+<p><strong>Variance</strong> describes the variability of our estimator. Ideally, variance is also small. Intuitively we are less “sure” about our estimate if we have a wider variance. We denote variance with <img src="https://latex.codecogs.com/png.latex?Var(%5Cdelta(%5Cmathbf%7BX%7D)%7C%5Ctheta)">.</p>
+<p>However, notice that both bias and variance are conditional on the true value of our unknown parameter <img src="https://latex.codecogs.com/png.latex?%5Ctheta">. Thus, we cannot calculate these quantities directly. To deal with this, we will introduce the concept of <strong>loss</strong> in the next article!</p>
 
 
+</section>
+</section>
 </section>
 
  ]]></description>
   <category>Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Fri, 05 Apr 2024 20:15:17 GMT</pubDate>
+  <pubDate>Fri, 24 May 2024 21:22:08 GMT</pubDate>
 </item>
 </channel>
 </rss>
