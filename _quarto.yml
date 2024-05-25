@@ -15,6 +15,9 @@ website:
         file: tutorials.qmd
       - text: "Blog"
         file: blogs.qmd
+    right:
+      - text: "☕ Buy me a coffee!"
+        href: "https://buymeacoffee.com/mitchellharrison"
         
   page-footer:
     left: 

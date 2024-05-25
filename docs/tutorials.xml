@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.333</generator>
-<lastBuildDate>Sat, 25 May 2024 04:32:39 GMT</lastBuildDate>
+<lastBuildDate>Sat, 25 May 2024 04:55:47 GMT</lastBuildDate>
 <item>
   <title>Welcome to Estimators! | Mathematical Statistics 1</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -95,7 +95,7 @@ Definition
  ]]></description>
   <category>Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Sat, 25 May 2024 04:32:39 GMT</pubDate>
+  <pubDate>Sat, 25 May 2024 04:55:47 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 </channel>
