@@ -39,5 +39,5 @@ knitr:
     message: false
     warning: false
   
-execute: 
-  freeze: auto
+# execute: 
+#   freeze: auto
