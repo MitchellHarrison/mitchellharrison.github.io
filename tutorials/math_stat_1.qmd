@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Estimators | Mathematical Statistics 1"
+title: "Welcome to Estimators! | Mathematical Statistics 1"
 author: "Mitch Harrison"
 categories:
   - "Statistics"
@@ -52,7 +52,7 @@ $$
 \delta(\mathbf{X}) = T = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}}.
 $$
 This function will come back in future articles, but for now, recall that
-we said that we already know the variance $sigma^2$. So that means we already
+we said that we already know the variance $\sigma^2$. So that means we already
 know $\sigma$. We also know $n$, as we mentioned earlier. But $\mu$ is
 unknown to us. Because we have an unknown value $\mu$ in the numerator, $T$ is
 *not* a statistic.

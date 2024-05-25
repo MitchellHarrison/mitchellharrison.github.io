@@ -10,9 +10,9 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.333</generator>
-<lastBuildDate>Fri, 24 May 2024 21:22:08 GMT</lastBuildDate>
+<lastBuildDate>Sat, 25 May 2024 03:45:47 GMT</lastBuildDate>
 <item>
-  <title>Welcome to Estimators | Mathematical Statistics 1</title>
+  <title>Welcome to Estimators! | Mathematical Statistics 1</title>
   <dc:creator>Mitch Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/tutorials/math_stat_1.html</link>
   <description><![CDATA[ 
@@ -54,7 +54,7 @@ Note
 <p>Constants (e.g., 7) are also statistics, although no data are involved in the calculation. If it feels like you’re just guessing at random if you do this, you’re right.</p>
 </div>
 </div>
-<p>Now let’s look at an example of a function that is <em>not</em> a statistic: <img src="https://latex.codecogs.com/png.latex?%0A%5Cdelta(%5Cmathbf%7BX%7D)%20=%20T%20=%20%5Cfrac%7B%5Coverline%7BX%7D%20-%20%5Cmu%7D%7B%5Csigma/%5Csqrt%7Bn%7D%7D.%0A"> This function will come back in future articles, but for now, recall that we said that we already know the variance <img src="https://latex.codecogs.com/png.latex?sigma%5E2">. So that means we already know <img src="https://latex.codecogs.com/png.latex?%5Csigma">. We also know <img src="https://latex.codecogs.com/png.latex?n">, as we mentioned earlier. But <img src="https://latex.codecogs.com/png.latex?%5Cmu"> is unknown to us. Because we have an unknown value <img src="https://latex.codecogs.com/png.latex?%5Cmu"> in the numerator, <img src="https://latex.codecogs.com/png.latex?T"> is <em>not</em> a statistic.</p>
+<p>Now let’s look at an example of a function that is <em>not</em> a statistic: <img src="https://latex.codecogs.com/png.latex?%0A%5Cdelta(%5Cmathbf%7BX%7D)%20=%20T%20=%20%5Cfrac%7B%5Coverline%7BX%7D%20-%20%5Cmu%7D%7B%5Csigma/%5Csqrt%7Bn%7D%7D.%0A"> This function will come back in future articles, but for now, recall that we said that we already know the variance <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2">. So that means we already know <img src="https://latex.codecogs.com/png.latex?%5Csigma">. We also know <img src="https://latex.codecogs.com/png.latex?n">, as we mentioned earlier. But <img src="https://latex.codecogs.com/png.latex?%5Cmu"> is unknown to us. Because we have an unknown value <img src="https://latex.codecogs.com/png.latex?%5Cmu"> in the numerator, <img src="https://latex.codecogs.com/png.latex?T"> is <em>not</em> a statistic.</p>
 <hr>
 </section>
 </section>
@@ -95,7 +95,7 @@ Definition
  ]]></description>
   <category>Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Fri, 24 May 2024 21:22:08 GMT</pubDate>
+  <pubDate>Sat, 25 May 2024 03:45:47 GMT</pubDate>
 </item>
 </channel>
 </rss>
