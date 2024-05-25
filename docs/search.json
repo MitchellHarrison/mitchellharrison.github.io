@@ -44,9 +44,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "About me",
+    "title": "Hi, I’m Mitch. 👋",
     "section": "",
-    "text": "This is where readers will see information about me, Mitch Harrison."
+    "text": "After leaving the Navy in 2022, I moved to North Carolina to study data science and political science at Duke University. Finishing my degree cost the military about $60,000 in aid and depleted my savings. Even my parents, who probably thought they could start spending their “put their kid through college” fund on fun things, had to chip in to help. My education was world-class but utterly unattainable for the majority of us. This website is my attempt to turn my course notes, homework, and projects into comprehensible articles for free. If nothing else, future Duke students struggling through their data science degree can look here for a different perspective.\nIf you want my personal, non-academic analysis projects, head to the Projects tab. If you are here to learn, the Tutorials tab is for you! And if you want to sit back and read some plain-language blog posts, there’s a Blog tab just for you. Of course, if you are curious about the website’s structure, it is built with R and Quarto, and the code is available by clicking on the GitHub icon at the bottom-left of every page (or click here).\nAccess to information should always be free, so every article here is, and always will be, at no cost. If you want to show financial support, you can buy me a coffee! But I won’t ever make donor-exclusive educational content, so don’t feel like you’re missing out by not donating. It’s just one way to show thanks.\nI hope you enjoy the site, and feel free to reach out via GitHub issues to make suggestions for articles. Thanks for reading!"
   },
   {
     "objectID": "index.html#the-about-me-page.",
