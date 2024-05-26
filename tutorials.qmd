@@ -9,4 +9,5 @@ listing:
 ---
 
 Here is a place to browse my tutorials! Feel free to browse or sort by
-category on the right side of the page.
+category on the right side of the page. If you have any questions or ideas for
+new topics, let me know on [Discord](https://discord.gg/vF6W2bdKFH)!
