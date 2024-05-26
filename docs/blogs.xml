@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/blogs.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.333</generator>
-<lastBuildDate>Sun, 26 May 2024 02:03:24 GMT</lastBuildDate>
+<lastBuildDate>Sun, 26 May 2024 03:47:28 GMT</lastBuildDate>
 <item>
   <title>Demo blog post</title>
   <link>https://mitchellharrison.github.io/blogs/demo_blog/demo_blog.html</link>
@@ -27,7 +27,7 @@
 
  ]]></description>
   <guid>https://mitchellharrison.github.io/blogs/demo_blog/demo_blog.html</guid>
-  <pubDate>Sun, 26 May 2024 02:03:24 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 03:47:28 GMT</pubDate>
 </item>
 </channel>
 </rss>

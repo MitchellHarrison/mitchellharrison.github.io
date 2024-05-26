@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.333</generator>
-<lastBuildDate>Sun, 26 May 2024 02:03:10 GMT</lastBuildDate>
+<lastBuildDate>Sun, 26 May 2024 03:48:57 GMT</lastBuildDate>
 <item>
   <title>Welcome to Estimators! | Mathematical Statistics 1</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -95,7 +95,7 @@ Definition
  ]]></description>
   <category>Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Sun, 26 May 2024 02:03:10 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 03:48:57 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -106,14 +106,1888 @@ Definition
 
 
 
-<p>Hello!</p>
+<p>Welcome! If you saw my post for this week’s TidyTuesday, I’m glad you liked it enough to learn from it! If not, you can either scroll to the bottom to see the final product or click <a href="../projects/tidytuesday_05212024/emissions.html">here</a> to see it. For this plot, we will use an area plot to visualize the global emissions by type going back to 1900. To start, we will use a bare-bones <code>ggplot2</code> area chart with no bells or whistles to see what we are working with.</p>
+<div class="cell">
+<details>
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># read data and rename an ugly column ------------------------------------------</span></span>
+<span id="cb1-4">emis<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(</span>
+<span id="cb1-5">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/"</span>,</span>
+<span id="cb1-6">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data/2024/2024-05-21/emissions.csv"</span></span>
+<span id="cb1-7">  )</span>
+<span id="cb1-8">)</span>
+<span id="cb1-9"></span>
+<span id="cb1-10">emis <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rename</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"total_emissions_MtCO2e"</span>)</span>
+<span id="cb1-12"></span>
+<span id="cb1-13">emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, commodity) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(emissions), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-16">  </span>
+<span id="cb1-17">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># start of plot --------------------------------------------------------------</span></span>
+<span id="cb1-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> emissions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> commodity)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>)</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_05212024_files/figure-html/step-one-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Okay, we’ve learned a lot. First, there are a <em>lot</em> of categories. A good rule of thumb is that once you get to about seven colors, even non-colorblind humans struggle to differentiate. But there is hope! Notice that there are several types of coal production. Let’s aggregate them. Second, there is a long tail on the left because of near-zero data. Let’s bring our limit to the right to get a better look.</p>
+<div class="cell">
+<details>
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(year <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># get rid of that tail</span></span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb2-4">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># aggregate coal</span></span>
+<span id="cb2-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(commodity, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, commodity),</span>
+<span id="cb2-6">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, commodity) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(emissions), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-9">  </span>
+<span id="cb2-10">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># start of plot --------------------------------------------------------------</span></span>
+<span id="cb2-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> emissions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> commodity)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>)</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_05212024_files/figure-html/step-two-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Much better! But to me, having the smallest category (cement) on top feels awkward. Let’s reorder the categories! I’ll do so in descending order of emissions in the last year.</p>
+<div class="cell">
+<details>
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">LEVS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># our desired order</span></span>
+<span id="cb3-2"></span>
+<span id="cb3-3">emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(year <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb3-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(commodity, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, commodity),</span>
+<span id="cb3-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(commodity, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> LEVS) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># re-order </span></span>
+<span id="cb3-8">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, commodity) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(emissions), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-11">  </span>
+<span id="cb3-12">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># start of plot --------------------------------------------------------------</span></span>
+<span id="cb3-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> emissions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> commodity)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>)</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_05212024_files/figure-html/step-three-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now we’re cooking! It’s time for some style points. I’ll use my favorite aesthetic cheat code: <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/"><code>ggthemes</code></a>. Let’s add a theme and color scheme. I’m going with the FiveThirtyEight theme and a colorblind-friendly palette. I’ll also take this opportunity to adjust the opacity down just a touch. This is a personal choice, but I find it nice to be able to see the grid behind such ink-heavy plots as area plots.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember: unless you are making plots for a very small number of people and you know for certain that none are colorblind, <em>making inaccessible plots is</em> <em>inexcusable</em>. Of course, we all make mistakes, so if you ever notice an accessibility issue on my site, reach out and let me know on <a href="https://discord.gg/vF6W2bdKFH">Discord</a> or via a GitHub issue so I can improve for next time!</p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">LEVS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># our desired order</span></span>
+<span id="cb4-2"></span>
+<span id="cb4-3">emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(year <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb4-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(commodity, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, commodity),</span>
+<span id="cb4-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(commodity, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> LEVS) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># re-order </span></span>
+<span id="cb4-8">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, commodity) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(emissions), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-11">  </span>
+<span id="cb4-12">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># start of plot --------------------------------------------------------------</span></span>
+<span id="cb4-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> emissions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> commodity)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># drop the opacity just a touch</span></span>
+<span id="cb4-15"></span>
+<span id="cb4-16">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># add theme and colors (love you, ggthemes) </span></span>
+<span id="cb4-17">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_colorblind</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-18">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>()</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_05212024_files/figure-html/step-four-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>And just like that, it feels like we are almost there! Let’s change a few things at once. We will change the background color, add the title/subtitle/axis labels/caption, and format the <img src="https://latex.codecogs.com/png.latex?y">-axis to read <code>30k</code> instead of <code>30000</code>. That will give us a feel for the final color scheme and how the fonts feel on the page. Because of the subscript “2” in <img src="https://latex.codecogs.com/png.latex?CO_2">, I will use the <code>latex2exp</code> package use <img src="https://latex.codecogs.com/png.latex?%5CLaTeX"> typesetting in the plot.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One note that is unique to this plot. When we use <code>theme_fivethirtyeight</code>, it removes the <img src="https://latex.codecogs.com/png.latex?y">-axis title. So, although we normally wouldn’t have to explicitly set the axis title to <code>element_text</code> in the <code>theme</code> function, we will here.</p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">LEVS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>)</span>
+<span id="cb5-2">BG_COLOR <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F0F0F0"</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># this will be our background color</span></span>
+<span id="cb5-3"></span>
+<span id="cb5-4">emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(year <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb5-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(commodity, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, commodity),</span>
+<span id="cb5-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(commodity, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> LEVS) </span>
+<span id="cb5-9">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, commodity) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(emissions), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-12">  </span>
+<span id="cb5-13">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># start of plot --------------------------------------------------------------</span></span>
+<span id="cb5-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> emissions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> commodity)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-16"></span>
+<span id="cb5-17">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_colorblind</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-18">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-19"></span>
+<span id="cb5-20">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># abbreviate the y axis labels using the scales package</span></span>
+<span id="cb5-21">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> scales<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">label_number</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scale =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">suffix =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"k"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-22"></span>
+<span id="cb5-23">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># add labels to the plot -----------------------------------------------------</span></span>
+<span id="cb5-24">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb5-25">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb5-26">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> latex2exp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TeX</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Emissions ($MtCO_2e$)"</span>), <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># LaTeX typesetting with TeX()</span></span>
+<span id="cb5-27">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Our World in Emissions"</span>,</span>
+<span id="cb5-28">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> latex2exp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TeX</span>(</span>
+<span id="cb5-29">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb5-30">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Emissions are measured in Millions of Tons of $CO_2$ equivalent"</span>,</span>
+<span id="cb5-31">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"($MtCO_2e$)"</span></span>
+<span id="cb5-32">      )</span>
+<span id="cb5-33">    ),</span>
+<span id="cb5-34">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb5-35">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Made with love by Mitch Harrison"</span>,</span>
+<span id="cb5-36">      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># long blank line to "hack" a an annotation in the bottom-left corner</span></span>
+<span id="cb5-37">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"                                                                       "</span>,</span>
+<span id="cb5-38">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Source: Carbon Majors database and TidyTuesday"</span></span>
+<span id="cb5-39">    )</span>
+<span id="cb5-40">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-41">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb5-42">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.title.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>),</span>
+<span id="cb5-43">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> BG_COLOR) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># change background color</span></span>
+<span id="cb5-44">  ) </span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_05212024_files/figure-html/step-five-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You could submit this plot for public consumption without shame, but we can do better! For example, I think we could safely remove the legend by annotating the colors directly on the plot. Let’s use a <code>geom_text</code> to do just that. While this entire process has been creative, we are getting into highly subjective territory here. So if you don’t like these changes, do something else! I would love to see your ideas.</p>
+<p>To make the annotations, I want the text to be right-justified and directly atop one another. To accomplish that, I will give <code>geom_text</code> a single <img src="https://latex.codecogs.com/png.latex?x"> value but several <img src="https://latex.codecogs.com/png.latex?y"> values (one for each category).</p>
+<div class="cell">
+<details>
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">LEVS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>)</span>
+<span id="cb6-2">BG_COLOR <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F0F0F0"</span></span>
+<span id="cb6-3"></span>
+<span id="cb6-4">emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(year <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb6-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(commodity, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, commodity),</span>
+<span id="cb6-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(commodity, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> LEVS) </span>
+<span id="cb6-9">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, commodity) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(emissions), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-12">  </span>
+<span id="cb6-13">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># start of plot --------------------------------------------------------------</span></span>
+<span id="cb6-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> emissions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> commodity)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-16"></span>
+<span id="cb6-17">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_colorblind</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-18">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> scales<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">label_number</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scale =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">suffix =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"k"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-20"></span>
+<span id="cb6-21">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># add annotation text to replace the legend ----------------------------------</span></span>
+<span id="cb6-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(</span>
+<span id="cb6-23">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>,</span>
+<span id="cb6-24">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>,</span>
+<span id="cb6-25">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>,</span>
+<span id="cb6-26">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4700</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">26000</span>),</span>
+<span id="cb6-27">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>),</span>
+<span id="cb6-28">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"right"</span>,</span>
+<span id="cb6-29">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fontface =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bold"</span></span>
+<span id="cb6-30">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-31"></span>
+<span id="cb6-32">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb6-33">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb6-34">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> latex2exp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TeX</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Emissions ($MtCO_2e$)"</span>),</span>
+<span id="cb6-35">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Our World in Emissions"</span>,</span>
+<span id="cb6-36">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> latex2exp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TeX</span>(</span>
+<span id="cb6-37">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb6-38">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Emissions are measured in Millions of Tons of $CO_2$ equivalent"</span>,</span>
+<span id="cb6-39">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"($MtCO_2e$)"</span></span>
+<span id="cb6-40">      )</span>
+<span id="cb6-41">    ),</span>
+<span id="cb6-42">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb6-43">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Made with love by Mitch Harrison"</span>,</span>
+<span id="cb6-44">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"                                                                       "</span>,</span>
+<span id="cb6-45">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Source: Carbon Majors database and TidyTuesday"</span></span>
+<span id="cb6-46">    )</span>
+<span id="cb6-47">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-48"></span>
+<span id="cb6-49">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb6-50">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># hide the legend</span></span>
+<span id="cb6-51">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.title.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>),</span>
+<span id="cb6-52">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> BG_COLOR)</span>
+<span id="cb6-53">  ) </span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_05212024_files/figure-html/step-six-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Nailed it. Now, I will happily take criticism here. I don’t love that the “Cement” label isn’t entirely encompassed by its data. But I think it’s much cleaner than having a legend drawing our eye away from the plot, so I’ll keep it.</p>
+<p>The last thing we have to do before we can worry about the big annotation in the middle of the plot is change where the axes break. That is, set the years and emission amount displayed on the x and y axes, respectively. And while I’m at it, I will use a <code>geom_hline</code> to make the <img src="https://latex.codecogs.com/png.latex?x">-axis a bit bolder since it melts into the background a little bit too much for my liking.</p>
+<div class="cell">
+<details>
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">LEVS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>)</span>
+<span id="cb7-2">BG_COLOR <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F0F0F0"</span></span>
+<span id="cb7-3">GRAY <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray35"</span></span>
+<span id="cb7-4"></span>
+<span id="cb7-5">emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(year <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb7-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(commodity, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, commodity),</span>
+<span id="cb7-9">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(commodity, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> LEVS) </span>
+<span id="cb7-10">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, commodity) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(emissions), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-13">  </span>
+<span id="cb7-14">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># start of plot --------------------------------------------------------------</span></span>
+<span id="cb7-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> emissions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> commodity)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-17"></span>
+<span id="cb7-18">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_colorblind</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-19">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-20"></span>
+<span id="cb7-21">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># change where the axis breaks occur -----------------------------------------</span></span>
+<span id="cb7-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_x_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">breaks =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-23">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(</span>
+<span id="cb7-24">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">breaks =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">40000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5000</span>), </span>
+<span id="cb7-25">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> scales<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">label_number</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scale =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">suffix =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"k"</span>)</span>
+<span id="cb7-26">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-27"></span>
+<span id="cb7-28">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(</span>
+<span id="cb7-29">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>,</span>
+<span id="cb7-30">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>,</span>
+<span id="cb7-31">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>,</span>
+<span id="cb7-32">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4700</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">26000</span>),</span>
+<span id="cb7-33">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>),</span>
+<span id="cb7-34">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"right"</span>,</span>
+<span id="cb7-35">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fontface =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bold"</span></span>
+<span id="cb7-36">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-37"></span>
+<span id="cb7-38">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb7-39">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb7-40">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> latex2exp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TeX</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Emissions ($MtCO_2e$)"</span>),</span>
+<span id="cb7-41">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Our World in Emissions"</span>,</span>
+<span id="cb7-42">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> latex2exp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TeX</span>(</span>
+<span id="cb7-43">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb7-44">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Emissions are measured in Millions of Tons of $CO_2$ equivalent"</span>,</span>
+<span id="cb7-45">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"($MtCO_2e$)"</span></span>
+<span id="cb7-46">      )</span>
+<span id="cb7-47">    ),</span>
+<span id="cb7-48">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb7-49">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Made with love by Mitch Harrison"</span>,</span>
+<span id="cb7-50">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"                                                                       "</span>,</span>
+<span id="cb7-51">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Source: Carbon Majors database and TidyTuesday"</span></span>
+<span id="cb7-52">    )</span>
+<span id="cb7-53">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-54"></span>
+<span id="cb7-55">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_hline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yintercept =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> GRAY) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># bold axis</span></span>
+<span id="cb7-56">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb7-57">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># hide the legend</span></span>
+<span id="cb7-58">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.title.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>),</span>
+<span id="cb7-59">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> BG_COLOR)</span>
+<span id="cb7-60">  ) </span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_05212024_files/figure-html/step-seven-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Once I write-in the line breaks, I’ll use the <code>annotate</code> function as before. But that’s not all. By default, there is no background with text annotations, so the grid overlaps the text and decreases legibility. To fix this, I’ll use <code>annotate</code> to put a rectangle the same color as the plot background behind the text, which “removes” the grid lines behind the text.</p>
+<p>Finally, to accomplish the arrow, we will use our final <code>annotate</code> to draw a line segment and put an arrowhead at the end.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Normally, the order that we put things in a <code>ggplot2</code> pipeline doesn’t matter. But here, if you put the background rectangle after the text annotation, it will cover the text, rendering it invisible.</p>
+</div>
+</div>
+<p>Because this is our last edit, I will take this opportunity to make one very oft-forgotten change: write my alt text. Since you’re here, I know you respect the power of data communication. Alt text lets us communicate with those who sometimes miss out on learning from plots online. As our color palette did for colorblind viewers, we owe it to our non-sighted friends to let them participate.</p>
+<p>And finally, I’ll change the aspect ratio of the plot. You may have heard of the <a href="https://en.wikipedia.org/wiki/Golden_ratio">golden ratio</a>, which is a ratio that many humans find inherently satisfying to look at. That ratio is approximately 1.618:1. The inverse of that number is 0.618, which will be our horizontal aspect ratio (1.618 is vertical). Because the quarto headers won’t render with the document, my final header is below:</p>
+<pre><code>#| label: plt-final
+#| fig-width: 8
+#| fig-align: "center"
+#| fig-asp: 0.618
+#| fig-alt: |
+#|   This plot is titled Our World in Emissions. It is an area plot that shows
+#|   global emissions over time by type. The types are coal, natural gas,
+#|   cement, and oil and NGL. The plot notes that in 1995, the UN first met to
+#|   discuss the climate threat. The plot shows near-zero emissions from 1900 to
+#|   1920, when a slow increase begins. From there, emission growth seems to be
+#|   exponentially increasing, with no decline since the UN first met. Coal is
+#|   the largest emitter, then oil and NGL, then natural gas, and finally,
+#|   cement.</code></pre>
+<p>Now, let’s see the plot!</p>
+<div class="cell" data-layout-align="center" data-fig.asp="0.618">
+<details>
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># constants for ease of code legibility ----------------------------------------</span></span>
+<span id="cb9-2">LEVS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>)</span>
+<span id="cb9-3">BG_COLOR <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F0F0F0"</span></span>
+<span id="cb9-4">UN_TEXT <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb9-5">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"In 1995, the United Nations</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Conference of the Parties met for</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">the first"</span>, </span>
+<span id="cb9-6">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"time to discuss the looming</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">threat of climate change. The COP</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">has"</span>,</span>
+<span id="cb9-7">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"met twenty-eight times since."</span></span>
+<span id="cb9-8">)</span>
+<span id="cb9-9"></span>
+<span id="cb9-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># data cleanup -----------------------------------------------------------------</span></span>
+<span id="cb9-11">emis <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(year <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># lots of near-zero space without this filter</span></span>
+<span id="cb9-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb9-14">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(commodity, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>, commodity),</span>
+<span id="cb9-15">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">commodity =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(commodity, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> LEVS) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># re-order areas</span></span>
+<span id="cb9-16">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, commodity) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emissions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(emissions), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-19">  </span>
+<span id="cb9-20">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># start of plot --------------------------------------------------------------</span></span>
+<span id="cb9-21">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> emissions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> commodity)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-23">  </span>
+<span id="cb9-24">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># UN COP annotation text box -------------------------------------------------</span></span>
+<span id="cb9-25"></span>
+<span id="cb9-26">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># the arrow</span></span>
+<span id="cb9-27">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(</span>
+<span id="cb9-28">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"segment"</span>,</span>
+<span id="cb9-29">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1995</span>,</span>
+<span id="cb9-30">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xend =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1995</span>,</span>
+<span id="cb9-31">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">35500</span>,</span>
+<span id="cb9-32">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yend =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20500</span>,</span>
+<span id="cb9-33">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"solid"</span>,</span>
+<span id="cb9-34">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linejoin =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"round"</span>,</span>
+<span id="cb9-35">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb9-36">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey35"</span>,</span>
+<span id="cb9-37">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">arrow =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrow</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"closed"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">length =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unit</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cm"</span>))</span>
+<span id="cb9-38">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-39"></span>
+<span id="cb9-40">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># the background rectangle (must be before the text)</span></span>
+<span id="cb9-41">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(</span>
+<span id="cb9-42">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rect"</span>,</span>
+<span id="cb9-43">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xmin =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1945.5</span>,</span>
+<span id="cb9-44">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xmax =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1993.5</span>,</span>
+<span id="cb9-45">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymin =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">23500</span>,</span>
+<span id="cb9-46">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymax =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">35800</span>,</span>
+<span id="cb9-47">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> BG_COLOR</span>
+<span id="cb9-48">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-49"></span>
+<span id="cb9-50">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># annotation text</span></span>
+<span id="cb9-51">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(</span>
+<span id="cb9-52">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>,</span>
+<span id="cb9-53">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1992</span>,</span>
+<span id="cb9-54">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30000</span>,</span>
+<span id="cb9-55">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> UN_TEXT,</span>
+<span id="cb9-56">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> GRAY,</span>
+<span id="cb9-57">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fontface =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"italic"</span>,</span>
+<span id="cb9-58">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"right"</span></span>
+<span id="cb9-59">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-60">  </span>
+<span id="cb9-61">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># replace legend with annotation text ----------------------------------------</span></span>
+<span id="cb9-62">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(</span>
+<span id="cb9-63">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>,</span>
+<span id="cb9-64">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>,</span>
+<span id="cb9-65">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>,</span>
+<span id="cb9-66">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4700</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">26000</span>),</span>
+<span id="cb9-67">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cement"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Natural Gas"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Oil &amp; NGL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coal"</span>),</span>
+<span id="cb9-68">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"right"</span>,</span>
+<span id="cb9-69">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fontface =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bold"</span></span>
+<span id="cb9-70">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-71">  </span>
+<span id="cb9-72">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># visual style elements (love you, ggthemes) ---------------------------------</span></span>
+<span id="cb9-73">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_colorblind</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-74">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-75">  </span>
+<span id="cb9-76">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># customize axis breaks and labels -------------------------------------------</span></span>
+<span id="cb9-77">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_x_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">breaks =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1900</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2020</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-78">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(</span>
+<span id="cb9-79">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">breaks =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">40000</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5000</span>), </span>
+<span id="cb9-80">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> scales<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">label_number</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">scale =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">suffix =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"k"</span>)</span>
+<span id="cb9-81">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-82">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb9-83">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb9-84">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> latex2exp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TeX</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Emissions ($MtCO_2e$)"</span>),</span>
+<span id="cb9-85">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Our World in Emissions"</span>,</span>
+<span id="cb9-86">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> latex2exp<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">TeX</span>(</span>
+<span id="cb9-87">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb9-88">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Emissions are measured in Millions of Tons of $CO_2$ equivalent"</span>,</span>
+<span id="cb9-89">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"($MtCO_2e$)"</span></span>
+<span id="cb9-90">      )</span>
+<span id="cb9-91">    ),</span>
+<span id="cb9-92">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb9-93">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Made with love by Mitch Harrison"</span>,</span>
+<span id="cb9-94">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"                                                                       "</span>,</span>
+<span id="cb9-95">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Source: Carbon Majors database and TidyTuesday"</span></span>
+<span id="cb9-96">    )</span>
+<span id="cb9-97">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb9-98">  </span>
+<span id="cb9-99">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># theme cleanup --------------------------------------------------------------</span></span>
+<span id="cb9-100">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_hline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yintercept =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> GRAY) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># bold axis</span></span>
+<span id="cb9-101">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb9-102">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>, </span>
+<span id="cb9-103">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.title.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>),</span>
+<span id="cb9-104">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> BG_COLOR)</span>
+<span id="cb9-105">  ) </span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_05212024_files/figure-html/plt-final-1.png" class="img-fluid figure-img" alt="This plot is titled Our World in Emissions. It is an area plot that shows global emissions over time by type. The types are coal, natural gas, cement, and oil and NGL. The plot notes that in 1995, the UN first met to discuss the climate threat. The plot shows near-zero emissions from 1900 to 1920, when a slow increase begins. From there, emission growth seems to be exponentially increasing, with no decline since the UN first met. Coal is the largest emitter, then oil and NGL, then natural gas, and finally, cement." width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>No plot is perfect, but I am happy with what we have accomplished, and I hope you are too! If you have any questions or corrections, feel free to reach out on <a href="https://discord.gg/vF6W2bdKFH">Discord</a>, and I’ll be happy to help. And, of course, if you want to contribute to this effort financially, you are more than welcome to <a href="https://buymeacoffee.com/mitchellharrison">buy me a coffee</a>.</p>
+<p>Thanks for sticking around, and good luck with your TidyTuesday adventures!</p>
 
 
 
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</guid>
-  <pubDate>Sun, 26 May 2024 02:03:10 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 03:48:57 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 </channel>

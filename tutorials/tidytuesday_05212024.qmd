@@ -5,4 +5,497 @@ categories:
   - "Data Viz"
 image: "../../images/thumbnails/tidytuesday/05212024.png"
 ---
-Hello!
+
+Welcome! If you saw my post for this week's TidyTuesday, I'm glad you liked it
+enough to learn from it! If not, you can either scroll to the bottom to see the
+final product or click [here](../projects/tidytuesday_05212024/emissions.qmd)
+to see it. For this plot, we will use an area plot to visualize the global
+emissions by type going back to 1900. To start, we will use a bare-bones
+`ggplot2` area chart with no bells or whistles to see what we are working with.
+
+```{r}
+#| label: step-one
+library(tidyverse)
+
+# read data and rename an ugly column ------------------------------------------
+emis<- read_csv(paste0(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/",
+  "data/2024/2024-05-21/emissions.csv"
+  )
+)
+
+emis <- emis |>
+  rename(emissions = "total_emissions_MtCO2e")
+
+emis |>
+  group_by(year, commodity) |>
+  summarise(emissions = sum(emissions), .groups = "drop") |>
+  
+  # start of plot --------------------------------------------------------------
+  ggplot(aes(x = year, y = emissions, fill = commodity)) +
+  geom_area(alpha = 0.9)
+```
+
+Okay, we've learned a lot. First, there are a *lot* of categories. A good rule
+of thumb is that once you get to about seven colors, even non-colorblind humans
+struggle to differentiate. But there is hope! Notice that there are
+several types of coal production. Let's aggregate them. Second, there is a long
+tail on the left because of near-zero data. Let's bring our limit to the right
+to get a better look.
+
+```{r}
+#| label: step-two
+emis |>
+  filter(year >= 1900) |> # get rid of that tail
+  mutate(
+    # aggregate coal
+    commodity = if_else(str_detect(commodity, "Coal"), "Coal", commodity),
+  ) |>
+  group_by(year, commodity) |>
+  summarise(emissions = sum(emissions), .groups = "drop") |>
+  
+  # start of plot --------------------------------------------------------------
+  ggplot(aes(x = year, y = emissions, fill = commodity)) +
+  geom_area(alpha = 0.9)
+```
+
+Much better! But to me, having the smallest category (cement) on top feels 
+awkward. Let's reorder the categories! I'll do so in descending order of 
+emissions in the last year.
+
+```{r}
+#| label: step-three
+LEVS <- c("Coal", "Oil & NGL", "Natural Gas", "Cement") # our desired order
+
+emis |>
+  filter(year >= 1900) |>
+  mutate(
+    commodity = if_else(str_detect(commodity, "Coal"), "Coal", commodity),
+    commodity = factor(commodity, levels = LEVS) # re-order 
+  ) |>
+  group_by(year, commodity) |>
+  summarise(emissions = sum(emissions), .groups = "drop") |>
+  
+  # start of plot --------------------------------------------------------------
+  ggplot(aes(x = year, y = emissions, fill = commodity)) +
+  geom_area(alpha = 0.9)
+```
+
+Now we're cooking! It's time for some style points. I'll use my favorite 
+aesthetic cheat code: 
+[`ggthemes`](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/). 
+Let's add a theme and color scheme. I'm going with the FiveThirtyEight theme and
+a colorblind-friendly palette. I'll also take this opportunity to adjust the
+opacity down just a touch. This is a personal choice, but I find it nice to be
+able to see the grid behind such ink-heavy plots as area plots.
+
+::: {.callout-important}
+Remember: unless you are making plots for a very small number of people and you 
+know for certain that none are colorblind, *making inaccessible plots is*
+*inexcusable*. Of course, we all make mistakes, so if you ever notice an 
+accessibility issue on my site, reach out and let me know on 
+[Discord](https://discord.gg/vF6W2bdKFH) or via a GitHub issue so I can improve 
+for next time!
+:::
+
+```{r}
+#| label: step-four
+LEVS <- c("Coal", "Oil & NGL", "Natural Gas", "Cement") # our desired order
+
+emis |>
+  filter(year >= 1900) |>
+  mutate(
+    commodity = if_else(str_detect(commodity, "Coal"), "Coal", commodity),
+    commodity = factor(commodity, levels = LEVS) # re-order 
+  ) |>
+  group_by(year, commodity) |>
+  summarise(emissions = sum(emissions), .groups = "drop") |>
+  
+  # start of plot --------------------------------------------------------------
+  ggplot(aes(x = year, y = emissions, fill = commodity)) +
+  geom_area(alpha = 0.9) + # drop the opacity just a touch
+
+  # add theme and colors (love you, ggthemes) 
+  ggthemes::scale_fill_colorblind() +
+  ggthemes::theme_fivethirtyeight()
+```
+
+And just like that, it feels like we are almost there! Let's change a few things
+at once. We will change the background color, add the title/subtitle/axis 
+labels/caption, and format the $y$-axis to read `30k` instead of `30000`. That 
+will give us a feel for the final color scheme and how the fonts feel on the 
+page. Because of the subscript "2" in $CO_2$, I will use the `latex2exp` package 
+use $\LaTeX$ typesetting in the plot.
+
+::: {.callout-note}
+One note that is unique to this plot. When we use `theme_fivethirtyeight`, it
+removes the $y$-axis title. So, although we normally wouldn't have to explicitly
+set the axis title to `element_text` in the `theme` function, we will here. 
+:::
+
+```{r}
+#| label: step-five
+LEVS <- c("Coal", "Oil & NGL", "Natural Gas", "Cement")
+BG_COLOR <- "#F0F0F0" # this will be our background color
+
+emis |>
+  filter(year >= 1900) |>
+  mutate(
+    commodity = if_else(str_detect(commodity, "Coal"), "Coal", commodity),
+    commodity = factor(commodity, levels = LEVS) 
+  ) |>
+  group_by(year, commodity) |>
+  summarise(emissions = sum(emissions), .groups = "drop") |>
+  
+  # start of plot --------------------------------------------------------------
+  ggplot(aes(x = year, y = emissions, fill = commodity)) +
+  geom_area(alpha = 0.9) +
+
+  ggthemes::scale_fill_colorblind() +
+  ggthemes::theme_fivethirtyeight() +
+
+  # abbreviate the y axis labels using the scales package
+  scale_y_continuous(label = scales::label_number(scale = 1e-3, suffix = "k")) +
+
+  # add labels to the plot -----------------------------------------------------
+  labs(
+    x = element_blank(),
+    y = latex2exp::TeX("Emissions ($MtCO_2e$)"), # LaTeX typesetting with TeX()
+    title = "Our World in Emissions",
+    subtitle = latex2exp::TeX(
+      paste(
+        "Emissions are measured in Millions of Tons of $CO_2$ equivalent",
+        "($MtCO_2e$)"
+      )
+    ),
+    caption = paste(
+      "Made with love by Mitch Harrison",
+      # long blank line to "hack" a an annotation in the bottom-left corner
+      "                                                                       ",
+      "Source: Carbon Majors database and TidyTuesday"
+    )
+  ) +
+  theme(
+    axis.title.y = element_text(size = 10),
+    plot.background = element_rect(fill = BG_COLOR) # change background color
+  ) 
+```
+
+You could submit this plot for public consumption without shame, but we can do 
+better! For example, I think we could safely remove the legend by annotating the 
+colors directly on the plot. Let's use a `geom_text` to do just that. While this 
+entire process has been creative, we are getting into highly subjective 
+territory here. So if you don't like these changes, do something else! I would 
+love to see your ideas.
+
+To make the annotations, I want the text to be right-justified and directly
+atop one another. To accomplish that, I will give `geom_text` a single $x$ value
+but several $y$ values (one for each category).
+
+```{r}
+#| label: step-six
+LEVS <- c("Coal", "Oil & NGL", "Natural Gas", "Cement")
+BG_COLOR <- "#F0F0F0"
+
+emis |>
+  filter(year >= 1900) |>
+  mutate(
+    commodity = if_else(str_detect(commodity, "Coal"), "Coal", commodity),
+    commodity = factor(commodity, levels = LEVS) 
+  ) |>
+  group_by(year, commodity) |>
+  summarise(emissions = sum(emissions), .groups = "drop") |>
+  
+  # start of plot --------------------------------------------------------------
+  ggplot(aes(x = year, y = emissions, fill = commodity)) +
+  geom_area(alpha = 0.9) +
+
+  ggthemes::scale_fill_colorblind() +
+  ggthemes::theme_fivethirtyeight() +
+  scale_y_continuous(label = scales::label_number(scale = 1e-3, suffix = "k")) +
+
+  # add annotation text to replace the legend ----------------------------------
+  annotate(
+    geom = "text",
+    color = "white",
+    x = 2020,
+    y = c(1000, 4700, 13000, 26000),
+    label = c("Cement", "Natural Gas", "Oil & NGL", "Coal"),
+    hjust = "right",
+    fontface = "bold"
+  ) +
+
+  labs(
+    x = element_blank(),
+    y = latex2exp::TeX("Emissions ($MtCO_2e$)"),
+    title = "Our World in Emissions",
+    subtitle = latex2exp::TeX(
+      paste(
+        "Emissions are measured in Millions of Tons of $CO_2$ equivalent",
+        "($MtCO_2e$)"
+      )
+    ),
+    caption = paste(
+      "Made with love by Mitch Harrison",
+      "                                                                       ",
+      "Source: Carbon Majors database and TidyTuesday"
+    )
+  ) +
+
+  theme(
+    legend.position = "none", # hide the legend
+    axis.title.y = element_text(size = 10),
+    plot.background = element_rect(fill = BG_COLOR)
+  ) 
+```
+
+Nailed it. Now, I will happily take criticism here. I don't love that the 
+"Cement" label isn't entirely encompassed by its data. But I think it's much 
+cleaner than having a legend drawing our eye away from the plot, so I'll keep 
+it.
+
+The last thing we have to do before we can worry about the big annotation in the 
+middle of the plot is change where the axes break. That is, set the years and 
+emission amount displayed on the x and y axes, respectively. And while I'm at 
+it, I will use a `geom_hline` to make the $x$-axis a bit bolder since it melts 
+into the background a little bit too much for my liking.
+
+```{r}
+#| label: step-seven
+LEVS <- c("Coal", "Oil & NGL", "Natural Gas", "Cement")
+BG_COLOR <- "#F0F0F0"
+GRAY <- "gray35"
+
+emis |>
+  filter(year >= 1900) |>
+  mutate(
+    commodity = if_else(str_detect(commodity, "Coal"), "Coal", commodity),
+    commodity = factor(commodity, levels = LEVS) 
+  ) |>
+  group_by(year, commodity) |>
+  summarise(emissions = sum(emissions), .groups = "drop") |>
+  
+  # start of plot --------------------------------------------------------------
+  ggplot(aes(x = year, y = emissions, fill = commodity)) +
+  geom_area(alpha = 0.9) +
+
+  ggthemes::scale_fill_colorblind() +
+  ggthemes::theme_fivethirtyeight() +
+
+  # change where the axis breaks occur -----------------------------------------
+  scale_x_continuous(breaks = seq(1900, 2020, 20)) +
+  scale_y_continuous(
+    breaks = seq(0, 40000, 5000), 
+    label = scales::label_number(scale = 1e-3, suffix = "k")
+  ) +
+
+  annotate(
+    geom = "text",
+    color = "white",
+    x = 2020,
+    y = c(1000, 4700, 13000, 26000),
+    label = c("Cement", "Natural Gas", "Oil & NGL", "Coal"),
+    hjust = "right",
+    fontface = "bold"
+  ) +
+
+  labs(
+    x = element_blank(),
+    y = latex2exp::TeX("Emissions ($MtCO_2e$)"),
+    title = "Our World in Emissions",
+    subtitle = latex2exp::TeX(
+      paste(
+        "Emissions are measured in Millions of Tons of $CO_2$ equivalent",
+        "($MtCO_2e$)"
+      )
+    ),
+    caption = paste(
+      "Made with love by Mitch Harrison",
+      "                                                                       ",
+      "Source: Carbon Majors database and TidyTuesday"
+    )
+  ) +
+
+  geom_hline(yintercept = 0, linewidth = 0.7, color = GRAY) + # bold axis
+  theme(
+    legend.position = "none", # hide the legend
+    axis.title.y = element_text(size = 10),
+    plot.background = element_rect(fill = BG_COLOR)
+  ) 
+```
+
+Once I write-in the line breaks, I'll use the `annotate` function as before. But 
+that's not all. By default, there is no background with text annotations, so the 
+grid overlaps the text and decreases legibility. To fix this, I'll use 
+`annotate` to put a rectangle the same color as the plot background behind the 
+text, which "removes" the grid lines behind the text.
+
+Finally, to accomplish the arrow, we will use our final `annotate` to draw a 
+line segment and put an arrowhead at the end.
+
+::: {.callout-note}
+Normally, the order that we put things in a `ggplot2` pipeline doesn't matter.
+But here, if you put the background rectangle after the text annotation, it will
+cover the text, rendering it invisible.
+:::
+
+Because this is our last edit, I will take this opportunity to make one very 
+oft-forgotten change: write my alt text. Since you're here, I know you respect 
+the power of data communication. Alt text lets us communicate with those who 
+sometimes miss out on learning from plots online. As our color palette did for 
+colorblind viewers, we owe it to our non-sighted friends to let them 
+participate.
+
+And finally, I'll change the aspect ratio of the plot. You may have heard of the 
+[golden ratio](https://en.wikipedia.org/wiki/Golden_ratio), which is a ratio 
+that many humans find inherently satisfying to look at. That ratio is 
+approximately 1.618:1. The inverse of that number is 0.618, which will be our 
+horizontal aspect ratio (1.618 is vertical). Because the quarto headers won't 
+render with the document, my final header is below:
+```
+#| label: plt-final
+#| fig-width: 8
+#| fig-align: "center"
+#| fig-asp: 0.618
+#| fig-alt: |
+#|   This plot is titled Our World in Emissions. It is an area plot that shows
+#|   global emissions over time by type. The types are coal, natural gas,
+#|   cement, and oil and NGL. The plot notes that in 1995, the UN first met to
+#|   discuss the climate threat. The plot shows near-zero emissions from 1900 to
+#|   1920, when a slow increase begins. From there, emission growth seems to be
+#|   exponentially increasing, with no decline since the UN first met. Coal is
+#|   the largest emitter, then oil and NGL, then natural gas, and finally,
+#|   cement.
+```
+
+Now, let's see the plot!
+
+```{r}
+#| label: plt-final
+#| fig-width: 8
+#| fig-align: "center"
+#| fig-asp: 0.618
+#| fig-alt: |
+#|   This plot is titled Our World in Emissions. It is an area plot that shows
+#|   global emissions over time by type. The types are coal, natural gas,
+#|   cement, and oil and NGL. The plot notes that in 1995, the UN first met to
+#|   discuss the climate threat. The plot shows near-zero emissions from 1900 to
+#|   1920, when a slow increase begins. From there, emission growth seems to be
+#|   exponentially increasing, with no decline since the UN first met. Coal is
+#|   the largest emitter, then oil and NGL, then natural gas, and finally,
+#|   cement.
+
+# constants for ease of code legibility ----------------------------------------
+LEVS <- c("Coal", "Oil & NGL", "Natural Gas", "Cement")
+BG_COLOR <- "#F0F0F0"
+UN_TEXT <- paste(
+  "In 1995, the United Nations\nConference of the Parties met for\nthe first", 
+  "time to discuss the looming\nthreat of climate change. The COP\nhas",
+  "met twenty-eight times since."
+)
+
+# data cleanup -----------------------------------------------------------------
+emis |>
+  filter(year >= 1900) |> # lots of near-zero space without this filter
+  mutate(
+    commodity = if_else(str_detect(commodity, "Coal"), "Coal", commodity),
+    commodity = factor(commodity, levels = LEVS) # re-order areas
+  ) |>
+  group_by(year, commodity) |>
+  summarise(emissions = sum(emissions), .groups = "drop") |>
+  
+  # start of plot --------------------------------------------------------------
+  ggplot(aes(x = year, y = emissions, fill = commodity)) +
+  geom_area(alpha = 0.9) +
+  
+  # UN COP annotation text box -------------------------------------------------
+
+  # the arrow
+  annotate(
+    geom = "segment",
+    x = 1995,
+    xend = 1995,
+    y = 35500,
+    yend = 20500,
+    linetype = "solid",
+    linejoin = "round",
+    linewidth = 1,
+    color = "grey35",
+    arrow = arrow(type = "closed", length = unit(0.2, "cm"))
+  ) +
+
+  # the background rectangle (must be before the text)
+  annotate(
+    geom = "rect",
+    xmin = 1945.5,
+    xmax = 1993.5,
+    ymin = 23500,
+    ymax = 35800,
+    fill = BG_COLOR
+  ) +
+
+  # annotation text
+  annotate(
+    geom = "text",
+    x = 1992,
+    y = 30000,
+    label = UN_TEXT,
+    color = GRAY,
+    fontface = "italic",
+    hjust = "right"
+  ) +
+  
+  # replace legend with annotation text ----------------------------------------
+  annotate(
+    geom = "text",
+    color = "white",
+    x = 2020,
+    y = c(1000, 4700, 13000, 26000),
+    label = c("Cement", "Natural Gas", "Oil & NGL", "Coal"),
+    hjust = "right",
+    fontface = "bold"
+  ) +
+  
+  # visual style elements (love you, ggthemes) ---------------------------------
+  ggthemes::scale_fill_colorblind() +
+  ggthemes::theme_fivethirtyeight() +
+  
+  # customize axis breaks and labels -------------------------------------------
+  scale_x_continuous(breaks = seq(1900, 2020, 20)) +
+  scale_y_continuous(
+    breaks = seq(0, 40000, 5000), 
+    label = scales::label_number(scale = 1e-3, suffix = "k")
+  ) +
+  labs(
+    x = element_blank(),
+    y = latex2exp::TeX("Emissions ($MtCO_2e$)"),
+    title = "Our World in Emissions",
+    subtitle = latex2exp::TeX(
+      paste(
+        "Emissions are measured in Millions of Tons of $CO_2$ equivalent",
+        "($MtCO_2e$)"
+      )
+    ),
+    caption = paste(
+      "Made with love by Mitch Harrison",
+      "                                                                       ",
+      "Source: Carbon Majors database and TidyTuesday"
+    )
+  ) + 
+  
+  # theme cleanup --------------------------------------------------------------
+  geom_hline(yintercept = 0, linewidth = 0.7, color = GRAY) + # bold axis
+  theme(
+    legend.position = "none", 
+    axis.title.y = element_text(size = 10),
+    plot.background = element_rect(fill = BG_COLOR)
+  ) 
+```
+
+No plot is perfect, but I am happy with what we have accomplished, and I hope 
+you are too! If you have any questions or corrections, feel free to reach out on 
+[Discord](https://discord.gg/vF6W2bdKFH), and I'll be happy to help. And, of 
+course, if you want to contribute to this effort financially, you are more than 
+welcome to [buy me a coffee](https://buymeacoffee.com/mitchellharrison).
+
+Thanks for sticking around, and good luck with your TidyTuesday adventures!

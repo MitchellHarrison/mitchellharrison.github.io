@@ -24,6 +24,15 @@ your own plot, check out the data on the TidyTuesday GitHub repository
 #| fig-width: 8
 #| fig-align: "center"
 #| fig-asp: 0.618
+#| fig-alt: |
+#|   This plot is titled Our World in Emissions. It is an area plot that shows
+#|   global emissions over time by type. The types are coal, natural gas,
+#|   cement, and oil and NGL. The plot notes that in 1995, the UN first met to
+#|   discuss the climate threat. The plot shows near-zero emissions from 1900 to
+#|   1920, when a slow increase begins. From there, emission growth seems to be
+#|   exponentially increasing, with no decline since the UN first met. Coal is
+#|   the largest emitter, then oil and NGL, then natural gas, and finally,
+#|   cement.
 
 library(tidyverse)
 
@@ -140,6 +149,7 @@ emis |>
 ```
 
 ```{r}
+#| label: save-fig
 #| echo: false
 # ggsave("projects/tidytuesday_05212024/final.png") # for saving/posting
 ```
