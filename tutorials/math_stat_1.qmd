@@ -3,6 +3,7 @@ title: "Welcome to Estimators! | Mathematical Statistics 1"
 author: "Mitch Harrison"
 categories:
   - "Statistics"
+  - "Mathematical Statistics"
 image: "../images/thumbnails/mathematical_statistics/1.png"
 ---
 

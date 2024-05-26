@@ -3,6 +3,7 @@ title: "Hello, statistics. | Mathematical Statistics 0"
 author: "Mitch Harrison"
 categories:
   - "Statistics"
+  - "Mathematical Statistics"
 image: "../images/thumbnails/mathematical_statistics/0.png"
 ---
 
