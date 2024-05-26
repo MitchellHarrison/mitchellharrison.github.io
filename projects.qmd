@@ -7,5 +7,3 @@ listing:
   categories: true
   feed: true
 ---
-
-This is where my projects will be listed... soon!

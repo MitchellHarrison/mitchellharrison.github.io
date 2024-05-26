@@ -1,0 +1,8 @@
+---
+title: "Our World in Emissions | TidyTutorial"
+author: "Mitch Harrison"
+categories:
+  - "Data Viz"
+image: "../../images/thumbnails/tidytuesday/05212024.png"
+---
+Hello!
