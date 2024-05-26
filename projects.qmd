@@ -7,3 +7,9 @@ listing:
   categories: true
   feed: true
 ---
+
+These are my independent projects! They can be quick visualizations, full
+analyses with write-ups, and even interactive data exploration dashboards.
+Feel free to use the tags on the right side of the page to navigate, and reach
+out to me on [Discord](https://discord.gg/vF6W2bdKFH) with any questions.
+Thanks!

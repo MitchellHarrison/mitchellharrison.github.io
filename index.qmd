@@ -13,13 +13,12 @@ course notes, homework, and projects into comprehensible articles for free. If
 nothing else, future Duke students struggling through their data science degree 
 can look here for a different perspective.
 
-If you want my personal, non-academic analysis projects, head to the 
-[Projects tab](projects.qmd). If you are here to learn, the 
-[Tutorials tab](tutorials.qmd) is for you! And if you want 
-to sit back and read some plain-language blog posts, there's a 
-[Blog tab](blogs.qmd) just for you. Of course, if you are curious about the 
-website's structure, it is built with R and Quarto, and the code is available by 
-clicking on the GitHub icon at the bottom-left of every page (or click 
+If you want to see some of my analysis work, head to the 
+[Projects tab](projects.qmd)! If you are here to learn, the 
+[Tutorials tab](tutorials.qmd) is for you. Of course, if you are curious about 
+the website's structure, it is built with R and Quarto, and the code is 
+available by clicking on the GitHub icon at the bottom-left of every page 
+(or click 
 [here](https://github.com/MitchellHarrison/mitchellharrison.github.io)).
 
 Access to information should always be free, so every article here is, and 

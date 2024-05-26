@@ -1,6 +1,0 @@
----
-title: "Demo blog post"
----
-
-## Demo blog
-This is where I may do some writing.
