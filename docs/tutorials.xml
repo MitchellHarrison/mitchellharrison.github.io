@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.333</generator>
-<lastBuildDate>Sun, 26 May 2024 19:58:26 GMT</lastBuildDate>
+<lastBuildDate>Sun, 26 May 2024 20:09:20 GMT</lastBuildDate>
 <item>
   <title>Hello, statistics. | Mathematical Statistics 0</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -39,7 +39,7 @@
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>To get started with the course, click <a href="../tutorials/math_stat_0.html">here</a> to go to the first article in the series, where we begin our discussion of estimators! Of course, if you want to ask me anything about this course, my time at Duke, or anything else, the best place to reach me is on <a href="https://discord.gg/vF6W2bdKFH">Discord</a>! And if you really want to support this project, you can <a href="https://buymeacoffee.com/mitchellharrison">buy me a coffee</a>. Thank you for reading, and I can’t want to get started!</p>
+<p>To get started with the course, click <a href="../tutorials/math_stat_0.html">here</a> to go to the first article in the series, where we begin our discussion of estimators! Of course, if you want to ask me anything about this course, my time at Duke, or anything else, the best place to reach me is on <a href="https://discord.gg/vF6W2bdKFH">Discord</a>! And if you really want to support this project, you can <a href="https://buymeacoffee.com/mitchellharrison">buy me a coffee</a>. Thank you for reading, and I can’t wait to get started!</p>
 
 
 </section>
@@ -48,7 +48,7 @@
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_0.html</guid>
-  <pubDate>Sun, 26 May 2024 19:58:26 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 20:09:20 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/0.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -136,7 +136,7 @@ Definition
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Sun, 26 May 2024 19:58:26 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 20:09:20 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -2028,7 +2028,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</guid>
-  <pubDate>Sun, 26 May 2024 19:58:26 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 20:09:20 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 </channel>
