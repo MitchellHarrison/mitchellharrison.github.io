@@ -10,7 +10,46 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.333</generator>
-<lastBuildDate>Sun, 26 May 2024 03:48:57 GMT</lastBuildDate>
+<lastBuildDate>Sun, 26 May 2024 18:18:41 GMT</lastBuildDate>
+<item>
+  <title>Hello, statistics. | Mathematical Statistics 0</title>
+  <dc:creator>Mitch Harrison</dc:creator>
+  <link>https://mitchellharrison.github.io/tutorials/math_stat_0.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>I recently finished <a href="https://stat.duke.edu/courses/theory-and-methods-statistical-learning-and-inference-0">STA 432</a> at Duke. For my fellow Duke students looking to take it: yes, it was that hard. But you’re smarter than me, so you will be fine! For the mathematically curious, the course is (somewhat longwindedly) called “Theory and Methods of Statistical Learning and Inference.” If, like me, you prefer helpful course names, call it “Mathematical Statistics.”</p>
+<p>While in STA 432, I kept finding myself in mathematics far beyond the “Google the topic and find it on 100 websites” stage. In fact, the topics covered in the course were typically covered by sources that assumed a level of mathematical maturity that I did not possess. I kept thinking that I needed to pre-understand the material to understand the explanation of that same material. I longed for a plain-language introduction to mathematically rigorous subjects.</p>
+<p>This series is my humble attempt to communicate the beauty of mathematical statistics in comprehensible English to my fellow students (at Duke or at home). To facilitate this, we will take a “trust my word for it” approach, with proofs being in separate articles. However, I recommend at least reading through any proofs that I post. Struggling through those should prepare you for problems involving those same concepts. Even in the proofs articles, I’ll go step-by-step (very granularly) for easy comprehension. That is not a luxury that professors get in a short lecture period, but I’ll take my time to make sure every step is annotated, which I wish I had when I was in 432.</p>
+</section>
+<section id="course-outline" class="level1">
+<h1>Course Outline</h1>
+<p>This course is broadly broken into three sections. First, we will study point <a href="https://en.wikipedia.org/wiki/Estimator">estimators</a>. If you’ve never heard of estimators, don’t worry. They’re just educated guesses at unknown distribution parameters (like the mean of a normal distribution). We will calculate estimators, study them, and choose between them.</p>
+<p>In the middle portion of the course, we will look at <a href="https://en.wikipedia.org/wiki/Confidence_interval">confidence intervals</a>. Again, no background knowledge is necessary here. In effect, confidence intervals tell us how confident we are that our chosen estimator falls into a particular range. Any statisticians reading just cringed at my description because it isn’t technically accurate, but we will discuss why that’s the case when we get to confidence intervals. Don’t worry; it’ll be pretty intuitive once we get there.</p>
+<p>Last but certainly not least, we will conduct <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_test">hypothesis tests</a>. There, we will choose two possible options for our estimator. For example, maybe we want to choose between X &gt; 5 or X &lt;= 5. We will use our data to decide which option is more likely to be correct. Of course, we will never be 100% of our guess, but we will get close.</p>
+<p>And that’s the course! It sounds nice and clean, and in many ways it is. However, like with much of statistics, the findings are the easy part. Finding the findings is the challenge. But I’ll try my best to get us through it so your GPA can be better than mine.</p>
+</section>
+<section id="course-materials" class="level1">
+<h1>Course Materials</h1>
+<p>My course, which was run by Professor <a href="https://scholars.duke.edu/person/alexander.volfovsky">Alexander Volfovsky</a>, had very few requirements. There was a recommended textbook (found <a href="https://www.amazon.com/Probability-Statistics-4th-Morris-DeGroot/dp/0321500466">here</a>), which I found helpful to get a second perspective on topics. But if the price is off-putting, don’t worry. We only loosely followed it; apart from some homework questions, it was never explicitly required. So, for our purposes, I won’t reference the book directly. If you want a second perspective and don’t mind spending some coin, you have the Amazon link and can search the ISBN elsewhere.</p>
+<p>Besides that, you’ll only need a willingness to learn and a statistical curiosity!</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>To get started with the course, click <a href="../tutorials/math_stat_0.html">here</a> to go to the first article in the series, where we begin our discussion of estimators! Of course, if you want to ask me anything about this course, my time at Duke, or anything else, the best place to reach me is on <a href="https://discord.gg/vF6W2bdKFH">Discord</a>! And if you really want to support this project, you can <a href="https://buymeacoffee.com/mitchellharrison">buy me a coffee</a>. Thank you for reading, and I can’t want to get started!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Statistics</category>
+  <guid>https://mitchellharrison.github.io/tutorials/math_stat_0.html</guid>
+  <pubDate>Sun, 26 May 2024 18:18:41 GMT</pubDate>
+  <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
+</item>
 <item>
   <title>Welcome to Estimators! | Mathematical Statistics 1</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -95,7 +134,7 @@ Definition
  ]]></description>
   <category>Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Sun, 26 May 2024 03:48:57 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 18:18:41 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -1987,7 +2026,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</guid>
-  <pubDate>Sun, 26 May 2024 03:48:57 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 18:18:41 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 </channel>
