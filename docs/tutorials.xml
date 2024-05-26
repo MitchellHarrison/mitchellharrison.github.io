@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.333</generator>
-<lastBuildDate>Sun, 26 May 2024 19:38:30 GMT</lastBuildDate>
+<lastBuildDate>Sun, 26 May 2024 19:48:36 GMT</lastBuildDate>
 <item>
   <title>Hello, statistics. | Mathematical Statistics 0</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -47,7 +47,7 @@
  ]]></description>
   <category>Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_0.html</guid>
-  <pubDate>Sun, 26 May 2024 19:38:30 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 19:48:36 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/0.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -134,7 +134,7 @@ Definition
  ]]></description>
   <category>Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Sun, 26 May 2024 19:38:30 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 19:48:36 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -2026,7 +2026,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</guid>
-  <pubDate>Sun, 26 May 2024 19:38:30 GMT</pubDate>
+  <pubDate>Sun, 26 May 2024 19:48:36 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 </channel>

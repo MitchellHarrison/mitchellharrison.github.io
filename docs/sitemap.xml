@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mitchellharrison.github.io/tutorials/math_stat_1.html</loc>
-    <lastmod>2024-05-25T05:01:52.108Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mitchellharrison.github.io/tutorials/math_stat_0.html</loc>
-    <lastmod>2024-05-26T19:37:48.026Z</lastmod>
-  </url>
-  <url>
     <loc>https://mitchellharrison.github.io/tutorials.html</loc>
-    <lastmod>2024-05-26T19:38:30.780Z</lastmod>
+    <lastmod>2024-05-26T19:48:36.579Z</lastmod>
   </url>
   <url>
     <loc>https://mitchellharrison.github.io/projects/tidytuesday_05212024/emissions.html</loc>
-    <lastmod>2024-05-26T19:33:17.921Z</lastmod>
+    <lastmod>2024-05-26T19:48:19.913Z</lastmod>
   </url>
   <url>
     <loc>https://mitchellharrison.github.io/projects.html</loc>
-    <lastmod>2024-05-26T19:41:40.359Z</lastmod>
+    <lastmod>2024-05-26T19:48:52.383Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mitchellharrison.github.io/tutorials/math_stat_0.html</loc>
+    <lastmod>2024-05-26T19:48:32.966Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mitchellharrison.github.io/tutorials/math_stat_1.html</loc>
+    <lastmod>2024-05-26T19:48:29.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</loc>
+    <lastmod>2024-05-26T19:48:38.868Z</lastmod>
   </url>
   <url>
     <loc>https://mitchellharrison.github.io/index.html</loc>
-    <lastmod>2024-05-26T19:37:05.266Z</lastmod>
+    <lastmod>2024-05-26T19:48:16.194Z</lastmod>
   </url>
 </urlset>
