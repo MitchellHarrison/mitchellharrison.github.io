@@ -111,4 +111,4 @@ variance. We denote variance with $Var(\delta(\mathbf{X})|\theta)$.
 However, notice that both bias and variance are conditional on the true value of
 our unknown parameter $\theta$. Thus, we cannot calculate these quantities 
 directly. To deal with this, we will introduce the concept of **loss** in the
-next article!
+next article [here](../tutorials/math_stat_2.qmd)!
