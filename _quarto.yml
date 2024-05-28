@@ -13,6 +13,7 @@ website:
         file: projects.qmd
       - text: "Tutorials"
         file: tutorials.qmd
+        
     right:
       - text: "☕ Buy me a coffee!"
         href: "https://buymeacoffee.com/mitchellharrison"
