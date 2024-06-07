@@ -1,0 +1,205 @@
+---
+title: "The Cheese Explorer"
+format: 
+  dashboard:
+    logo: "images/tidytuesday/cheese.png"
+    layout: 
+---
+
+```{r}
+#| label: read-libs-and-data
+
+library(tidyverse)
+library(DT)
+
+theme_set(theme_minimal(base_size = 10, base_family = "Atkinson Hyperlegible"))
+
+cheese <- read_csv(paste0(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/",
+  "data/2024/2024-06-04/cheeses.csv"
+))
+
+CHEDDAR <- "#f9b02e"
+
+MILKS <- cheese |>
+  pull(milk) |>
+  strsplit(",\\s*") |>
+  unlist() |>
+  unique() |>
+  na.omit() |>
+  sort()
+```
+
+## Row {height="15%"}
+
+```{r}
+#| label: box-top-milk
+#| content: valuebox
+#| title: "Most popular milk"
+
+milk_count <- cheese |>
+  separate_rows(milk, sep = ", ") |>
+  count(milk, name = "count") |>
+  arrange(desc(count)) |>
+  filter(!is.na(milk)) |>
+  mutate(milk = str_to_title(milk))
+
+milk_count <- milk_count |>
+  mutate(milk = factor(milk, levels = rev(milk_count$milk)))
+
+top_milk <- milk_count |>
+  slice_head(n = 1) |>
+  pull(milk)
+
+list(color = "white", value = str_to_title(top_milk), icon = "bucket")
+```
+
+```{r}
+#| label: box-top-flavor
+#| content: valuebox
+#| title: "Most common flavor"
+
+flavor_count <- cheese |>
+  separate_rows(flavor, sep = ", ") |>
+  count(flavor, name = "count") |>
+  arrange(desc(count)) |>
+  filter(!is.na(flavor))
+
+flavor_count <- flavor_count |>
+  mutate(flavor = factor(flavor, levels = rev(flavor_count$flavor))) |>
+  slice_head(n = 10)
+
+top_flavor <- flavor_count |>
+  slice_head(n = 1) |>
+  pull(flavor)
+
+list(color = CHEDDAR, value = str_to_title(top_flavor), icon = "cart3")
+```
+
+```{r}
+#| label: box-top-country
+#| content: valuebox
+#| title: "Highest-producing country"
+
+country_count <- cheese |>
+  separate_rows(country, sep = ", ") |>
+  count(country, name = "count") |>
+  arrange(desc(count)) |>
+  filter(!is.na(country))
+
+country_count <- country_count |>
+  mutate(country = factor(country, levels = rev(country_count$country))) |>
+  slice_head(n = 10)
+
+top_country <- country_count |>
+  slice_head(n = 1) |>
+  pull(country)
+
+list(color = "white", value = top_country, icon = "globe-americas")
+```
+
+## Row {height="85%"}
+
+### Column {.tabset}
+
+```{r}
+#| label: plot-production-by-animal
+#| title: "Production by animal"
+
+milk_count |>
+  ggplot(aes(y = milk, x = count)) +
+  geom_col(fill = CHEDDAR) +
+  geom_text(
+    aes(label = count), 
+    hjust = -0.1, 
+    color = CHEDDAR, 
+    fontface = "bold",
+    vjust = "center",
+    size = 5
+  ) +
+  coord_cartesian(clip = "off") +
+  labs(
+    title = "The hardest workers in the dairy business",
+    subtitle = "Number of unique cheeses produced by each source animal/plant"
+  ) +
+  theme(
+    axis.title = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
+```
+
+```{r}
+#| label: plot-production-by-country
+#| title: "Production by country"
+
+country_count |>
+  ggplot(aes(y = country, x = count)) +
+  geom_col(fill = CHEDDAR) +
+  geom_text(
+    aes(label = count), 
+    hjust = -0.1, 
+    color = CHEDDAR, 
+    fontface = "bold",
+    vjust = "center",
+    size = 5
+  ) +
+  coord_cartesian(clip = "off") +
+  labs(
+    title = "The lands of the cheese",
+    subtitle = "Number of unique cheeses by source country"
+  ) +
+  theme(
+    axis.title = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
+```
+
+```{r}
+#| label: plot-texture-count
+#| title: "Texture distribution"
+
+texture_count <- cheese |>
+  separate_rows(texture, sep = ", ") |>
+  count(texture, name = "count") |>
+  arrange(desc(count)) |>
+  filter(!is.na(texture)) |>
+  mutate(texture = str_to_title(texture))
+
+texture_count <- texture_count |>
+  mutate(texture = factor(texture, levels = rev(texture_count$texture))) |>
+  slice_head(n = 10)
+
+texture_count |>
+  ggplot(aes(y = texture, x = count)) +
+  geom_col(fill = CHEDDAR) +
+  geom_text(
+    aes(label = count), 
+    hjust = -0.1, 
+    color = CHEDDAR, 
+    fontface = "bold",
+    vjust = "center",
+    size = 5
+  ) +
+  coord_cartesian(clip = "off") +
+  labs(
+    title = "It's a texture thing",
+    subtitle = "Top ten cheese textures worldwide"
+  ) +
+  theme(
+    axis.title = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
+```
+
+
+### Column {width="40%"}
+
+```{r}
+#| label: data-table
+#| title: "Raw data"
+
+DT::datatable(cheese)
+```
