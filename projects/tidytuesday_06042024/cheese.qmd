@@ -1,9 +1,13 @@
 ---
-title: "The Cheese Explorer"
+title: "The Cheese Explorer | TidyTuesday"
+categories:
+  - "Data Viz"
+  - "TidyTuesday"
+  - "Dashboard"
 format: 
   dashboard:
-    logo: "images/tidytuesday/cheese.png"
-    layout: 
+    logo: "../../images/projects/tidytuesday/cheese.png"
+image: "../../images/thumbnails/projects/tidytuesday/06042024.jpg"
 ---
 
 ```{r}
@@ -51,7 +55,7 @@ top_milk <- milk_count |>
   slice_head(n = 1) |>
   pull(milk)
 
-list(color = "white", value = str_to_title(top_milk), icon = "bucket")
+list(color = "white", value = str_to_title(top_milk), icon = "droplet")
 ```
 
 ```{r}
@@ -73,7 +77,7 @@ top_flavor <- flavor_count |>
   slice_head(n = 1) |>
   pull(flavor)
 
-list(color = CHEDDAR, value = str_to_title(top_flavor), icon = "cart3")
+list(color = CHEDDAR, value = str_to_title(top_flavor), icon = "eyedropper")
 ```
 
 ```{r}
@@ -196,6 +200,16 @@ texture_count |>
 
 
 ### Column {width="40%"}
+
+Welcome to TidyTuesday! This is a quick demonstration of the new Quarto
+dashboard functionality, which allows for quick-and-easy construction of data
+visualization dashboards with a markdown-like syntax. If you want the full 
+source code for this dashboard (only about 200 lines!!), click
+[here](https://github.com/MitchellHarrison/mitchellharrison.github.io/blob/main/projects/tidytuesday_06042024/cheese.qmd).
+
+Of course, if you want to discuss the project, reach out on 
+[Discord](https://discord.gg/vF6W2bdKFH) or say thanks by 
+[buying me a coffee](https://buymeacoffee.com/mitchellharrison). Enjoy!
 
 ```{r}
 #| label: data-table
