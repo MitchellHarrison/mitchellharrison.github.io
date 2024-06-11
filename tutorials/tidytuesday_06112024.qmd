@@ -1,5 +1,5 @@
 ---
-title: "Campus Pride Index| TidyTutorial"
+title: "Campus Pride Index | TidyTutorial"
 author: "Mitch Harrison"
 categories:
   - "Data Viz"
