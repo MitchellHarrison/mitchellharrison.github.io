@@ -1,10 +1,10 @@
 ---
-title: "The Bias-Variance Tradeoff pt. 2 | Mathematical Statistics 2"
+title: "Jensen's Inequality | Mathematical Statistics 3"
 author: "Mitch Harrison"
 categories:
   - "Statistics"
   - "Mathematical Statistics"
-image: "../images/thumbnails/mathematical_statistics/2.png"
+image: "../images/thumbnails/mathematical_statistics/3.png"
 ---
 
 # Review
@@ -29,7 +29,7 @@ There, $\mathbf{X}$ is our data, $\theta$ is our unknown parameter,
 $\delta(\mathbf{X})$ is our estimator, and $bias^2[\cdot]$ denotes our
 estimator's bias squared.
 
-# The Bias-Variance Tradeoff
+# Jensen's Inequality
 
 We can often "pay" a little bit of bias to reduce variance, or a little bit of 
 variance to reduce bias. We are tasked with choosing ways of optimizing these 
@@ -105,3 +105,23 @@ are working with is $1/\theta$. Then,
 Since the expected value of our estimator is not $\theta$, we have some 
 non-zero bias. So, we know that our estimator is biased! Thanks for help
 [Jensen](https://en.wikipedia.org/wiki/Johan_Jensen_(mathematician)).
+
+Instead of finding whether or not there *is* bias, we may want to calculate the
+exact bias of our estimator. For this example, doing so becomes quite the
+exercise in calculus and involves factoring constants out of integrals until
+those integrals evaluate to 1 (because we turn them into PDFs). Then we can
+safely get rid of them. But the math is such that it may be worth doing in a
+separate, smaller article. So for now, Jensen has at least showed us that our
+estimator is biased, and we will call that a win!
+
+# Conclusion
+
+And just like that, we've added a new tool to our belt: Jensen's inequality.
+If you find yourself with questions or want some more guidance, feel free to
+reach out to me on my [Discord](https://discord.gg/vF6W2bdKFH)
+server! If enough demand for calculating the bias in this example appears, I 
+will draft a separate article with all of the integral math done step-by-step.
+And, of course, if you want to financially support this project, you can
+[buy me a coffee](https://buymeacoffee.com/mitchellharrison).
+
+Thanks for reading, and I'll see you in the next one!

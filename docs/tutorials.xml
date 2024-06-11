@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.554</generator>
-<lastBuildDate>Fri, 07 Jun 2024 19:42:41 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Jun 2024 17:26:11 GMT</lastBuildDate>
 <item>
   <title>Hello, statistics. | Mathematical Statistics 0</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -49,7 +49,7 @@
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_0.html</guid>
-  <pubDate>Fri, 07 Jun 2024 19:42:41 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/0.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -138,19 +138,18 @@ Definition
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Fri, 07 Jun 2024 19:42:41 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
-  <title></title>
+  <title>The Bias-Variance Tradeoff | Mathematical Statistics 2</title>
+  <dc:creator>Mitch Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/tutorials/math_stat_2.html</link>
   <description><![CDATA[ 
 
 
 
 
-<p>title: “The Bias-Variance Tradeoff | Mathematical Statistics 2” author: “Mitch Harrison” categories: - “Statistics” - “Mathematical Statistics” image: “../images/thumbnails/mathematical_statistics/2.png”</p>
-<hr>
 <section id="loss" class="level1">
 <h1>Loss</h1>
 <p><a href="../tutorials/math_stat_1.html">Last time</a>, we noted that we cannot precisely calculate bias or variance since they are conditional on the parameter we are estimating in the first place. If we knew that value, we wouldn’t need an estimator. Ideally, our estimators would be as close as possible to the true value of our unknown parameter <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, but there may be infinitely many possible values for <img src="https://latex.codecogs.com/png.latex?%5Ctheta">. Instead, we will seek to be close to a <em>range</em> of possible values of <img src="https://latex.codecogs.com/png.latex?%5Ctheta">.</p>
@@ -618,11 +617,14 @@ font-style: inherit;">element_line</span>()</span>
 </section>
 
  ]]></description>
+  <category>Statistics</category>
+  <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_2.html</guid>
-  <pubDate>Fri, 07 Jun 2024 19:42:41 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
+  <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/2.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
-  <title>The Bias-Variance Tradeoff pt. 2 | Mathematical Statistics 2</title>
+  <title>Jensen’s Inequality | Mathematical Statistics 3</title>
   <dc:creator>Mitch Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/tutorials/math_stat_3.html</link>
   <description><![CDATA[ 
@@ -637,11 +639,11 @@ font-style: inherit;">element_line</span>()</span>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B(%5Cdelta(%5Cmathbf%7BX%7D)%20-%20%5Ctheta)%5E2%5D%20=%0AVar%5B%5Cdelta(%5Cmathbf%7BX%7D)%20%7C%20%5Ctheta%5D%20+%20bias%5E2%5B%5Cdelta(%5Cmathbf%7BX%7D)%20%7C%20%5Ctheta%5D.%0A"></p>
 <p>There, <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D"> is our data, <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> is our unknown parameter, <img src="https://latex.codecogs.com/png.latex?%5Cdelta(%5Cmathbf%7BX%7D)"> is our estimator, and <img src="https://latex.codecogs.com/png.latex?bias%5E2%5B%5Ccdot%5D"> denotes our estimator’s bias squared.</p>
 </section>
-<section id="the-bias-variance-tradeoff" class="level1">
-<h1>The Bias-Variance Tradeoff</h1>
+<section id="jensens-inequality" class="level1">
+<h1>Jensen’s Inequality</h1>
 <p>We can often “pay” a little bit of bias to reduce variance, or a little bit of variance to reduce bias. We are tasked with choosing ways of optimizing these two. One common method is minimizing the MSE, but there are infinitely many possible methods to choose from.</p>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
+<section id="bias-example" class="level2">
+<h2 class="anchored" data-anchor-id="bias-example">Bias example</h2>
 <p>We are scientists. We are confident that the machine in our lab is working, and it is spitting out data that comes from the following distribution:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AX_1,%20%5Ccdots,%20X_n%20%5Coverset%7B%5Cmathrm%7Biid%7D%7D%7B%5Csim%7D%20Exp(%5Ctheta).%0A"></p>
 <p>The expected value (mean) of an exponential distribution is <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D%5BX%5D%20=%201/%20%5Ctheta">. We also know (or find on <a href="https://en.wikipedia.org/wiki/Exponential_distribution">Wikipedia</a>) that the probability density function (PDF) of an exponential is given by:</p>
@@ -667,18 +669,24 @@ Definition
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5Cleft%5B%5Cfrac%7B1%7D%7B%5Coverline%7BX%7D%7D%5Cright%5D%20%3E%20%5Cfrac%7B1%7D%7B%5Cmathbb%7BE%7D%5BX%5D%7D.%0A"></p>
 <p>We noted earlier that the expected value of the exponential distribution that we are working with is <img src="https://latex.codecogs.com/png.latex?1/%5Ctheta">. Then,</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign*%7D%0A%5Cmathbb%7BE%7D%5Cleft%5B%5Cfrac%7B1%7D%7B%5Coverline%7BX%7D%7D%5Cright%5D%0A&amp;%3E%20%5Cfrac%7B1%7D%7B%5Cmathbb%7BE%7D%5BX%5D%7D%20%5C%5C%0A&amp;%3E%20%5Cfrac%7B1%7D%7B%5Cfrac%7B1%7D%7B%5Ctheta%7D%7D%20%5C%5C%0A&amp;%3E%20%5Ctheta%20%5C%5C%0A%5Cmathbb%7BE%7D%5B%5Chat%7B%5Ctheta%7D_1%5D%20&amp;%3E%20%5Ctheta.%0A%5Cend%7Balign*%7D"></p>
-<p>Since the expected value of our estimator is not <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, we have some non-zero bias. So, we know that our estimator is biased! Thanks <a href="https://en.wikipedia.org/wiki/Johan_Jensen_(mathematician)">Jensen</a>.</p>
-
-
+<p>Since the expected value of our estimator is not <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, we have some non-zero bias. So, we know that our estimator is biased! Thanks for help <a href="https://en.wikipedia.org/wiki/Johan_Jensen_(mathematician)">Jensen</a>.</p>
+<p>Instead of finding whether or not there <em>is</em> bias, we may want to calculate the exact bias of our estimator. For this example, doing so becomes quite the exercise in calculus and involves factoring constants out of integrals until those integrals evaluate to 1 (because we turn them into PDFs). Then we can safely get rid of them. But the math is such that it may be worth doing in a separate, smaller article. So for now, Jensen has at least showed us that our estimator is biased, and we will call that a win!</p>
 </section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>And just like that, we’ve added a new tool to our belt: Jensen’s inequality. If you find yourself with questions or want some more guidance, feel free to reach out to me on my <a href="https://discord.gg/vF6W2bdKFH">Discord</a> server! If enough demand for calculating the bias in this example appears, I will draft a separate article with all of the integral math done step-by-step. And, of course, if you want to financially support this project, you can <a href="https://buymeacoffee.com/mitchellharrison">buy me a coffee</a>.</p>
+<p>Thanks for reading, and I’ll see you in the next one!</p>
+
+
 </section>
 
  ]]></description>
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_3.html</guid>
-  <pubDate>Fri, 07 Jun 2024 19:42:41 GMT</pubDate>
-  <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/2.png" medium="image" type="image/png" height="108" width="144"/>
+  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
+  <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/3.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
   <title>Our World in Emissions | TidyTutorial</title>
@@ -2598,7 +2606,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</guid>
-  <pubDate>Fri, 07 Jun 2024 19:42:41 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png"/>
 </item>
 </channel>

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Mitch Harrison">
 
-<title>Mitch’s Website</title>
+<title>Mitch’s Website - The Bias-Variance Tradeoff | Mathematical Statistics 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -194,11 +195,35 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Bias-Variance Tradeoff | Mathematical Statistics 2</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Statistics</div>
+    <div class="quarto-category">Mathematical Statistics</div>
+  </div>
+  </div>
 
 
 
-<p>title: “The Bias-Variance Tradeoff | Mathematical Statistics 2” author: “Mitch Harrison” categories: - “Statistics” - “Mathematical Statistics” image: “../images/thumbnails/mathematical_statistics/2.png”</p>
-<hr>
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mitch Harrison </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <section id="loss" class="level1">
 <h1>Loss</h1>
 <p><a href="../tutorials/math_stat_1.html">Last time</a>, we noted that we cannot precisely calculate bias or variance since they are conditional on the parameter we are estimating in the first place. If we knew that value, we wouldn’t need an estimator. Ideally, our estimators would be as close as possible to the true value of our unknown parameter <span class="math inline">\(\theta\)</span>, but there may be infinitely many possible values for <span class="math inline">\(\theta\)</span>. Instead, we will seek to be close to a <em>range</em> of possible values of <span class="math inline">\(\theta\)</span>.</p>

@@ -1,4 +1,4 @@
-
+---
 title: "The Bias-Variance Tradeoff | Mathematical Statistics 2"
 author: "Mitch Harrison"
 categories:

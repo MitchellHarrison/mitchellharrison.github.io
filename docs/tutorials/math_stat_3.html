@@ -8,7 +8,7 @@
 
 <meta name="author" content="Mitch Harrison">
 
-<title>Mitch’s Website - The Bias-Variance Tradeoff pt.&nbsp;2 | Mathematical Statistics 2</title>
+<title>Mitch’s Website - Jensen’s Inequality | Mathematical Statistics 3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,10 +148,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">Review</a></li>
-  <li><a href="#the-bias-variance-tradeoff" id="toc-the-bias-variance-tradeoff" class="nav-link" data-scroll-target="#the-bias-variance-tradeoff">The Bias-Variance Tradeoff</a>
+  <li><a href="#jensens-inequality" id="toc-jensens-inequality" class="nav-link" data-scroll-target="#jensens-inequality">Jensen’s Inequality</a>
   <ul class="collapse">
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#bias-example" id="toc-bias-example" class="nav-link" data-scroll-target="#bias-example">Bias example</a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/edit/main/tutorials/math_stat_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -160,7 +161,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The Bias-Variance Tradeoff pt.&nbsp;2 | Mathematical Statistics 2</h1>
+<h1 class="title">Jensen’s Inequality | Mathematical Statistics 3</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Statistics</div>
     <div class="quarto-category">Mathematical Statistics</div>
@@ -197,11 +198,11 @@ Var[\delta(\mathbf{X}) | \theta] + bias^2[\delta(\mathbf{X}) | \theta].
 \]</span></p>
 <p>There, <span class="math inline">\(\mathbf{X}\)</span> is our data, <span class="math inline">\(\theta\)</span> is our unknown parameter, <span class="math inline">\(\delta(\mathbf{X})\)</span> is our estimator, and <span class="math inline">\(bias^2[\cdot]\)</span> denotes our estimator’s bias squared.</p>
 </section>
-<section id="the-bias-variance-tradeoff" class="level1">
-<h1>The Bias-Variance Tradeoff</h1>
+<section id="jensens-inequality" class="level1">
+<h1>Jensen’s Inequality</h1>
 <p>We can often “pay” a little bit of bias to reduce variance, or a little bit of variance to reduce bias. We are tasked with choosing ways of optimizing these two. One common method is minimizing the MSE, but there are infinitely many possible methods to choose from.</p>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
+<section id="bias-example" class="level2">
+<h2 class="anchored" data-anchor-id="bias-example">Bias example</h2>
 <p>We are scientists. We are confident that the machine in our lab is working, and it is spitting out data that comes from the following distribution:</p>
 <p><span class="math display">\[
 X_1, \cdots, X_n \overset{\mathrm{iid}}{\sim} Exp(\theta).
@@ -247,10 +248,16 @@ Definition
 &amp;&gt; \theta \\
 \mathbb{E}[\hat{\theta}_1] &amp;&gt; \theta.
 \end{align*}\]</span></p>
-<p>Since the expected value of our estimator is not <span class="math inline">\(\theta\)</span>, we have some non-zero bias. So, we know that our estimator is biased! Thanks <a href="https://en.wikipedia.org/wiki/Johan_Jensen_(mathematician)">Jensen</a>.</p>
-
-
+<p>Since the expected value of our estimator is not <span class="math inline">\(\theta\)</span>, we have some non-zero bias. So, we know that our estimator is biased! Thanks for help <a href="https://en.wikipedia.org/wiki/Johan_Jensen_(mathematician)">Jensen</a>.</p>
+<p>Instead of finding whether or not there <em>is</em> bias, we may want to calculate the exact bias of our estimator. For this example, doing so becomes quite the exercise in calculus and involves factoring constants out of integrals until those integrals evaluate to 1 (because we turn them into PDFs). Then we can safely get rid of them. But the math is such that it may be worth doing in a separate, smaller article. So for now, Jensen has at least showed us that our estimator is biased, and we will call that a win!</p>
 </section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>And just like that, we’ve added a new tool to our belt: Jensen’s inequality. If you find yourself with questions or want some more guidance, feel free to reach out to me on my <a href="https://discord.gg/vF6W2bdKFH">Discord</a> server! If enough demand for calculating the bias in this example appears, I will draft a separate article with all of the integral math done step-by-step. And, of course, if you want to financially support this project, you can <a href="https://buymeacoffee.com/mitchellharrison">buy me a coffee</a>.</p>
+<p>Thanks for reading, and I’ll see you in the next one!</p>
+
+
 </section>
 
 </main> <!-- /main -->
