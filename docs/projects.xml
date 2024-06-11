@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/projects.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.554</generator>
-<lastBuildDate>Tue, 11 Jun 2024 20:30:15 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Jun 2024 22:11:00 GMT</lastBuildDate>
 <item>
   <title>Our World in Emissions | TidyTuesday</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -604,7 +604,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_05212024/emissions.html</guid>
-  <pubDate>Tue, 11 Jun 2024 20:30:15 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 22:11:00 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png"/>
 </item>
 <item>
@@ -707,7 +707,7 @@ $icon
   <category>TidyTuesday</category>
   <category>Dashboard</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06042024/cheese.html</guid>
-  <pubDate>Tue, 11 Jun 2024 20:30:15 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 22:11:00 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06042024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -720,7 +720,7 @@ $icon
 
 <section id="welcome" class="level1">
 <h1>Welcome!</h1>
-<p>Happy pride month! On this fine TidyTuesday afternoon, we will see how different types of colleges and universities handle LGBTQ+ inclusion! The Campus Pride Index tracks safety, inclusivity, and LGBTQ+ policies/programs at universities across the United States. Results are on a 1-5 scale (with higher numbers being most inclusive), and colleges are grouped by various discrete categories. Today, we’ll build a stacked horizontal bar chart to see the distribution of scores for some of those categories. I’ll use the <code>ggchicklet</code> package and some custom fonts for easy aesthetic changes, and we’ll be done! If you want to see a step-by-step tutorial explaining the code, click <a href="">here</a>.</p>
+<p>Happy pride month! On this fine TidyTuesday afternoon, we will see how different types of colleges and universities handle LGBTQ+ inclusion! The Campus Pride Index tracks safety, inclusivity, and LGBTQ+ policies/programs at universities across the United States. Results are on a 1-5 scale (with higher numbers being most inclusive), and colleges are grouped by various discrete categories. Today, we’ll build a stacked horizontal bar chart to see the distribution of scores for some of those categories. I’ll use the <code>ggchicklet</code> package and some custom fonts for easy aesthetic changes, and we’ll be done! If you want to see a step-by-step tutorial explaining the code, click <a href="../../tutorials/tidytuesday_06112024.html">here</a>.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Click here for code</summary>
@@ -1236,7 +1236,7 @@ font-style: inherit;">20</span>))</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06112024/pride.html</guid>
-  <pubDate>Tue, 11 Jun 2024 20:30:15 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 22:11:00 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06112024.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>

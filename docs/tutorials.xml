@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.554</generator>
-<lastBuildDate>Tue, 11 Jun 2024 20:30:14 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Jun 2024 22:46:54 GMT</lastBuildDate>
 <item>
   <title>Hello, statistics. | Mathematical Statistics 0</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -49,7 +49,7 @@
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_0.html</guid>
-  <pubDate>Tue, 11 Jun 2024 20:30:14 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 22:46:54 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/0.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -138,7 +138,7 @@ Definition
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Tue, 11 Jun 2024 20:30:14 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 22:46:54 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -620,7 +620,7 @@ font-style: inherit;">element_line</span>()</span>
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_2.html</guid>
-  <pubDate>Tue, 11 Jun 2024 20:30:14 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 22:46:54 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/2.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -685,7 +685,7 @@ Definition
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_3.html</guid>
-  <pubDate>Tue, 11 Jun 2024 20:30:14 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 22:46:54 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/3.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -697,7 +697,7 @@ Definition
 
 
 
-<p>Welcome! If you saw my post for this week’s TidyTuesday, I’m glad you liked it enough to learn from it! If not, you can either scroll to the bottom to see the final product or click <a href="../projects/tidytuesday_05212024/emissions.html">here</a> to see it. For this plot, we will use an area plot to visualize the global emissions by type going back to 1900. To start, we will use a bare-bones <code>ggplot2</code> area chart with no bells or whistles to see what we are working with.</p>
+<p>Welcome! If you saw my post for this week’s TidyTuesday, I’m glad you liked it enough to learn from it! If not, you can either scroll to the bottom to see the final product or click <a href="../projects/tidytuesday_05212024/emissions.html">here</a>. For this plot, we will use an area plot to visualize the global emissions by type going back to 1900. To start, we will use a bare-bones <code>ggplot2</code> area chart with no bells or whistles to see what we are working with.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Click here for code</summary>
@@ -2606,8 +2606,969 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</guid>
-  <pubDate>Tue, 11 Jun 2024 20:30:14 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 22:46:54 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>Campus Pride Index| TidyTutorial</title>
+  <dc:creator>Mitch Harrison</dc:creator>
+  <link>https://mitchellharrison.github.io/tutorials/tidytuesday_06112024.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In celebration of Pride Month, this week’s <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-06-11">TidyTuesday</a> provides data from the <a href="https://www.campusprideindex.org">Campus Pride Index</a>, which measures the safety and inclusivity of LGBTQ+ programs across universities in the United States.</p>
+<p>Each university is binned into one or more categories (e.g., military colleges, private/public, and others). What feels natural to me is to see how the Campus Pride Index compares across some of these categories. A proportionate stacked bar chart (where each bar has height equal to 1) is one option, but I would also like to see which types of universities are most common. If there are some categories with worse scores but with much smaller sample sizes, that would be helpful to know. So we’ll use a stacked bar, but not normalize the bar so we can also see how common each type is. Also bear in mind that a single university can (and often does) fall into multiple categories.</p>
+<p>Let’s set some global settings so I don’t have to worry about aspect ratio or other trivialities while we work.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">knitr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>opts_chunk<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set</span>(</span>
+<span id="cb1-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fig.width =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>,        </span>
+<span id="cb1-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fig.asp =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.618</span>,      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># the golden ratio</span></span>
+<span id="cb1-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fig.align =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"center"</span>  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># center align figures</span></span>
+<span id="cb1-5">)</span></code></pre></div>
+</details>
+</div>
+</section>
+<section id="data-wrangling" class="level1">
+<h1>Data Wrangling</h1>
+<p>Time to load the data.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(gglgbtq)</span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggchicklet)</span>
+<span id="cb2-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggthemes)</span>
+<span id="cb2-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(DT)</span>
+<span id="cb2-6"></span>
+<span id="cb2-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># load the data ----------------------------------------------------------------</span></span>
+<span id="cb2-8"></span>
+<span id="cb2-9">pride_schools <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(</span>
+<span id="cb2-10">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/"</span>,</span>
+<span id="cb2-11">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2024/2024-06-11/pride_index.csv"</span></span>
+<span id="cb2-12">))</span>
+<span id="cb2-13"></span>
+<span id="cb2-14">pride_tags <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(</span>
+<span id="cb2-15">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/"</span>,</span>
+<span id="cb2-16">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2024/2024-06-11/pride_index_tags.csv"</span></span>
+<span id="cb2-17">))</span>
+<span id="cb2-18"></span>
+<span id="cb2-19"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">datatable</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(pride_schools, pride_tags))</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-140f97cddfcbd6f0cd6f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-140f97cddfcbd6f0cd6f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238"],["University of Maryland, College Park","University of Michigan-Dearborn","SUNY Westchester Community College","University at Buffalo","Slippery Rock University","Emory University","Washington State University","Davidson College","Virginia Commonwealth University","Northern Arizona University","California State University, Long Beach or Long Beach State","University of La Verne","Rutgers, The State University of New Jersey-New Brunswick","Gettysburg College","Northern Illinois University","Trinity College","Augsburg University","Ithaca College","Portland State University","Northwestern University","University of Colorado at Boulder","Northeastern Illinois University","Elon University","Bridgewater State University","New Mexico State University","University of Richmond","Tufts University","University of Nebraska at Omaha","Youngstown State University","University of Massachusetts, Amherst","West Virginia University","Virginia State University","Kansas State University","Bentley University","Knox College","Oakland University","Union College","Montana State University-Bozeman","Syracuse University","California State University, Northridge","SUNY Oneonta","Montclair State University","University of New Haven","University of Wisconsin","Lehigh University","George Mason University","University of Houston","William &amp; Mary","College of Staten Island/CUNY","Virginia Tech","Washington University in St. Louis","Eastern Michigan University","University of Vermont","MIT","University of Minnesota, Morris","Kalamazoo College","Pace University","University of Maryland, Baltimore County","The University of Alabama","Michigan State University","The Evergreen State College","Napa Valley College","University of Tennessee","University of Missouri-Kansas City","Clark University","Roger Williams University","University of Colorado at Colorado Springs","The Pennsylvania State University","Emporia State University","Indiana University, Bloomington","Lawrence University","Macalester College","University of Missouri - St. Louis","San Diego State University","Appalachian State University","University of Wisconsin - Superior","Centre College","University of Wisconsin - Eau Claire","Rhodes College","California State University, Chico","Hofstra University","University of Rochester","University California, Irvine","Washington College","Illinois State University","University of Miami","University of Kentucky","University of Wisconsin - Oshkosh","Oregon State University","North Dakota State University","University at Albany - SUNY","Michigan Technological University","Colby College","Northern Kentucky University","Eckerd College","Guilford College","University of North Dakota","University of Wisconsin - Green Bay","Georgia College &amp; State University","University of Pittsburgh at Bradford","University of Kansas","Baldwin Wallace University","Rochester Institute of Technology","University of Maine at Machias","University of Wisconsin - Whitewater","San Francisco State University","Swarthmore College","University of Texas at Dallas","Red Rocks Community College","Colgate University","Bard College at Simon's Rock","Kent State University","Purdue University","Kenyon College","Widener University","College of Wooster","University of Wisconsin - Milwaukee","University of Maine at Farmington","St. John's College, Annapolis","Drexel University","Southern Methodist University","Earlham College","Southern Illinois University Carbondale","University of Louisville","Wichita State University","SUNY ROCKLAND COMMUNITY COLLEGE","Adelphi University","Hobart and William Smith Colleges","University of Illinois Chicago","Metropolitan State University of Denver","Montserrat College of Art","Harvard College","Cleveland State University","University of Mount Union","University of Virginia","Gonzaga University","James Madison University","University of the Arts","Stevens Institute of Technology","Towson University","Florida International University","Antioch College","Millersville University of Pennsylvania","Mars Hill University","Kean University","The University of Findlay","Fort Lewis College","Southwestern University","Lebanon Valley College","University of New Hampshire-Main Campus","Mohawk Valley Community College","Bryant University","Emerson College","Manhattan School of Music","Eastern Mennonite University","Tidewater Community College","Art Academy of Cincinnati","Joliet Junior College","University of Mary Washington","Gwynedd Mercy University","Colorado College","University of Puget Sound","Virginia Wesleyan University","Fitchburg State University","Juniata College","University of Michigan-Ann Arbor","Worcester State University","Regis College","West Chester University of Pennsylvania","William Paterson University of New Jersey","Gallaudet University","Whitman College","University of Wisconsin-Stevens Point","Georgia Southern University","Susquehanna University","Dominican University of California","Texas State University","Skyline College","Salt Lake Community College","Catawba College","Nazareth College","Rhode Island College","Big Sandy Community and Technical College","Dutchess Community College","California State Polytechnic University-Pomona","Diablo Valley College","Point Park University","Bergen Community College","Miami University-Oxford","Butte College","Wheaton College","University of Oklahoma-Norman Campus","Norco College","Milwaukee Institute of Art &amp; Design","Allegheny College","Ramapo College of New Jersey","Drew University","Dakota State University","Randolph College","Otis College of Art and Design","Dickinson College","University of Northern Colorado","University of North Carolina at Charlotte","University of Nebraska at Kearney","California State University-Bakersfield","Suffolk University","Wayne State University","Western Colorado University","Wentworth Institute of Technology","Sacred Heart University","Henry Ford Community College","Xavier University","Haverford College","The College of Idaho","University of Central Arkansas","Camden County College","Western Kentucky University","University of Pittsburgh-Main Campus","Binghamton University SUNY","Stockton University","Kutztown University","East Carolina University","Southern New Hampshire University","Cuyahoga Community College Metro Campus","Cuyahoga Community College Western Campus","Cuyahoga Community College Eastern Campus","Cuyahoga Community College Westshore Campus","Ferris State University","University of Toledo","Bates College","Missouri Science &amp; Technology","Forsyth Technical Community College","Woodbury University","University of Texas Arlington","University of Arkansas at Little Rock","Linfield University","Bluegrass Community &amp; Technical College (BCTC)","Hartwick College"],["College Park, MD","Dearborn, MI","Valhalla, NY","Buffalo, NY","Slippery Rock, PA","Atlanta, GA","Pullman, WA","Davidson, NC","Richmond, VA","Flagstaff, AZ","Long Beach, CA","La Verne, CA","New Brunswick, NJ","Gettysburg, PA","DeKalb, IL","Hartford, CT","Minneapolis, MN","Ithaca, NY","Portland, OR","Evanston, IL","Boulder, CO","Chicago, IL","Elon, NC","Bridgewater, MA","Las Cruces, NM","Richmond, VA","Medford, MA","Omaha, NE","youngstown, OH","Amherst, MA","Morgantown, WV","Virginia State University, VA","Manhattan, KS","Waltham, MA","Galesburg, IL","Rochester, MI","Schenectady, NY","Bozeman, MT","Syracuse, NY","Northridge, CA","Oneonta, NY, NY","Montclair, NJ","West Haven, CT","Madison, WI","Bethlehem, PA","Fairfax, VA","Houston, TX","Williamsburg, VA","Staten Island, NY","Blacksburg, VA","St. Louis, MO","Ypsilanti, MI","Burlington, VT","Cambridge, MA","Morris, MN","Kalamazoo, MI","New York, NY","Baltimore, MD","Tuscaloosa, AL","East Lansing, MI","Olympia, WA","Napa, CA","KNoxville, TN","Kansas City, MO","Worcester, MA","Bristol, RI","Colorado Springs, CO","University Park, PA","Emporia, KS","Bloomington, IN","Appleton, WI","Saint Paul, MN","Saint Louis, MO","San Diego, CA","Boone, NC","Superior, WI","Danville, KY","Eau Claire, WI","Memphis, TN","Chico, CA","Hempstead, NY","Rochester, NY","Irvine, CA","Chestertown, MD","Normal, IL","Coral Gables, FL","Lexington, KY","Oshkosh, WI","Corvallis, OR","Fargo, ND","Albany, NY","Houghton, MI","Waterville, ME","Highland Heights, KY","St. Petersburg, FL","Greensboro, NC","Grand Forks, ND","Green Bay, WI","Milledgeville, GA","Bradford, PA","Lawrence, KS","Berea, OH","Rochester, NY","Machias, ME","Whitewater, WI","San Francisco, CA","Swarrthmore, PA","Richardson, TX","Lakewood, CO","Hamilton, NY","Great Barrington, MA","Kent, OH","West Lafayette, IN","Gambier, OH","Chester, PA","Wooster, OH","Milwaukee, WI, WI","Farmington, ME","Annapolis, MD","Philadelphia, PA","DALLAS, TX","Richmond, IN","Carbondale, IL","Louisville, KY","Wichita, KS","SUFFERN, NY","Garden City, NY","Geneva, NY","Chicago, IL","Denver, CO","Beverly, MA","Cambridge, MA","Cleveland, OH","Alliance, OH","Charlottesville, VA","Spokane, WA","Harrisonburg, VA","Philadelphia, PA","Hoboken, NJ","Towson, MD","Miami, FL","Yellow Springs, OH","Millersville, PA","Mars Hill, NC","Union, NJ","Findlay, OH","Durango, CO","Georgetown, TX","Annville, PA","Durham, NH","Utica, NY","Smithfield, RI","Boston, MA","New York, NY","Harrisonburg, VA","Norfolk, VA","Cincinnati, OH","Joliet, IL","Fredericksburg, VA","Gwynedd Valley, PA","Colorado Springs, CO","Tacoma, WA","Virginia Beach, VA","FITCHBURG, MA","Huntingdon, PA","Ann Arbor, MI","Worcester, MA","Weston, MA","West Chester, PA","Wayne, NJ","Washington, DC","Walla Walla, WA","Stevens Point, WI","Statesboro, GA","Selinsgrove, PA","San Rafael, CA","San Marcos, TX","San Bruno, CA","Salt Lake City, UT","Salisbury, NC","Rochester, NY","Providence, RI","Prestonsburg, KY","Poughkeepsie, NY","Pomona, CA","Pleasant Hill, CA","Pittsburgh, PA","Paramus, NJ","Oxford, OH","Oroville, CA","Norton, MA","Norman, OK","Norco, CA","Milwaukee, WI","Meadville, PA","Mahwah, NJ","Madison, NJ","Madison, SD","Lynchburg, VA","Los Angeles, CA","Carlisle, PA","Greeley, CO","Charlotte, NC","Kearney, NE","Bakersfield, CA","Boston, MA","Detroit, MI","Gunnison, CO","Boston, MA","Fairfield, CT","Dearborn, MI","Cincinnati, OH","Haverford, PA","Caldwell, ID","Conway, AR","Blackwood, NJ","Bowling Green, KY","Pittsburgh, PA","Binghamton, NY","Galloway, NJ","Kutztown, PA","Greenville, NC","Manchester, NH","Cleveland, OH","Parma, OH","Highland Hills, OH","Westlake, OH","Big Rapids, MI","Toledo, OH","Lewiston, ME","Rolla, MO","Winston-Salem, NC","Burbank, CA","Arlington, TX","Little Rock, AR","McMinnville, OR","Lexington, KY","Oneonta, NY"],[5,3,4,3.5,4,4.5,5,4,4.5,4.5,4.5,2.5,5,4.5,5,5,5,5,5,4,5,2.5,5,4.5,4.5,4.5,5,4.5,3,5,4.5,4,5,4.5,4,5,5,4,4,4.5,4,5,4,4.5,5,5,4.5,4.5,3.5,4,5,4.5,5,4.5,4,4,5,3,4.5,4,3.5,4,4,4.5,4.5,4,4.5,5,4,5,4,5,4,5,4.5,3.5,3,5,4.5,4,5,5,3.5,3.5,4,4,5,4.5,4,3.5,5,3.5,3.5,5,3,5,4,5,3,3.5,4.5,4,4,4.5,4,3.5,4,5,3.5,4.5,4.5,5,5,4,4,4,4.5,4.5,3.5,3.5,4.5,4.5,5,5,4,3,5,4.5,5,4.5,4,4.5,4,3,4.5,4.5,4,3,4,5,4.5,4.5,3.5,3,3,3.5,4,3.5,4,4.5,2,2,4,3,3,1.5,2.5,2.5,4,3,2.5,4,5,4.5,3,5,4.5,3.5,4,4.5,3.5,3,4.5,3.5,3,3,3.5,3,4,2,4,2.5,2.5,3.5,3.5,1.5,3,4.5,4.5,3.5,4.5,4,3,4,4.5,4,4.5,2,3,4,4.5,5,3.5,5,3.5,3.5,4.5,3,4.5,4,2.5,3,3,2.5,2,2.5,4.5,5,4.5,4.5,4,4.5,3.5,3,3,3,3,3.5,4,3.5,3,4,3,5,2.5,3,4,3.5],[37952,9000,13000,29850,8500,14769,19446,1850,31500,29000,36846,8600,48000,2400,16234,2159,3537,6000,25000,21215,30000,10275,6500,10000,16765,3890,11926,15500,11171,28500,34000,3400,20000,4100,1300,17170,2150,16902,14422,36000,5514,21000,6500,43193,6950,39150,40000,8500,10185,31000,14000,10500,11000,11000,1900,1458,12835,14000,38000,50000,2100,5000,26000,16375,2300,4000,12017,46184,6100,49695,1500,2094,8381,32000,20436,2500,1450,11000,2000,16251,9533,10182,29000,1420,20000,16397,30000,14000,28000,14500,18000,7238,2299,16000,1950,1200,14172,9780,6800,1500,28000,3500,18897,800,12000,29905,1699,27642,4297,3228,400,28000,49000,1730,6300,2000,23829,1800,450,14000,12373,1200,14000,22000,15000,7500,7859,2396,30539,21000,370,6500,16000,2100,22000,7450,22000,1900,6825,16517,34000,125,7500,1000,11610,3500,3443,1500,1651,13000,5000,3287,3783,1035,1000,7028,260,10000,4000,1724,2300,2200,1750,3500,1600,46000,4039,3014,17552,8000,1454,1493,8900,21000,2300,1531,38000,5599,16158,1200,3000,5776,1193,6500,23717,7854,4000,14585,24000,4816,1700,25829,10000,900,1800,5041,2100,3100,650,1100,2400,11114,22968,6232,7000,7288,26251,3040,5000,10216,13000,6738,1400,987,12000,6425,13228,25069,18000,9080,8000,29131,3400,3094,7000,3394,2183,10222,23000,1800,9000,2890,1132,47000,6712,1750,14500,1100],["large urban city","medium city","very small town","medium city","rural community","large urban city","small town","small town","medium city","small city","medium city","small city","large urban city","very small town","small city","medium city","large urban city","small city","large urban city","small city","small city","large urban city","small town","small city","medium city","medium city","small city","large urban city","medium city","small town","small city","small town","small city","small city","small city","small city","small city","small city","medium city","large urban city","small town","small city","small city","medium city","small city","small city","large urban city","small town","large urban city","small city","medium city","small city","small city","medium city","very small town","medium city","large urban city","large urban city","small city","small city","small city","small city","medium city","large urban city","medium city","small town","medium city","small town","small city","small city","small city","large urban city","large urban city","large urban city","small town","small city","small town","small city","large urban city","medium city","medium city","medium city","medium city","very small town","small city","large urban city","medium city","small city","small city","medium city","medium city","rural community","small town","medium city","medium city","medium city","small city","medium city","small town","rural community","small city","small town","medium city","rural community","small town","large urban city","large urban city","medium city","medium city","rural community","very small town","small city","small city","rural community","small city","small city","large urban city","very small town","small city","large urban city","large urban city","small city","small city","large urban city","large urban city","small town","small town","rural community","large urban city","large urban city","small city","medium city","medium city","small town","small town","medium city","small city","large urban city","small city","large urban city","large urban city","rural community","small city","rural community","small city","small city","small town","small city","rural community","small town","small city","small town","large urban city","large urban city","small city","large urban city","medium city","small city","small city","small town","large urban city","medium city","large urban city","small city","very small town","medium city","medium city","rural community","small town","small city","large urban city","small city","small city","small town","very small town","small city","small city","small city","large urban city","rural community","small town","medium city","rural community","medium city","medium city","small city","medium city","large urban city","small town","small town","small town","medium city","small town","large urban city","small town","small city","small town","very small town","rural community","large urban city","small town","medium city","large urban city","small city","medium city","large urban city","large urban city","very small town","large urban city","small city","small city","medium city","small city","very small town","small city","rural community","small city","medium city","small city","small city","very small town","small city","medium city","medium city","small city","small town","small city","small town","medium city","small city","small town","medium city","medium city","medium city","medium city","small city","medium city","small town"],[true,true,true,true,true,null,true,null,true,true,true,null,true,null,true,null,null,null,true,null,true,true,null,true,true,null,null,true,true,null,true,true,true,null,null,true,null,true,null,true,true,true,null,true,null,true,true,true,true,true,null,true,true,null,true,null,null,true,true,true,true,null,true,true,null,null,true,null,true,true,null,null,true,true,true,true,null,true,null,true,null,null,null,null,true,null,true,true,true,true,true,true,null,true,null,null,true,true,true,null,true,null,null,true,true,true,null,true,null,null,null,true,true,null,null,null,true,true,null,null,null,null,true,true,true,null,null,null,true,true,null,null,true,null,true,null,true,null,null,true,null,null,true,null,true,null,true,null,null,true,true,null,null,null,null,null,null,null,true,null,null,null,null,true,null,true,true,null,true,true,null,null,true,true,null,null,null,true,null,null,null,true,null,null,true,null,null,null,true,null,null,true,null,null,null,true,null,true,null,null,null,true,true,true,true,null,true,true,null,null,null,null,null,null,true,null,true,null,null,true,true,true,null,null,null,null,null,true,true,null,true,null,null,true,true,null,null,null],[null,null,null,null,null,true,null,true,null,null,null,true,null,true,null,true,true,true,null,true,null,null,true,null,null,true,true,null,null,null,null,null,null,true,true,null,true,null,true,null,null,null,true,null,true,null,null,null,null,null,true,null,null,true,null,true,true,null,null,null,null,null,null,null,true,true,null,null,null,null,true,true,null,null,null,null,true,null,true,null,null,true,null,null,null,true,null,null,null,null,null,null,null,null,true,true,null,null,null,null,null,true,true,null,null,null,null,null,null,true,true,null,null,true,true,true,null,null,true,true,true,true,null,null,null,null,true,true,null,null,true,true,null,true,null,true,null,true,true,null,null,true,null,true,null,true,null,true,true,null,null,true,true,true,true,null,true,null,null,true,true,true,true,null,true,null,null,true,null,null,true,true,null,null,true,true,null,null,null,true,true,null,null,null,null,null,true,null,null,null,true,null,null,true,true,null,true,null,null,true,true,null,null,null,null,true,null,null,true,true,null,true,true,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,true,null,null,true,null,true],[true,true,null,true,true,true,true,null,true,true,true,true,true,null,true,null,true,null,true,true,true,null,null,null,true,null,true,true,null,true,true,true,true,true,null,true,null,true,true,true,null,true,null,true,true,true,true,true,true,true,true,true,true,true,null,null,true,true,true,true,null,null,true,true,true,null,true,true,true,true,null,null,true,true,null,null,null,true,null,null,true,true,true,null,true,true,true,null,true,true,true,true,null,null,null,null,true,true,null,null,true,null,true,null,null,null,null,true,null,null,null,true,true,null,true,null,true,null,null,true,true,null,true,true,null,null,null,null,true,null,null,null,true,null,true,null,true,null,true,true,true,null,null,null,true,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,true,true,null,true,null,null,true,null,null,true,null,null,null,true,null,null,null,null,null,true,null,true,null,null,true,null,null,null,null,null,true,null,null,null,true,true,true,null,true,true,null,null,true,null,true,null,null,true,null,true,true,true,true,true,true,null,null,null,null,null,null,true,null,true,null,null,true,true,null,null,null],[null,true,null,true,true,null,null,null,true,true,true,true,true,null,true,true,true,true,null,null,true,true,true,true,true,true,null,true,true,null,true,true,true,true,null,true,null,true,true,true,null,true,true,true,true,null,true,null,true,true,true,true,true,true,null,null,true,true,true,null,true,null,null,null,true,true,true,null,true,null,null,null,true,true,true,null,null,true,null,true,null,true,true,null,true,true,true,true,true,null,null,true,null,true,null,true,true,true,true,null,null,null,true,null,true,true,null,true,null,null,null,true,true,null,null,null,true,null,null,true,null,true,true,true,null,null,null,null,true,true,null,null,true,true,null,true,true,true,true,true,null,null,true,null,true,true,null,null,true,true,null,true,true,null,true,null,true,null,null,null,null,null,true,true,null,true,true,true,null,true,true,null,true,null,null,true,null,null,null,null,true,true,null,null,true,null,true,null,null,null,null,true,null,null,null,true,null,true,null,null,null,true,true,true,true,true,true,true,true,true,null,true,null,null,true,null,null,null,null,true,true,null,null,null,null,null,null,true,true,null,true,null,true,true,true,null,null,null],[null,true,null,true,true,null,null,true,true,true,true,true,true,true,true,true,true,true,null,null,true,true,true,true,true,true,null,true,null,null,true,true,true,true,null,true,true,true,true,true,null,true,null,true,true,null,true,null,true,true,true,true,true,true,true,null,true,true,true,null,true,null,null,null,true,true,true,null,true,null,true,true,true,true,null,true,true,true,true,true,null,true,true,null,true,true,true,true,true,null,null,true,null,true,null,true,true,true,true,true,null,null,true,true,true,true,null,true,null,true,true,true,true,true,null,true,true,true,null,true,null,true,true,true,null,null,null,true,true,true,true,null,true,true,null,true,null,null,true,true,null,true,true,null,true,true,null,true,true,true,null,true,true,null,true,null,true,null,null,null,true,null,true,true,true,true,true,true,null,true,true,true,true,null,true,null,null,null,null,true,true,true,null,null,null,null,true,null,null,null,true,true,null,true,true,true,null,true,null,null,true,true,true,true,true,true,true,true,true,true,null,true,null,null,true,null,null,null,null,true,true,null,true,null,null,null,null,null,true,true,true,null,true,true,true,null,null,true],[null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,true,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,true,null,null,null,true,true,null,true,null,true,null,true,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,true,null,null,null,null,null,null,null,true,true,true,true,null,null,null,null,true,null,null,null,null,true,null],[true,null,null,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,null,true,true,true,true,true,true,true,null,true,true,true,true,true,true,true,null,true,true,null,true,true,null,true,true,true,true,true,true,true,null,true,true,true,true,true,true,null,true,true,null,true,null,true,true,true,null,null,true,true,true,null,true,null,null,true,true,true,true,null,true,true,null,true,true,true,null,true,true,null,null,null,true,true,true,true,true,true,null,true,null,true,true,true,true,null,true,null,true,true,true,true,true,true,true,null,true,true,true,true,null,true,true,null,null,null,true,true,null,true,true,null,true,true,true,null,true,true,true,null,true,null,true,true,true,null,true,true,true,null,true,true,null,true,null,null,null,null,null,true,null,true,true,true,true,true,true,true,true,true,true,true,true,true,null,null,null,null,true,true,true,null,null,null,null,true,null,true,null,true,true,null,true,true,true,null,true,null,true,true,true,true,true,true,true,true,true,true,true,null,true,true,null,true,null,true,null,null,true,true,true,true,null,null,null,null,true,null,true,true,null,true,true,true,true,null,true],[null,true,true,null,null,null,null,null,null,true,true,null,null,null,null,null,null,null,true,null,null,true,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,true,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,true,null,null,null,null,null,null,true,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,true,true,null,null,null,true,null,null,null,null,true,null,null,null,true,null,null,null,true,true,true,true,null,null,null,true,null,null,null,true,null,null,null],[null,null,null,null,true,true,null,true,null,null,null,null,null,true,null,true,true,true,null,null,null,null,true,true,null,true,null,null,null,null,null,null,null,null,true,null,true,null,null,null,null,true,null,null,null,null,null,true,true,null,null,null,null,null,true,true,true,true,null,null,true,null,null,null,true,true,null,null,null,null,true,true,null,null,null,null,true,true,true,null,null,null,null,true,null,null,null,null,null,null,null,null,true,null,true,true,null,true,true,null,null,null,true,true,null,null,true,null,null,true,true,null,null,true,null,true,null,true,true,null,null,true,null,null,null,null,null,true,null,null,true,true,null,null,null,null,null,null,null,null,null,true,null,true,null,true,true,true,true,null,null,null,true,null,true,null,null,null,true,null,null,true,true,true,true,null,null,null,null,null,true,true,true,null,true,true,null,null,null,true,true,true,null,null,null,null,true,null,null,null,true,true,null,null,true,true,true,null,true,null,true,null,null,null,null,null,null,true,null,null,true,null,true,true,null,null,null,null,null,true,true,null,null,null,null,null,null,null,null,true,null,null,true,null,true,true,null,true],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,true,null,null,null,null,null],[null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,true,null,null,null,null,null,null,null,null,null,null,null,true,null,true,null,null,null,null,null,null,null,true,null,null,null,true,true,null,null,null,null,null,true,null,null,null,null,true,null,null,true,null,true,null,null,true,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,true,null,null,null,null,null,null,true,true,true,null,null,null,null,null,null,true,null,null,true,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,true,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,true,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,true,null,null,null,null,null,null,null,null,null,null,true,null,null,null,true,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,true,true,null,null,null,true,null,null,true,null,null,null,null,true,null,null,null,null,null,true,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,true,null,null,null,null],[true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,true,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>campus_name<\/th>\n      <th>campus_location<\/th>\n      <th>rating<\/th>\n      <th>students<\/th>\n      <th>community_type<\/th>\n      <th>public<\/th>\n      <th>private<\/th>\n      <th>doctoral<\/th>\n      <th>masters<\/th>\n      <th>baccalaureate<\/th>\n      <th>community<\/th>\n      <th>residential<\/th>\n      <th>nonresidential<\/th>\n      <th>liberal_arts<\/th>\n      <th>technical<\/th>\n      <th>religious<\/th>\n      <th>military<\/th>\n      <th>hbcu<\/th>\n      <th>hispanic_serving<\/th>\n      <th>aapi_serving<\/th>\n      <th>other_minority_serving<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"campus_name","targets":1},{"name":"campus_location","targets":2},{"name":"rating","targets":3},{"name":"students","targets":4},{"name":"community_type","targets":5},{"name":"public","targets":6},{"name":"private","targets":7},{"name":"doctoral","targets":8},{"name":"masters","targets":9},{"name":"baccalaureate","targets":10},{"name":"community","targets":11},{"name":"residential","targets":12},{"name":"nonresidential","targets":13},{"name":"liberal_arts","targets":14},{"name":"technical","targets":15},{"name":"religious","targets":16},{"name":"military","targets":17},{"name":"hbcu","targets":18},{"name":"hispanic_serving","targets":19},{"name":"aapi_serving","targets":20},{"name":"other_minority_serving","targets":21}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>First, let’s format the data for ease of plotting. Right now, each category has its own column, with <code>TRUE</code> or <code>NA</code> values, where <code>NA</code> means “false” for our purposes. But we want the type of school to be represented in a single column so we can map that column to the color of the bars. To move multiple columns into a single one, we will <strong>pivot</strong> the data. Since we want to consolidate columns, we will need to make our data <em>longer</em> (i.e., add more rows), where each university now has multiple rows corresponding to <code>TRUE</code> or <code>FALSE</code>. Intuitively, to pivot the data longer, we use the <code>pivot_longer</code> function. Notice that once the pivot is complete, we only want to keep the rows where the value is <code>TRUE</code>, since the <code>FALSE</code> rows are just saying that “this university doesn’t fall into this type,” which is useless noise in our dataset.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># format data for plotting -----------------------------------------------------</span></span>
+<span id="cb3-2"></span>
+<span id="cb3-3">uni_types <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> pride_schools <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-4">  </span>
+<span id="cb3-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># join both datasets into one</span></span>
+<span id="cb3-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(pride_tags) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-7">  </span>
+<span id="cb3-8">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># select which columns we want to analyze along with their ratings</span></span>
+<span id="cb3-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(rating, public, private, community, liberal_arts, technical,</span>
+<span id="cb3-10">         religious, military, hbcu, hispanic_serving, aapi_serving,</span>
+<span id="cb3-11">         other_minority_serving) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb3-12">  </span>
+<span id="cb3-13">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># replace NA with FALSE</span></span>
+<span id="cb3-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">everything</span>(), <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">replace_na</span>(., <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>))) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-15">  </span>
+<span id="cb3-16">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># do the pivot</span></span>
+<span id="cb3-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>rating, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"type"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-18">  </span>
+<span id="cb3-19">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># drop the rows that don't apply</span></span>
+<span id="cb3-20">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(value <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-21">  </span>
+<span id="cb3-22">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># clean up some strings for prettier plotting</span></span>
+<span id="cb3-23">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb3-24">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace_all</span>(type, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span>),</span>
+<span id="cb3-25">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_to_title</span>(type),</span>
+<span id="cb3-26">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(type, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Aapi"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"AAPI"</span>)</span>
+<span id="cb3-27">  )</span>
+<span id="cb3-28"></span>
+<span id="cb3-29"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">datatable</span>(uni_types)</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-743f17a4bbf13ca941f9" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-743f17a4bbf13ca941f9">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","328","329","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384"],[5,5,3,4,4,4,3.5,4,4,4.5,4.5,4.5,5,4,4,4.5,4.5,4.5,4.5,4.5,2.5,2.5,5,4.5,4.5,5,5,5,5,5,5,5,5,5,5,4,5,2.5,2.5,5,5,4.5,4.5,4.5,4.5,4.5,4.5,5,4.5,3,4.5,4,4,5,4.5,4,4,5,5,5,4,4,4.5,4.5,4.5,4,5,5,5,4,4.5,5,5,4.5,4.5,4.5,4.5,3.5,3.5,4,4,5,4.5,5,4.5,4.5,4,4,4,4,5,5,3,3,4.5,4,3.5,3.5,4,4,4.5,4.5,4.5,4,4,4.5,4,5,4,4,5,5,4,5,5,4.5,3.5,3,3,5,5,4.5,4.5,4.5,4,4,5,3.5,3.5,3.5,4,4,5,4.5,4,3.5,5,3.5,3.5,5,3,3,5,5,5,4,5,5,3,3,4.5,4,4,4,4,4.5,4.5,4,3.5,3.5,4,5,3.5,4.5,4.5,4.5,4.5,5,5,4,4,4,4,4,4.5,4.5,4.5,3.5,3.5,3.5,4.5,4.5,4.5,4.5,4.5,5,5,4,3,5,4.5,4.5,5,5,5,4.5,4.5,4,4,4.5,4.5,4,3,3,4.5,4.5,4.5,4,3,4,5,4.5,4.5,4.5,3.5,3,3,3,3,3,3.5,3.5,4,4,4,3.5,3.5,3.5,3.5,4,4,4,4.5,2,2,2,4,4,3,3,3,3,1.5,2.5,2.5,4,4,3,3,2.5,4,4,5,5,5,5,4.5,4.5,4.5,3,3,3,5,4.5,3.5,3.5,4,4.5,4.5,3.5,3.5,3.5,3,3,4.5,4.5,3.5,3,3,3,3,3.5,3,3,3,3,4,2,2,2,4,4,2.5,2.5,2.5,2.5,2.5,2.5,3.5,3.5,3.5,3.5,3.5,1.5,3,3,4.5,4.5,3.5,3.5,4.5,4.5,4,4,3,4,4.5,4.5,4,4,4,4.5,4.5,2,3,4,4,4.5,4.5,5,3.5,5,3.5,3.5,3.5,4.5,3,3,4.5,4.5,4,4,2.5,2.5,2.5,3,3,3,3,2.5,2,2.5,4.5,4.5,4.5,4,4,4.5,3.5,3,3,3,3,3.5,4,3.5,3,3,4,3,3,3,3,5,5,5,5,2.5,2.5,3,3,4,3.5,3.5],["Public","AAPI Serving","Public","Public","Community","Hispanic Serving","Public","Public","Liberal Arts","Private","Liberal Arts","Religious","Public","Private","Liberal Arts","Public","Public","Hispanic Serving","Public","Hispanic Serving","Private","Hispanic Serving","Public","Private","Liberal Arts","Public","Private","Liberal Arts","Private","Liberal Arts","Religious","Private","Liberal Arts","Public","Hispanic Serving","Private","Public","Public","Hispanic Serving","Private","Liberal Arts","Public","Liberal Arts","Public","Hispanic Serving","Private","Liberal Arts","Private","Public","Public","Public","Public","Hbcu","Public","Private","Private","Liberal Arts","Public","Private","Liberal Arts","Public","Private","Public","Hispanic Serving","AAPI Serving","Public","Public","Liberal Arts","Hispanic Serving","Private","Public","Private","Public","Public","Hispanic Serving","Public","Liberal Arts","Public","Liberal Arts","Public","Military","Private","Public","Public","Private","Technical","Public","Liberal Arts","Private","Liberal Arts","Private","Liberal Arts","Public","Liberal Arts","Public","Public","Public","Liberal Arts","Community","Public","Public","Private","Liberal Arts","Private","Liberal Arts","Public","Public","Public","Private","Liberal Arts","Private","Liberal Arts","Public","Public","Hispanic Serving","Public","Public","Private","Liberal Arts","Public","Liberal Arts","Private","Liberal Arts","Religious","Public","Hispanic Serving","Private","Hispanic Serving","AAPI Serving","Liberal Arts","Public","Private","Public","Public","Public","Public","Public","Public","Liberal Arts","Public","Private","Liberal Arts","Private","Liberal Arts","Religious","Public","Public","Liberal Arts","Public","Liberal Arts","Public","Private","Private","Liberal Arts","Technical","Public","Liberal Arts","Public","Public","AAPI Serving","Liberal Arts","Public","Community","Private","Liberal Arts","Private","Liberal Arts","Public","Public","Private","Liberal Arts","Private","Private","Liberal Arts","Public","Public","Liberal Arts","Private","Liberal Arts","Private","Private","Religious","Private","Liberal Arts","Religious","Public","Public","Public","Community","Private","Private","Liberal Arts","Public","Hispanic Serving","AAPI Serving","Public","Hispanic Serving","Private","Liberal Arts","Private","Liberal Arts","Public","Private","Religious","Public","Private","Religious","Public","Private","Private","Public","Hispanic Serving","Private","Liberal Arts","Public","Private","Liberal Arts","Religious","Public","Hispanic Serving","Private","Liberal Arts","Public","Liberal Arts","Other Minority Serving","Private","Liberal Arts","Religious","Hispanic Serving","Private","Liberal Arts","Religious","Public","Public","Community","Private","Private","Liberal Arts","Private","Private","Liberal Arts","Religious","Community","Private","Community","Public","Liberal Arts","Private","Religious","Private","Private","Liberal Arts","Private","Liberal Arts","Religious","Other Minority Serving","Public","Liberal Arts","Military","Private","Liberal Arts","Religious","Public","Public","Private","Religious","Public","Public","Hispanic Serving","Private","Liberal Arts","Other Minority Serving","Private","Liberal Arts","Public","Liberal Arts","Public","Private","Liberal Arts","Private","Liberal Arts","Hispanic Serving","Public","Community","Hispanic Serving","AAPI Serving","Community","Private","Liberal Arts","Religious","Private","Liberal Arts","Public","Liberal Arts","Hispanic Serving","Other Minority Serving","Community","Technical","Community","Public","Hispanic Serving","AAPI Serving","Other Minority Serving","Community","Private","Liberal Arts","Community","Public","Community","Hispanic Serving","Private","Liberal Arts","Public","Liberal Arts","Community","Private","Private","Liberal Arts","Public","Liberal Arts","Hispanic Serving","Private","Liberal Arts","Public","Liberal Arts","Private","AAPI Serving","Private","Liberal Arts","Public","Public","Public","Public","Hispanic Serving","Private","Public","Public","Liberal Arts","Private","Technical","Private","Religious","Community","Liberal Arts","Technical","Private","Religious","Private","Liberal Arts","Liberal Arts","Public","Community","Public","Public","Liberal Arts","Public","Liberal Arts","Public","Private","Community","Community","Community","Community","Public","Public","Liberal Arts","Public","Technical","Community","Private","Liberal Arts","Technical","Hispanic Serving","Public","Military","Hispanic Serving","AAPI Serving","Public","Liberal Arts","Private","Liberal Arts","Community","Private","Liberal Arts"],[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>rating<\/th>\n      <th>type<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"rating","targets":1},{"name":"type","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>That looks just like we wanted it to. Now that our data is formatting, we can work on the plot. Per the data dictionary on the TidyVerse GitHub repository, we know that fractional scores are possible. A quick call to the <code>unique</code> function told me that the “fractional” scores are only half-stars, not any decimal in between two scores. So 1 and 1.5 are possible scores, but 1.7 is not. We should bin these scores by their leading digit so we have five possible fill values instead of ten. We’ll call these bins <code>rating_levs</code>, or “rating levels.”</p>
+<p>I would also like to order the bars in descending order of the total number of universities of that type. To do that, we’ll count how many of each category there are and save the order as a vector <code>uni_levs</code>, or “university levels.”</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">uni_levs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> uni_types <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(type) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">count =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(count)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pull</span>(type)</span>
+<span id="cb4-6"></span>
+<span id="cb4-7">rating_levs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1 - 1.5"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2 - 2.5"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"3 - 3.5"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"4 - 4.5"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"5"</span>)</span></code></pre></div>
+</details>
+</div>
+<p>For our last data wrangling step, we can assign the rating bins to their respective ratings. I’ll create a new column for this and call it <code>score</code>. After that, we can group by type of university and <code>score</code>, and count the number of occurrences of each group. Then, we’ll be ready to plot.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">uni_types <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> uni_types <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-2">  </span>
+<span id="cb5-3">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># assign bins to the score variable</span></span>
+<span id="cb5-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb5-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">score =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">case_when</span>(</span>
+<span id="cb5-6">      rating <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>],</span>
+<span id="cb5-7">      rating <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>],</span>
+<span id="cb5-8">      rating <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>],</span>
+<span id="cb5-9">      rating <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>],</span>
+<span id="cb5-10">      <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>] </span>
+<span id="cb5-11">    ),</span>
+<span id="cb5-12">    </span>
+<span id="cb5-13">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># order the score bins using the rating_levs we made earlier</span></span>
+<span id="cb5-14">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">score =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(score, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> rating_levs)</span>
+<span id="cb5-15">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-16">  </span>
+<span id="cb5-17">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># count the number of each type/score combination</span></span>
+<span id="cb5-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(type, score) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">count =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>(), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-20">  </span>
+<span id="cb5-21">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># reorder the universities by descending order of number</span></span>
+<span id="cb5-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(type, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rev</span>(uni_levs)))</span></code></pre></div>
+</details>
+</div>
+</section>
+<section id="the-plot" class="level1">
+<h1>The Plot</h1>
+<p>Now that we have our data, let’s get the skeleton of the plot going. I’m going to use a favorite “cheat code” of mine for making aesthetically pleasing bar graphs in R: the <code>ggchicklet</code> package. It lets us round the corners of each bar, which gives a much more aesthetic appearance (in my opinion). So, instead of using the <code>geom_col</code> function that is standard, we will use <code>geom_chicklet</code> instead.</p>
+<p>One small note for <code>geom_chicklet</code>: it prefers to have bar graphs be vertical. But because my category names are long (and you <em>never</em> want to rotate text), I would like the plot to be horizontal. So I’ll map the type to the <code>x</code> axis and the counts to the <code>y</code> axis like <code>geom_chicklet</code> prefers, but I’ll use <code>coord_flip</code> afterwards to make it horizontal. This is the same technique that the author of the <code>ggchicklet</code> package uses in his demo on the <a href="https://github.com/hrbrmstr/ggchicklet"><code>ggchicklet</code> GitHub repository</a>.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">uni_types <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> type, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> count, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> score)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_chicklet</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">position_stack</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">reverse =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_flip</span>()</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_06112024_files/figure-html/plot-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is already a great start! We have some aesthetic changes to make, but our bins and bars are in the order that we were hoping. Let’s change some colors.</p>
+<p>First, I’ll use my favorite theme function, which comes from the <code>ggthemes</code> package. That theme is <code>theme_fivethirtyeight</code>, which takes its name from the legendary data visualizations of the <a href="https://abcnews.go.com/538">FiveThirtyEight</a> website.</p>
+<p>I also think it would be appropriate for us to use Pride colors, don’t you? Of course, there is an R package for that: the <code>gglgbtq</code> package, which I imported earlier. We will use the “rainbow” color palette provided by <code>gglgbtq</code> to color our bars.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">uni_types <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> type, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> count, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> score)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_chicklet</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">position_stack</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">reverse =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_flip</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-5">  </span>
+<span id="cb7-6">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># change theme and base font size</span></span>
+<span id="cb7-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-8">  </span>
+<span id="cb7-9">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># change bar colors and put the legend in the right order</span></span>
+<span id="cb7-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">palette_lgbtq</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rainbow"</span>))</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_06112024_files/figure-html/plot-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we’re cooking! I think we are safe to add the title and subtitle, and then we can make a few more aesthetic changes before wrapping up. I want the background to be black (personal preference), which means the text needs to be white. I also don’t think that horizontal grid lines are necessary when the <code>y</code> axis is discrete, so we will remove those. I love the legend, but I would like it to be stacked and placed vertically in the plot, rather than horizontal and below the plot.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">uni_types <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> type, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> count, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> score)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_chicklet</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">position_stack</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">reverse =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_flip</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">palette_lgbtq</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rainbow"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-7">  </span>
+<span id="cb8-8">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># add title and subtitle</span></span>
+<span id="cb8-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb8-10">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Campus Pride Index Scores"</span>,</span>
+<span id="cb8-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Higher scores mean increased LGBTQ-inclusive policies/programs"</span>,</span>
+<span id="cb8-12">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb8-13">  </span>
+<span id="cb8-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb8-15">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># make all text white</span></span>
+<span id="cb8-16">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">text =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Lato"</span>) ,</span>
+<span id="cb8-17">    </span>
+<span id="cb8-18">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># adjust title font size</span></span>
+<span id="cb8-19">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(),</span>
+<span id="cb8-20">    </span>
+<span id="cb8-21">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># make background black</span></span>
+<span id="cb8-22">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>),</span>
+<span id="cb8-23">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>),</span>
+<span id="cb8-24">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>),</span>
+<span id="cb8-25">    </span>
+<span id="cb8-26">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># remove grid lines</span></span>
+<span id="cb8-27">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.grid.major.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb8-28">    </span>
+<span id="cb8-29">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># move legend</span></span>
+<span id="cb8-30">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.direction =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"vertical"</span>,</span>
+<span id="cb8-31">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>),</span>
+<span id="cb8-32">  )</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_06112024_files/figure-html/plot-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Much better! Only a few small edits left. First, I don’t think the legend needs a title. I also want the higher scores to be higher on the legend, so we can reverse the order of the legend inside of the <code>scale_fill_manual</code> function. The <code>y</code> axis text is a little far from the axis for my liking, so we will shift that in, and we’ll be done, save for one more thing: fonts.</p>
+<p>I’m going to use custom fonts that aren’t shipped with R or <code>ggplot</code>. These fonts come from <a href="https://fonts.google.com">Google Fonts</a>, and we will need to use two packages to get them to work: <code>sysfonts</code> to load fonts from Google and <code>showtext</code> to get them to work with our plots. Once we import them, we can use them like any other font in our <code>ggplot</code> graphs!</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># load fonts from Google Fonts into our project</span></span>
+<span id="cb9-2">sysfonts<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">font_add_google</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Galada"</span>)</span>
+<span id="cb9-3">sysfonts<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">font_add_google</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Lato"</span>)</span>
+<span id="cb9-4">showtext<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">showtext_auto</span>()</span>
+<span id="cb9-5"></span>
+<span id="cb9-6">uni_types <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> type, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> count, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> score)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_chicklet</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">position_stack</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">reverse =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_flip</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">25</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(</span>
+<span id="cb9-12">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">palette_lgbtq</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rainbow"</span>),</span>
+<span id="cb9-13">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">guide =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">guide_legend</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">reverse =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># reverse the legend order</span></span>
+<span id="cb9-14">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb9-16">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Campus Pride Index Scores"</span>,</span>
+<span id="cb9-17">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Higher scores mean increased LGBTQ-inclusive policies/programs"</span>,</span>
+<span id="cb9-18">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb9-20">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># use Lato font from Google for all text</span></span>
+<span id="cb9-21">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">text =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Lato"</span>) ,</span>
+<span id="cb9-22">    </span>
+<span id="cb9-23">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># use Galada font from Google just for the title</span></span>
+<span id="cb9-24">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Galada"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">43</span>),</span>
+<span id="cb9-25">    </span>
+<span id="cb9-26">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>),</span>
+<span id="cb9-27">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>),</span>
+<span id="cb9-28">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.grid.major.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb9-29">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>),</span>
+<span id="cb9-30">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb9-31">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.direction =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"vertical"</span>,</span>
+<span id="cb9-32">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>),</span>
+<span id="cb9-33">    </span>
+<span id="cb9-34">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># shift y axis text closer to the margin</span></span>
+<span id="cb9-35">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.text.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">margin =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">margin</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">r =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>))</span>
+<span id="cb9-36">  )</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://mitchellharrison.github.io/tutorials/tidytuesday_06112024_files/figure-html/plot-final-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Done! With some data wrangling and some nice themes, we have arrived of a graph that we can be <em>proud</em> of (get it?). I hope this helps you in your own data viz journey, but if you have further questions, feel free to join my <a href="https://discord.gg/vF6W2bdKFH">Discord server</a> and ask me personally! And if you are feeling grateful for my work (and are financially able to), you can give me a special thanks by <a href="https://buymeacoffee.com/mitchellharrison">buying me a coffee</a>.</p>
+<p>As always, thanks for reading, and see you next week!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Data Viz</category>
+  <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_06112024.html</guid>
+  <pubDate>Tue, 11 Jun 2024 22:46:54 GMT</pubDate>
+  <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/06112024.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

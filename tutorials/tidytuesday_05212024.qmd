@@ -8,8 +8,8 @@ image: "../../images/thumbnails/tidytuesday/05212024.png"
 
 Welcome! If you saw my post for this week's TidyTuesday, I'm glad you liked it
 enough to learn from it! If not, you can either scroll to the bottom to see the
-final product or click [here](../projects/tidytuesday_05212024/emissions.qmd)
-to see it. For this plot, we will use an area plot to visualize the global
+final product or click [here](../projects/tidytuesday_05212024/emissions.qmd). 
+For this plot, we will use an area plot to visualize the global
 emissions by type going back to 1900. To start, we will use a bare-bones
 `ggplot2` area chart with no bells or whistles to see what we are working with.
 

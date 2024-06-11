@@ -17,7 +17,7 @@ we'll build a stacked horizontal bar chart to see the distribution of scores for
 some of those categories. I'll use the `ggchicklet` package and some custom 
 fonts for easy aesthetic changes, and we'll be done! If you want to see a 
 step-by-step tutorial explaining the code, click 
-[here]().
+[here](../../tutorials/tidytuesday_06112024.qmd).
 
 
 ```{r}
@@ -122,7 +122,11 @@ uni_types |>
 #| echo: false
 
 # save the plot (for thumbnails/posting)
-# ggsave("images/thumbnails/projects/tidytuesday/06112024.png")
+#ggsave(
+#  "images/thumbnails/projects/tidytuesday/06112024.png", 
+#  width = 9, 
+#  height = 5.5
+#)
 ```
 
 # Conclusion
