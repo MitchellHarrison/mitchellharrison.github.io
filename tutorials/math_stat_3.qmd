@@ -1,0 +1,107 @@
+---
+title: "The Bias-Variance Tradeoff pt. 2 | Mathematical Statistics 2"
+author: "Mitch Harrison"
+categories:
+  - "Statistics"
+  - "Mathematical Statistics"
+image: "../images/thumbnails/mathematical_statistics/2.png"
+---
+
+# Review
+
+Hello again! Last time, we found the bias and variance of two different 
+estimators and discussed the *bias-variance tradeoff*. Now that we have some 
+necessary background knowledge, let's discuss balancing bias and variance to 
+find a better estimator. Recall that we want our estimator to be accurate (have
+a small bias) and precise (have a small variance). 
+
+We mentioned the mean squared error (MSE) as a common way of analyzing an 
+estimator. In the below equality, we only discussed the left-hand side. But now 
+that we know what bias and variance are, we can observe a new (but equivalent) 
+definition of the MSE:
+
+$$
+\mathbb{E}[(\delta(\mathbf{X}) - \theta)^2] =
+Var[\delta(\mathbf{X}) | \theta] + bias^2[\delta(\mathbf{X}) | \theta].
+$$
+
+There, $\mathbf{X}$ is our data, $\theta$ is our unknown parameter, 
+$\delta(\mathbf{X})$ is our estimator, and $bias^2[\cdot]$ denotes our
+estimator's bias squared.
+
+# The Bias-Variance Tradeoff
+
+We can often "pay" a little bit of bias to reduce variance, or a little bit of 
+variance to reduce bias. We are tasked with choosing ways of optimizing these 
+two. One common method is minimizing the MSE, but there are infinitely many 
+possible methods to choose from.
+
+## Bias example
+
+We are scientists. We are confident that the machine in our lab is working, and 
+it is spitting out data that comes from the following distribution:
+
+$$
+X_1, \cdots, X_n \overset{\mathrm{iid}}{\sim} Exp(\theta).
+$$
+
+The expected value (mean) of an exponential distribution is 
+$\mathbb{E}[X] = 1/ \theta$. We also know (or find on 
+[Wikipedia](https://en.wikipedia.org/wiki/Exponential_distribution)) that the 
+probability density function (PDF) of an exponential is given by:
+
+$$
+f_ \theta(x) = \theta e^{- \theta x}.
+$$
+
+Our goal is to study $ \theta$. Let's re-arrange the expected value of the
+exponential distribution to isolate $ \theta $:
+
+\begin{align*}
+\mathbb{E}[X] &= \frac{1}{ \theta} \\
+\theta\mathbb{E}[X] &= 1 \\
+\theta &= \frac{1}{\mathbb{E}[X]}.
+\end{align*}
+
+Now that we have isolated $ \theta $, we can start guessing at some estimators.
+Let's replace $\mathbb{E}[X]$ with our sample mean (the average of whatever data
+we end up with). Like we did before, let's call it $\overline{X}$. Then our
+first estimator will be
+$$
+\hat{\theta}_1 = \frac{1}{\overline{X}}
+$$
+
+Let's see if our new estimator is **unbiased**. That is, if it has zero bias.
+
+:::{.callout-important}
+### Definition
+
+**Jensen's inequality**: Let $g(\cdot)$ be a convex function (i.e., it has a
+positive second derivative). In that case,
+$$
+\mathbb{E}[g(X)] \ge g(\mathbb{E}[X])
+$$
+with equality if $g$ is linear.
+:::
+
+In our case, $g(X) = \hat{\theta}_1$. Therefore, Jensen's inequality tells us
+that
+
+$$
+\mathbb{E}\left[\frac{1}{\overline{X}}\right] > \frac{1}{\mathbb{E}[X]}.
+$$
+
+We noted earlier that the expected value of the exponential distribution that we
+are working with is $1/\theta$. Then,
+
+\begin{align*}
+\mathbb{E}\left[\frac{1}{\overline{X}}\right] 
+&> \frac{1}{\mathbb{E}[X]} \\
+&> \frac{1}{\frac{1}{\theta}} \\
+&> \theta \\
+\mathbb{E}[\hat{\theta}_1] &> \theta.
+\end{align*}
+
+Since the expected value of our estimator is not $\theta$, we have some 
+non-zero bias. So, we know that our estimator is biased! Thanks for help
+[Jensen](https://en.wikipedia.org/wiki/Johan_Jensen_(mathematician)).

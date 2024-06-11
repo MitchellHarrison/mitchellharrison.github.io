@@ -1,4 +1,4 @@
----
+
 title: "The Bias-Variance Tradeoff | Mathematical Statistics 2"
 author: "Mitch Harrison"
 categories:
@@ -232,8 +232,8 @@ This phenomenon, where one estimator has better bias and the other has better
 variance, is an example of a central balancing act that statisticians have to 
 perform: the **bias-variance tradeoff**. We have seen an estimator with no 
 bias but positive variance ($\overline{X}$) and another with no variance but 
-non-zero bias (5). How do we know which is better? We will explore that question i
-n the following article when we explore the MSE more deeply.
+non-zero bias (5). How do we know which is better? We will explore that question 
+in the following article when we explore this tradeoff more deeply.
 
 # Conclusion
 

@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mitch Harrison">
 
-<title>Mitch’s Website - The Bias-Variance Tradeoff | Mathematical Statistics 2</title>
+<title>Mitch’s Website</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -195,35 +194,11 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">The Bias-Variance Tradeoff | Mathematical Statistics 2</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">Statistics</div>
-    <div class="quarto-category">Mathematical Statistics</div>
-  </div>
-  </div>
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mitch Harrison </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<p>title: “The Bias-Variance Tradeoff | Mathematical Statistics 2” author: “Mitch Harrison” categories: - “Statistics” - “Mathematical Statistics” image: “../images/thumbnails/mathematical_statistics/2.png”</p>
+<hr>
 <section id="loss" class="level1">
 <h1>Loss</h1>
 <p><a href="../tutorials/math_stat_1.html">Last time</a>, we noted that we cannot precisely calculate bias or variance since they are conditional on the parameter we are estimating in the first place. If we knew that value, we wouldn’t need an estimator. Ideally, our estimators would be as close as possible to the true value of our unknown parameter <span class="math inline">\(\theta\)</span>, but there may be infinitely many possible values for <span class="math inline">\(\theta\)</span>. Instead, we will seek to be close to a <em>range</em> of possible values of <span class="math inline">\(\theta\)</span>.</p>
@@ -399,7 +374,7 @@ Var[\delta_1(\mathbf{X})|\mu] &amp;= Var(\overline{X}) \\
 </section>
 <section id="the-tradeoff" class="level2">
 <h2 class="anchored" data-anchor-id="the-tradeoff">The Tradeoff</h2>
-<p>This phenomenon, where one estimator has better bias and the other has better variance, is an example of a central balancing act that statisticians have to perform: the <strong>bias-variance tradeoff</strong>. We have seen an estimator with no bias but positive variance (<span class="math inline">\(\overline{X}\)</span>) and another with no variance but non-zero bias (5). How do we know which is better? We will explore that question i n the following article when we explore the MSE more deeply.</p>
+<p>This phenomenon, where one estimator has better bias and the other has better variance, is an example of a central balancing act that statisticians have to perform: the <strong>bias-variance tradeoff</strong>. We have seen an estimator with no bias but positive variance (<span class="math inline">\(\overline{X}\)</span>) and another with no variance but non-zero bias (5). How do we know which is better? We will explore that question in the following article when we explore this tradeoff more deeply.</p>
 </section>
 </section>
 <section id="conclusion" class="level1">
