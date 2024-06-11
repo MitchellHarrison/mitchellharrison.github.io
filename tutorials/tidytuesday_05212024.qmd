@@ -3,7 +3,7 @@ title: "Our World in Emissions | TidyTutorial"
 author: "Mitch Harrison"
 categories:
   - "Data Viz"
-image: "../../images/thumbnails/tidytuesday/05212024.png"
+image: "../../images/thumbnails/projects/tidytuesday/05212024.png"
 ---
 
 Welcome! If you saw my post for this week's TidyTuesday, I'm glad you liked it

@@ -4,7 +4,7 @@ author: "Mitch Harrison"
 categories:
   - "Data Viz"
   - "TidyTuesday"
-image: "../../images/thumbnails/tidytuesday/05212024.png"
+image: "../../images/thumbnails/projects/tidytuesday/05212024.png"
 ---
 Hello, all! Welcome to TidyTuesday. This week, as climate analysts often do, we 
 are going to get mildly depressing in pursuit of a pretty graph. This time, we 

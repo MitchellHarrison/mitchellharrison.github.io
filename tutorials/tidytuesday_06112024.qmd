@@ -3,7 +3,7 @@ title: "Campus Pride Index | TidyTutorial"
 author: "Mitch Harrison"
 categories:
   - "Data Viz"
-image: "../../images/thumbnails/tidytuesday/06112024.jpg"
+image: "../../images/thumbnails/projects/tidytuesday/06112024.jpg"
 ---
 
 # Introduction
