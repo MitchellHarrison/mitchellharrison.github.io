@@ -1,0 +1,140 @@
+---
+title: "Campus Pride Index | TidyTuesday"
+categories:
+  - "Data Viz"
+  - "TidyTuesday"
+image: "../../images/thumbnails/projects/tidytuesday/06112024.jpg"
+---
+
+# Welcome!
+
+Happy pride month! On this fine TidyTuesday afternoon, we will see how different 
+types of colleges and universities handle LGBTQ+ inclusion! The Campus Pride 
+Index tracks safety, inclusivity, and LGBTQ+ policies/programs at universities 
+across the United States. Results are on a 1-5 scale (with higher numbers being 
+most inclusive), and colleges are grouped by various discrete categories. Today, 
+we'll build a stacked horizontal bar chart to see the distribution of scores for 
+some of those categories. I'll use the `ggchicklet` package and some custom 
+fonts for easy aesthetic changes, and we'll be done! If you want to see a 
+step-by-step tutorial explaining the code, click 
+[here]().
+
+
+```{r}
+#| label: plot-pride
+#| fig-width: 10
+#| fig-asp: 0.618
+#| fig-align: center
+
+library(tidyverse)
+library(gglgbtq)
+library(ggchicklet)
+library(ggthemes)
+
+# load custom fonts for the plot -----------------------------------------------
+
+sysfonts::font_add_google(name = "Galada")
+sysfonts::font_add_google(name = "Lato")
+showtext::showtext_auto()
+
+# load the data ----------------------------------------------------------------
+
+pride_schools <- read_csv(paste0(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/",
+  "2024/2024-06-11/pride_index.csv"
+))
+
+pride_tags <- read_csv(paste0(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/",
+  "2024/2024-06-11/pride_index_tags.csv"
+))
+
+# format data for plotting -----------------------------------------------------
+
+uni_types <- pride_schools |>
+  left_join(pride_tags) |>
+  select(rating, public, private, community, liberal_arts, technical,
+         religious, military, hbcu, hispanic_serving, aapi_serving,
+         other_minority_serving) |> 
+  mutate(across(everything(), ~ replace_na(., FALSE))) |>
+  pivot_longer(cols = !rating, names_to = "type") |>
+  filter(value == TRUE) |>
+  mutate(
+    type = str_replace_all(type, "_", " "),
+    type = str_to_title(type),
+    type = str_replace(type, "Aapi", "AAPI")
+  )
+
+# factor levels for ordering bars/fills ----------------------------------------
+
+uni_levs <- uni_types |>
+  group_by(type) |>
+  summarise(count = n()) |>
+  arrange(desc(count)) |>
+  pull(type)
+
+rating_levs <- c("1 - 1.5", "2 - 2.5", "3 - 3.5", "4 - 4.5", "5")
+
+# build the plot! --------------------------------------------------------------
+
+uni_types |>
+  mutate(
+    score = case_when(
+      rating < 2 ~ rating_levs[1],
+      rating < 3 ~ rating_levs[2],
+      rating < 4 ~ rating_levs[3],
+      rating < 5 ~ rating_levs[4],
+      TRUE ~ rating_levs[5] 
+    ),
+    score = factor(score, levels = rating_levs)
+  ) |>
+  group_by(type, score) |>
+  summarise(count = n(), .groups = "drop") |>
+  mutate(type = factor(type, levels = rev(uni_levs))) |>
+  ggplot(aes(x = type, y = count, fill = score)) +
+  geom_chicklet(position = position_stack(reverse = TRUE), width = 0.6) +
+  coord_flip() +
+  theme_fivethirtyeight(base_size = 25) +
+  scale_fill_manual(
+    values = palette_lgbtq("rainbow"),
+    guide = guide_legend(reverse = TRUE)
+  ) +
+  labs(
+    title = "Campus Pride Index Scores",
+    subtitle = "Higher scores mean increased LGBTQ-inclusive policies/programs",
+  ) +
+  theme(
+    text = element_text(color = "white", family = "Lato") ,
+    plot.title = element_text(family = "Galada", size = 43),
+    plot.background = element_rect(fill = "black"),
+    panel.background = element_rect(fill = "black"),
+    panel.grid.major.y = element_blank(),
+    legend.background = element_rect(fill = "black"),
+    legend.title = element_blank(),
+    legend.direction = "vertical",
+    legend.position = c(0.9, 0.5),
+    axis.text.y = element_text(margin = margin(r = -20))
+  )
+```
+
+```{r}
+#| label: save-plot
+#| echo: false
+
+# save the plot (for thumbnails/posting)
+# ggsave("images/thumbnails/projects/tidytuesday/06112024.png")
+```
+
+# Conclusion
+
+There we have it! Seeing very few 1s is a good sign, but there is always room 
+for progress. The top three types of colleges by number (public, private, and 
+liberal arts) are highly inclusive, while community colleges (where I started my 
+educational journey) have a long way to go.
+
+If you have any questions or suggestions for improvements, the best way to reach 
+me is on [Discord](https://discord.gg/vF6W2bdKFH)! And, of course, if you want 
+to support this work financially, you can 
+[buy me a coffee](https://buymeacoffee.com/mitchellharrison)!
+
+Thanks for reading, and I'll see you next week!
