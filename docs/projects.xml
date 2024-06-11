@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/projects.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.554</generator>
-<lastBuildDate>Tue, 11 Jun 2024 22:11:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Jun 2024 23:02:40 GMT</lastBuildDate>
 <item>
   <title>Our World in Emissions | TidyTuesday</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -604,8 +604,8 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_05212024/emissions.html</guid>
-  <pubDate>Tue, 11 Jun 2024 22:11:00 GMT</pubDate>
-  <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png"/>
+  <pubDate>Tue, 11 Jun 2024 23:02:40 GMT</pubDate>
+  <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
   <title>The Cheese Explorer | TidyTuesday</title>
@@ -707,7 +707,7 @@ $icon
   <category>TidyTuesday</category>
   <category>Dashboard</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06042024/cheese.html</guid>
-  <pubDate>Tue, 11 Jun 2024 22:11:00 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 23:02:40 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06042024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -1236,7 +1236,7 @@ font-style: inherit;">20</span>))</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06112024/pride.html</guid>
-  <pubDate>Tue, 11 Jun 2024 22:11:00 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 23:02:40 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06112024.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
