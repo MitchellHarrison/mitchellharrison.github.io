@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.554</generator>
-<lastBuildDate>Tue, 11 Jun 2024 17:26:11 GMT</lastBuildDate>
+<lastBuildDate>Tue, 11 Jun 2024 17:36:03 GMT</lastBuildDate>
 <item>
   <title>Hello, statistics. | Mathematical Statistics 0</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -49,7 +49,7 @@
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_0.html</guid>
-  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:36:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/0.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -138,7 +138,7 @@ Definition
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:36:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -620,7 +620,7 @@ font-style: inherit;">element_line</span>()</span>
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_2.html</guid>
-  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:36:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/2.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -648,9 +648,9 @@ font-style: inherit;">element_line</span>()</span>
 <p><img src="https://latex.codecogs.com/png.latex?%0AX_1,%20%5Ccdots,%20X_n%20%5Coverset%7B%5Cmathrm%7Biid%7D%7D%7B%5Csim%7D%20Exp(%5Ctheta).%0A"></p>
 <p>The expected value (mean) of an exponential distribution is <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D%5BX%5D%20=%201/%20%5Ctheta">. We also know (or find on <a href="https://en.wikipedia.org/wiki/Exponential_distribution">Wikipedia</a>) that the probability density function (PDF) of an exponential is given by:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Af_%20%5Ctheta(x)%20=%20%5Ctheta%20e%5E%7B-%20%5Ctheta%20x%7D.%0A"></p>
-<p>Our goal is to study $ $. Let’s re-arrange the expected value of the exponential distribution to isolate $ $:</p>
+<p>Our goal is to study <img src="https://latex.codecogs.com/png.latex?%5Ctheta">. Let’s re-arrange the expected value of the exponential distribution to isolate <img src="https://latex.codecogs.com/png.latex?%5Ctheta">:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Balign*%7D%0A%5Cmathbb%7BE%7D%5BX%5D%20&amp;=%20%5Cfrac%7B1%7D%7B%20%5Ctheta%7D%20%5C%5C%0A%5Ctheta%5Cmathbb%7BE%7D%5BX%5D%20&amp;=%201%20%5C%5C%0A%5Ctheta%20&amp;=%20%5Cfrac%7B1%7D%7B%5Cmathbb%7BE%7D%5BX%5D%7D.%0A%5Cend%7Balign*%7D"></p>
-<p>Now that we have isolated $ $, we can start guessing at some estimators. Let’s replace <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D%5BX%5D"> with our sample mean (the average of whatever data we end up with). Like we did before, let’s call it <img src="https://latex.codecogs.com/png.latex?%5Coverline%7BX%7D">. Then our first estimator will be <img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7B%5Ctheta%7D_1%20=%20%5Cfrac%7B1%7D%7B%5Coverline%7BX%7D%7D%0A"></p>
+<p>Now that we have isolated <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, we can start guessing at some estimators. Let’s replace <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D%5BX%5D"> with our sample mean (the average of whatever data we end up with). Like we did before, let’s call it <img src="https://latex.codecogs.com/png.latex?%5Coverline%7BX%7D">. Then our first estimator will be <img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7B%5Ctheta%7D_1%20=%20%5Cfrac%7B1%7D%7B%5Coverline%7BX%7D%7D%0A"></p>
 <p>Let’s see if our new estimator is <strong>unbiased</strong>. That is, if it has zero bias.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -685,7 +685,7 @@ Definition
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_3.html</guid>
-  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:36:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/3.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -2606,7 +2606,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</guid>
-  <pubDate>Tue, 11 Jun 2024 17:26:11 GMT</pubDate>
+  <pubDate>Tue, 11 Jun 2024 17:36:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/tidytuesday/05212024.png" medium="image" type="image/png"/>
 </item>
 </channel>

@@ -54,8 +54,8 @@ $$
 f_ \theta(x) = \theta e^{- \theta x}.
 $$
 
-Our goal is to study $ \theta$. Let's re-arrange the expected value of the
-exponential distribution to isolate $ \theta $:
+Our goal is to study $\theta$. Let's re-arrange the expected value of the
+exponential distribution to isolate $\theta$:
 
 \begin{align*}
 \mathbb{E}[X] &= \frac{1}{ \theta} \\
@@ -63,7 +63,7 @@ exponential distribution to isolate $ \theta $:
 \theta &= \frac{1}{\mathbb{E}[X]}.
 \end{align*}
 
-Now that we have isolated $ \theta $, we can start guessing at some estimators.
+Now that we have isolated $\theta$, we can start guessing at some estimators.
 Let's replace $\mathbb{E}[X]$ with our sample mean (the average of whatever data
 we end up with). Like we did before, let's call it $\overline{X}$. Then our
 first estimator will be

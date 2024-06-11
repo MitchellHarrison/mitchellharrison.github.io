@@ -211,13 +211,13 @@ X_1, \cdots, X_n \overset{\mathrm{iid}}{\sim} Exp(\theta).
 <p><span class="math display">\[
 f_ \theta(x) = \theta e^{- \theta x}.
 \]</span></p>
-<p>Our goal is to study $ $. Let’s re-arrange the expected value of the exponential distribution to isolate $ $:</p>
+<p>Our goal is to study <span class="math inline">\(\theta\)</span>. Let’s re-arrange the expected value of the exponential distribution to isolate <span class="math inline">\(\theta\)</span>:</p>
 <p><span class="math display">\[\begin{align*}
 \mathbb{E}[X] &amp;= \frac{1}{ \theta} \\
 \theta\mathbb{E}[X] &amp;= 1 \\
 \theta &amp;= \frac{1}{\mathbb{E}[X]}.
 \end{align*}\]</span></p>
-<p>Now that we have isolated $ $, we can start guessing at some estimators. Let’s replace <span class="math inline">\(\mathbb{E}[X]\)</span> with our sample mean (the average of whatever data we end up with). Like we did before, let’s call it <span class="math inline">\(\overline{X}\)</span>. Then our first estimator will be <span class="math display">\[
+<p>Now that we have isolated <span class="math inline">\(\theta\)</span>, we can start guessing at some estimators. Let’s replace <span class="math inline">\(\mathbb{E}[X]\)</span> with our sample mean (the average of whatever data we end up with). Like we did before, let’s call it <span class="math inline">\(\overline{X}\)</span>. Then our first estimator will be <span class="math display">\[
 \hat{\theta}_1 = \frac{1}{\overline{X}}
 \]</span></p>
 <p>Let’s see if our new estimator is <strong>unbiased</strong>. That is, if it has zero bias.</p>
