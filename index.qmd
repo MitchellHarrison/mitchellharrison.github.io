@@ -1,7 +1,8 @@
 ---
-title: "Hi, I'm Mitch. 👋"
 toc: false
 ---
+
+# Hi, I'm Mitch. 👋
 
 After leaving the Navy in 2022, I moved to North Carolina to study data science 
 and political science at Duke University. Finishing my degree cost the military 
