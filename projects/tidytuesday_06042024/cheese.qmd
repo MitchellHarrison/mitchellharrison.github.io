@@ -4,9 +4,7 @@ categories:
   - "Data Viz"
   - "TidyTuesday"
   - "Dashboard"
-format: 
-  dashboard:
-    logo: "../../images/projects/tidytuesday/cheese.png"
+format: dashboard
 image: "../../images/thumbnails/projects/tidytuesday/06042024.jpg"
 ---
 

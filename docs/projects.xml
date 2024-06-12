@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/projects.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Wed, 12 Jun 2024 06:44:52 GMT</lastBuildDate>
+<lastBuildDate>Wed, 12 Jun 2024 06:55:12 GMT</lastBuildDate>
 <item>
   <title></title>
   <link>https://mitchellharrison.github.io/projects/tidytuesday_06042024/cheese.html</link>
@@ -19,7 +19,7 @@
   <category>TidyTuesday</category>
   <category>Dashboard</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06042024/cheese.html</guid>
-  <pubDate>Wed, 12 Jun 2024 06:44:52 GMT</pubDate>
+  <pubDate>Wed, 12 Jun 2024 06:55:12 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06042024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -29,7 +29,7 @@
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06112024/pride.html</guid>
-  <pubDate>Wed, 12 Jun 2024 06:44:52 GMT</pubDate>
+  <pubDate>Wed, 12 Jun 2024 06:55:12 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06112024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -40,7 +40,7 @@
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_05212024/emissions.html</guid>
-  <pubDate>Wed, 12 Jun 2024 06:44:52 GMT</pubDate>
+  <pubDate>Wed, 12 Jun 2024 06:55:12 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 </channel>
