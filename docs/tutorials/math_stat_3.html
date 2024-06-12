@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -40,6 +40,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="../site_libs/quarto-dashboard/stickythead.js"></script>
+<script src="../site_libs/quarto-dashboard/datatables.min.js" kdttablesentinel="true"></script>
+<script src="../site_libs/quarto-dashboard/pdfmake.min.js" kdttablesentinel="true"></script>
+<script src="../site_libs/quarto-dashboard/vfs_fonts.js" kdttablesentinel="true"></script>
+<script src="../site_libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="../site_libs/quarto-dashboard/components.js"></script>
+<link href="../site_libs/quarto-dashboard/datatables.min.css" rel="stylesheet" kdttablesentinel="true">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,36 +79,10 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
 </head>
 
-<body class="nav-fixed">
+<body class="quarto-dashboard nav-fixed dashboard-fill fullcontent">
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -137,130 +119,148 @@ window.Quarto = {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-</header>
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">       
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Jensen’s Inequality | Mathematical Statistics 3</a></div>
+        
+        <div class="navbar-author">Mitch Harrison</div>
+      </div>
+    </div>
+<div id="dashboard-collapse" class="navbar-collapse collapse"><ul class="navbar-nav navbar-nav-scroll me-auto" role="tablist"><li class="nav-item" role="presentation"><a id="tab-review" class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#review" data-scrolling="false" href="#review" aria-controls="review" aria-selected="true"><span class="nav-link-text">Review</span></a></li><li class="nav-item" role="presentation"><a id="tab-jensens-inequality" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#jensens-inequality" data-scrolling="false" href="#jensens-inequality" aria-controls="jensens-inequality" aria-selected="false"><span class="nav-link-text">Jensen’s Inequality</span></a></li><li class="nav-item" role="presentation"><a id="tab-conclusion" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#conclusion" data-scrolling="false" href="#conclusion" aria-controls="conclusion" aria-selected="false"><span class="nav-link-text">Conclusion</span></a></li></ul></div></div>
+</nav>
+</header></header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-layout-custom page-navbar quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill quarto-dashboard-pages">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">Review</a></li>
-  <li><a href="#jensens-inequality" id="toc-jensens-inequality" class="nav-link" data-scroll-target="#jensens-inequality">Jensen’s Inequality</a>
-  <ul class="collapse">
-  <li><a href="#bias-example" id="toc-bias-example" class="nav-link" data-scroll-target="#bias-example">Bias example</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/edit/main/tutorials/math_stat_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
-    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Jensen’s Inequality | Mathematical Statistics 3</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">Statistics</div>
-    <div class="quarto-category">Mathematical Statistics</div>
-  </div>
-  </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mitch Harrison </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="review" class="level1">
-<h1>Review</h1>
+<div class="bslib-grid-item html-fill-item tab-content bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div id="review" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-review">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <p>Hello again! Last time, we found the bias and variance of two different estimators and discussed the <em>bias-variance tradeoff</em>. Now that we have some necessary background knowledge, let’s discuss balancing bias and variance to find a better estimator. Recall that we want our estimator to be accurate (have a small bias) and precise (have a small variance).</p>
 <p>We mentioned the mean squared error (MSE) as a common way of analyzing an estimator. In the below equality, we only discussed the left-hand side. But now that we know what bias and variance are, we can observe a new (but equivalent) definition of the MSE:</p>
-<p><span class="math display">\[
+<span class="math display">\[
 \mathbb{E}[(\delta(\mathbf{X}) - \theta)^2] =
 Var[\delta(\mathbf{X}) | \theta] + bias^2[\delta(\mathbf{X}) | \theta].
-\]</span></p>
+\]</span>
 <p>There, <span class="math inline">\(\mathbf{X}\)</span> is our data, <span class="math inline">\(\theta\)</span> is our unknown parameter, <span class="math inline">\(\delta(\mathbf{X})\)</span> is our estimator, and <span class="math inline">\(bias^2[\cdot]\)</span> denotes our estimator’s bias squared.</p>
-</section>
-<section id="jensens-inequality" class="level1">
-<h1>Jensen’s Inequality</h1>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div id="jensens-inequality" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-jensens-inequality">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content) minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <p>We can often “pay” a little bit of bias to reduce variance, or a little bit of variance to reduce bias. We are tasked with choosing ways of optimizing these two. One common method is minimizing the MSE, but there are infinitely many possible methods to choose from.</p>
-<section id="bias-example" class="level2">
-<h2 class="anchored" data-anchor-id="bias-example">Bias example</h2>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <p>We are scientists. We are confident that the machine in our lab is working, and it is spitting out data that comes from the following distribution:</p>
-<p><span class="math display">\[
+<span class="math display">\[
 X_1, \cdots, X_n \overset{\mathrm{iid}}{\sim} Exp(\theta).
-\]</span></p>
+\]</span>
 <p>The expected value (mean) of an exponential distribution is <span class="math inline">\(\mathbb{E}[X] = 1/ \theta\)</span>. We also know (or find on <a href="https://en.wikipedia.org/wiki/Exponential_distribution">Wikipedia</a>) that the probability density function (PDF) of an exponential is given by:</p>
-<p><span class="math display">\[
+<span class="math display">\[
 f_ \theta(x) = \theta e^{- \theta x}.
-\]</span></p>
+\]</span>
 <p>Our goal is to study <span class="math inline">\(\theta\)</span>. Let’s re-arrange the expected value of the exponential distribution to isolate <span class="math inline">\(\theta\)</span>:</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
 \mathbb{E}[X] &amp;= \frac{1}{ \theta} \\
 \theta\mathbb{E}[X] &amp;= 1 \\
 \theta &amp;= \frac{1}{\mathbb{E}[X]}.
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>Now that we have isolated <span class="math inline">\(\theta\)</span>, we can start guessing at some estimators. Let’s replace <span class="math inline">\(\mathbb{E}[X]\)</span> with our sample mean (the average of whatever data we end up with). Like we did before, let’s call it <span class="math inline">\(\overline{X}\)</span>. Then our first estimator will be <span class="math display">\[
 \hat{\theta}_1 = \frac{1}{\overline{X}}
 \]</span></p>
 <p>Let’s see if our new estimator is <strong>unbiased</strong>. That is, if it has zero bias.</p>
 <div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
+<div class="callout-header d-flex align-content-center html-fill-item html-fill-container">
+<div class="callout-icon-container html-fill-item html-fill-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-title-container flex-fill html-fill-item html-fill-container">
 Definition
 </div>
 </div>
-<div class="callout-body-container callout-body">
+<div class="callout-body-container callout-body html-fill-item html-fill-container">
 <p><strong>Jensen’s inequality</strong>: Let <span class="math inline">\(g(\cdot)\)</span> be a convex function (i.e., it has a positive second derivative). In that case, <span class="math display">\[
 \mathbb{E}[g(X)] \ge g(\mathbb{E}[X])
 \]</span> with equality if <span class="math inline">\(g\)</span> is linear.</p>
 </div>
 </div>
 <p>In our case, <span class="math inline">\(g(X) = \hat{\theta}_1\)</span>. Therefore, Jensen’s inequality tells us that</p>
-<p><span class="math display">\[
+<span class="math display">\[
 \mathbb{E}\left[\frac{1}{\overline{X}}\right] &gt; \frac{1}{\mathbb{E}[X]}.
-\]</span></p>
+\]</span>
 <p>We noted earlier that the expected value of the exponential distribution that we are working with is <span class="math inline">\(1/\theta\)</span>. Then,</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
 \mathbb{E}\left[\frac{1}{\overline{X}}\right]
 &amp;&gt; \frac{1}{\mathbb{E}[X]} \\
 &amp;&gt; \frac{1}{\frac{1}{\theta}} \\
 &amp;&gt; \theta \\
 \mathbb{E}[\hat{\theta}_1] &amp;&gt; \theta.
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>Since the expected value of our estimator is not <span class="math inline">\(\theta\)</span>, we have some non-zero bias. So, we know that our estimator is biased! Thanks for help <a href="https://en.wikipedia.org/wiki/Johan_Jensen_(mathematician)">Jensen</a>.</p>
 <p>Instead of finding whether or not there <em>is</em> bias, we may want to calculate the exact bias of our estimator. For this example, doing so becomes quite the exercise in calculus and involves factoring constants out of integrals until those integrals evaluate to 1 (because we turn them into PDFs). Then we can safely get rid of them. But the math is such that it may be worth doing in a separate, smaller article. So for now, Jensen has at least showed us that our estimator is biased, and we will call that a win!</p>
-</section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div>
+<div id="conclusion" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-conclusion">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <p>And just like that, we’ve added a new tool to our belt: Jensen’s inequality. If you find yourself with questions or want some more guidance, feel free to reach out to me on my <a href="https://discord.gg/vF6W2bdKFH">Discord</a> server! If enough demand for calculating the bias in this example appears, I will draft a separate article with all of the integral math done step-by-step. And, of course, if you want to financially support this project, you can <a href="https://buymeacoffee.com/mitchellharrison">buy me a coffee</a>.</p>
 <p>Thanks for reading, and I’ll see you in the next one!</p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 
 
-</section>
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
 
-</main> <!-- /main -->
+</div>
+</div>
+</div>
+</div>
+
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -685,13 +685,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/edit/main/tutorials/math_stat_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/edit/main/tutorials/math_stat_3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/MitchellHarrison/mitchellharrison.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with 💙 and <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
   </div>
 </footer>
 
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
 
 
 
