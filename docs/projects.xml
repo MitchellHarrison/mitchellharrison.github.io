@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/projects.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.553</generator>
-<lastBuildDate>Wed, 12 Jun 2024 07:02:15 GMT</lastBuildDate>
+<lastBuildDate>Wed, 12 Jun 2024 07:06:34 GMT</lastBuildDate>
 <item>
   <title></title>
   <link>https://mitchellharrison.github.io/projects/tidytuesday_06042024/cheese.html</link>
@@ -19,7 +19,7 @@
   <category>TidyTuesday</category>
   <category>Dashboard</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06042024/cheese.html</guid>
-  <pubDate>Wed, 12 Jun 2024 07:02:15 GMT</pubDate>
+  <pubDate>Wed, 12 Jun 2024 07:06:34 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06042024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -384,11 +384,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb1-69">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">theme_fivethirtyeight</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">25</span>) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb1-70">  <span class="fu" style="color: #4758AB;
@@ -453,11 +449,7 @@ font-style: inherit;">element_text</span>(<span class="at" style="color: #657422
 background-color: null;
 font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Galada"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">43</span>),</span>
+font-style: inherit;">"Galada"</span>),</span>
 <span id="cb1-81">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
@@ -548,7 +540,7 @@ font-style: inherit;">20</span>))</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06112024/pride.html</guid>
-  <pubDate>Wed, 12 Jun 2024 07:02:15 GMT</pubDate>
+  <pubDate>Wed, 12 Jun 2024 07:06:34 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06112024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -1144,7 +1136,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_05212024/emissions.html</guid>
-  <pubDate>Wed, 12 Jun 2024 07:02:15 GMT</pubDate>
+  <pubDate>Wed, 12 Jun 2024 07:06:34 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 </channel>

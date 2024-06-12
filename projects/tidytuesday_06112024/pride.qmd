@@ -94,7 +94,7 @@ uni_types |>
   ggplot(aes(x = type, y = count, fill = score)) +
   geom_chicklet(position = position_stack(reverse = TRUE), width = 0.6) +
   coord_flip() +
-  theme_fivethirtyeight(base_size = 25) +
+  theme_fivethirtyeight() +
   scale_fill_manual(
     values = palette_lgbtq("rainbow"),
     guide = guide_legend(reverse = TRUE)
@@ -105,7 +105,7 @@ uni_types |>
   ) +
   theme(
     text = element_text(color = "white", family = "Lato") ,
-    plot.title = element_text(family = "Galada", size = 43),
+    plot.title = element_text(family = "Galada"),
     plot.background = element_rect(fill = "black"),
     panel.background = element_rect(fill = "black"),
     panel.grid.major.y = element_blank(),
