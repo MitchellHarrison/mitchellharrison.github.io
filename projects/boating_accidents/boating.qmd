@@ -1,0 +1,123 @@
+---
+title: "Boating Accidents"
+author: "Mitch Harrison"
+categories:
+  - "Data Viz"
+  - "Reports"
+image: "../../images/thumbnails/projects/tidytuesday/05212024.png"
+---
+
+```{r}
+#| label: import-libs-and-data
+
+library(tidyverse)
+library(RSQLite)
+
+PATH <- "projects/boating_accidents/data/"
+
+# connect to databases
+con09 <- dbConnect(SQLite(), dbname = paste0(PATH, "bard-2009-2013.sqlite"))
+con14 <- dbConnect(SQLite(), dbname = paste0(PATH, "bard-2014-2022.sqlite"))
+con23 <- dbConnect(SQLite(), dbname = paste0(PATH, "bard-2023-2023.sqlite"))
+
+# export data tables at R tibbles
+accs09 <- tbl(con09, "ReleasableAccidents") |>
+  collect()
+accs14 <- tbl(con14, "ReleasableAccidentes") |>
+  select(!Year) |>
+  collect()
+accs23 <- tbl(con23, "ReleasableAccidents") |>
+  collect()
+
+injs09 <- tbl(con09, "ReleasableInjuries") |>
+  collect()
+injs14 <- tbl(con14, "ReleasableInjuries") |>
+  select(!Year) |>
+  collect()
+injs23 <- tbl(con23, "ReleasableInjuries") |>
+  collect()
+
+death09 <- tbl(con09, "ReleasableDeaths") |>
+  collect()
+death14 <- tbl(con14, "ReleasableDeaths") |>
+  select(!Year) |>
+  collect()
+death23 <- tbl(con23, "ReleasableDeaths") |>
+  collect()
+
+vess09 <- tbl(con09, "ReleasableVessels") |>
+  collect()
+vess14 <- tbl(con14, "ReleasableVessels") |>
+  select(!Year) |>
+  collect()
+vess23 <- tbl(con23, "ReleasableVessels") |>
+  collect()
+
+# join data into a single tibble for each database
+data09 <- left_join(
+    accs09, 
+    injs09, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |> 
+    left_join(
+    vess09, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |>
+    left_join(
+    death09, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |>
+  select(!c(matches("\\.y"), VesselID.x)) |>
+  mutate(VesselID = as.character(VesselID))
+  
+data14 <- left_join(
+    accs14, 
+    injs14, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |> 
+    left_join(
+    vess14, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |> 
+    left_join(
+    death14, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |>
+  select(!c(matches("\\.y"), VesselID.x)) |>
+  mutate(VesselID = as.character(VesselID))
+
+data23 <- left_join(
+    accs23, 
+    injs23, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |>
+    left_join(
+    vess23, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |>
+    left_join(
+    death23, 
+    by = "BARDID", 
+    relationship = "many-to-many"
+  ) |>
+  select(!c(matches("\\.y"), VesselID.x)) |>
+  mutate(
+    VesselID = as.character(VesselID),
+    Year = 2023
+  )
+  
+# join all database tables into a single master tibble
+bard <- bind_rows(data09, data14, data23) |>
+  janitor::clean_names() |>
+  select(!c(number_deaths_x, number_injured_x, damageto_non_vessel_property)) |>
+  rename_with(~ gsub("_x$", "", .), matches("_x$"))
+```
+
