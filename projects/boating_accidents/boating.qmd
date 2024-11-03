@@ -120,4 +120,3 @@ bard <- bind_rows(data09, data14, data23) |>
   select(!c(number_deaths_x, number_injured_x, damageto_non_vessel_property)) |>
   rename_with(~ gsub("_x$", "", .), matches("_x$"))
 ```
-
