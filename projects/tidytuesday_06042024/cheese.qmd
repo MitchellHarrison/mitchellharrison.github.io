@@ -6,6 +6,7 @@ categories:
   - "Dashboard"
 format: dashboard
 image: "../../images/thumbnails/projects/tidytuesday/06042024.jpg"
+css: "style.css"
 ---
 
 ```{r}
@@ -32,7 +33,7 @@ MILKS <- cheese |>
   sort()
 ```
 
-## Row {height="15%"}
+## Row {height="25%"}
 
 ```{r}
 #| label: box-top-milk
@@ -100,7 +101,7 @@ top_country <- country_count |>
 list(color = "white", value = top_country, icon = "globe-americas")
 ```
 
-## Row {height="85%"}
+## Row {height="75%"}
 
 ### Column {.tabset}
 
