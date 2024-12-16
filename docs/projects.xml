@@ -10,9 +10,10 @@
 <atom:link href="https://mitchellharrison.github.io/projects.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Mon, 16 Dec 2024 18:37:39 GMT</lastBuildDate>
+<lastBuildDate>Mon, 16 Dec 2024 18:48:25 GMT</lastBuildDate>
 <item>
   <title>Cricket Crackers: A Bayesian Approach</title>
+  <dc:creator>Mitchell Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/projects/crickets/crickets.html</link>
   <description><![CDATA[ 
 
@@ -5462,8 +5463,9 @@ font-style: inherit;">13</span></span>
  ]]></description>
   <category>Bayesian Statistics</category>
   <category>Data Viz</category>
+  <category>Research</category>
   <guid>https://mitchellharrison.github.io/projects/crickets/crickets.html</guid>
-  <pubDate>Mon, 16 Dec 2024 18:37:39 GMT</pubDate>
+  <pubDate>Mon, 16 Dec 2024 18:48:25 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/crickets.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -8210,8 +8212,10 @@ font-style: inherit;">"**Full model results**"</span>))</span></code></pre></div
 </section>
 
  ]]></description>
+  <category>Data Viz</category>
+  <category>Research</category>
   <guid>https://mitchellharrison.github.io/projects/gun_violence/gun_violence.html</guid>
-  <pubDate>Mon, 16 Dec 2024 18:37:39 GMT</pubDate>
+  <pubDate>Mon, 16 Dec 2024 18:48:25 GMT</pubDate>
 </item>
 <item>
   <title>Our World in Emissions | TidyTuesday</title>
@@ -8806,7 +8810,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_05212024/emissions.html</guid>
-  <pubDate>Mon, 16 Dec 2024 18:37:39 GMT</pubDate>
+  <pubDate>Mon, 16 Dec 2024 18:48:25 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -8817,11 +8821,12 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
   <category>TidyTuesday</category>
   <category>Dashboard</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06042024/cheese.html</guid>
-  <pubDate>Mon, 16 Dec 2024 18:37:39 GMT</pubDate>
+  <pubDate>Mon, 16 Dec 2024 18:48:25 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06042024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Campus Pride Index | TidyTuesday</title>
+  <dc:creator>Mitchell Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/projects/tidytuesday_06112024/pride.html</link>
   <description><![CDATA[ 
 
@@ -9338,7 +9343,7 @@ font-style: inherit;">20</span>))</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06112024/pride.html</guid>
-  <pubDate>Mon, 16 Dec 2024 18:37:39 GMT</pubDate>
+  <pubDate>Mon, 16 Dec 2024 18:48:25 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06112024.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>

@@ -1,6 +1,9 @@
 ---
 title: "The Lethality of the American Gun Lobby"
 subtitle: "Pro-gun special interest and mental health effects on suicide by gun"
+categories:
+  - "Data Viz"
+  - "Research"
 author: "Mitchell Harrison"
 execute: 
   warning: false

@@ -1,5 +1,6 @@
 ---
 title: "Campus Pride Index | TidyTuesday"
+author: "Mitchell Harrison"
 categories:
   - "Data Viz"
   - "TidyTuesday"

@@ -3,6 +3,8 @@ title: "Cricket Crackers: A Bayesian Approach"
 categories:
   - "Bayesian Statistics"
   - "Data Viz"
+  - "Research"
+author: "Mitchell Harrison"
 image: "../../images/thumbnails/projects/crickets.png"
 execute: 
   message: false
