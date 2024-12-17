@@ -357,12 +357,12 @@ updated_resid_data |>
 
 To verify the normality of our residuals, we conduct a Shapiro-Wilk test. A 
 significant p-value from a Shapiro-Wilk test (at the $\alpha=0.05$ level) was
-produced by the Shapiro-Wilk test, which rejects the null hypothesis that our 
-residuals come from a normal distribution. However, if we remove a single 
-residual (the largest one), our Shapiro-Wilk p-value becomes 0.8. Therefore, we 
-can be confident in the normality of our residuals with the exception of a 
-single outlier. Figure 6 shows the result of removing that outlier, and Figure 7 
-further verifies our model's normality using a quantile-quantile plot. 
+produced, which rejects the null hypothesis that our residuals come from a 
+normal distribution. However, if we remove a single residual (the largest one), 
+our Shapiro-Wilk p-value becomes 0.8. Therefore, we can be confident in the 
+normality of our residuals with the exception of a single outlier. Figure 6 
+shows the result of removing that outlier, and Figure 7 further verifies our 
+model's normality using a quantile-quantile plot. 
 
 ```{r}
 #| label: full-residual-distribution
