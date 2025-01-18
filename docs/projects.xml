@@ -10,7 +10,476 @@
 <atom:link href="https://mitchellharrison.github.io/projects.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Tue, 17 Dec 2024 01:09:18 GMT</lastBuildDate>
+<lastBuildDate>Sat, 18 Jan 2025 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Posit::Conf 2023 | TidyTuesday</title>
+  <dc:creator>Mitchell Harrison</dc:creator>
+  <link>https://mitchellharrison.github.io/projects/tidytuesday_01142025/talks.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(lubridate)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggthemes)</span>
+<span id="cb1-4"></span>
+<span id="cb1-5">conf23 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data/conf2023.csv"</span>)</span>
+<span id="cb1-6">conf24 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data/conf2024.csv"</span>)</span>
+<span id="cb1-7"></span>
+<span id="cb1-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#conf23 &lt;- read_csv("projects/tidytuesday_01142025/data/conf2023.csv")</span></span>
+<span id="cb1-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#conf24 &lt;- read_csv("projects/tidytuesday_01142025/data/conf2024.csv")</span></span></code></pre></div>
+</details>
+</div>
+<section id="the-viz" class="level1">
+<h1>The Viz</h1>
+<p>Hello all! This week’s <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-01-14/readme.md">TidyTuesday</a> brings us the event schedule from the posit::conf events of 2023 and 2024. Although there isn’t always much in the way of data analysis that we can do with a simple list of conference events, I did find a phenomenon that amused me.</p>
+<p>At the conference, there are three types of talks: keynote talks to open and close both days of the conference, regular talks that occur during the day, and very quick lightning talks that cover smaller topics in a very short time window. For some reason, all of the lightning talks were scheduled to overlap with the only pharma-related main talks at the entire event. So people had to choose whether to attend the pharma talks or the lightning talks. I’m not sure what the rationale for scheduling it that was is, but here’s a plot to demonstrate!</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">103</span>)</span>
+<span id="cb2-2"></span>
+<span id="cb2-3">new_23 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> conf23 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(session_type, session_start, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.keep_all =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb2-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">session_start_time =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">format</span>(session_start, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%H:%M:%S"</span>),</span>
+<span id="cb2-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">session_start_time =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.POSIXct</span>(session_start_time, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%H:%M:%S"</span>),</span>
+<span id="cb2-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">session_end_time =</span> session_start_time <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">minutes</span>(session_length),</span>
+<span id="cb2-9">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">date_encoded =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(session_date <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">min</span>(session_date), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>),</span>
+<span id="cb2-10">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">session_date2 =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(session_date <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.POSIXct</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2023-09-19"</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-11">  )</span>
+<span id="cb2-12"></span>
+<span id="cb2-13">lightning <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> new_23 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(session_type <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lightning"</span>)</span>
+<span id="cb2-15"></span>
+<span id="cb2-16">non_lightning <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> new_23 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(session_type <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lightning"</span>)</span>
+<span id="cb2-18"></span>
+<span id="cb2-19">new_23 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-20">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> session_type, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> session_start_time, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> session_date2)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb2-21">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_jitter</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> lightning, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">height =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> non_lightning, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-23">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_segment</span>(</span>
+<span id="cb2-24">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xend =</span> session_end_time),</span>
+<span id="cb2-25">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> non_lightning,</span>
+<span id="cb2-26">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span></span>
+<span id="cb2-27">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-28">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_rect</span>(</span>
+<span id="cb2-29">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xmin =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.POSIXct</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"17:00:00"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%H:%M:%S"</span>),</span>
+<span id="cb2-30">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xmax =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.POSIXct</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"19:20:00"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%H:%M:%S"</span>),</span>
+<span id="cb2-31">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymin =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.33</span>,</span>
+<span id="cb2-32">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymax =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.67</span>,</span>
+<span id="cb2-33">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#f0f0f0"</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># theme background color</span></span>
+<span id="cb2-34">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span></span>
+<span id="cb2-35">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-36">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(</span>
+<span id="cb2-37">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"text"</span>,</span>
+<span id="cb2-38">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.POSIXct</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"17:00:00"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%H:%M:%S"</span>),</span>
+<span id="cb2-39">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>,</span>
+<span id="cb2-40">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb2-41">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Lightning talks took place</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">exclusively during these</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Pharma-related"</span>,</span>
+<span id="cb2-42">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"main talks.</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Sorry, doc!"</span></span>
+<span id="cb2-43">    ),</span>
+<span id="cb2-44">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"left"</span>,</span>
+<span id="cb2-45">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#016392"</span>,</span>
+<span id="cb2-46">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fontface =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bold"</span></span>
+<span id="cb2-47">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-48">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(</span>
+<span id="cb2-49">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">geom =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"segment"</span>,</span>
+<span id="cb2-50">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.POSIXct</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"16:20:00"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%H:%M:%S"</span>),</span>
+<span id="cb2-51">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xend =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.POSIXct</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"16:55:00"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%H:%M:%S"</span>),</span>
+<span id="cb2-52">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.14</span>,</span>
+<span id="cb2-53">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yend =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.34</span>,</span>
+<span id="cb2-54">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#016392"</span>,</span>
+<span id="cb2-55">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-56">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-57">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-58">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_color_wsj</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-59">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(</span>
+<span id="cb2-60">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">breaks =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>),</span>
+<span id="cb2-61">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sep 19"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sep 20"</span>)</span>
+<span id="cb2-62">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-63">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb2-64">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Event schedule - posit::conf(2023)"</span>,</span>
+<span id="cb2-65">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Hopefully there were no impatient pharmacists there."</span>,</span>
+<span id="cb2-66">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>()</span>
+<span id="cb2-67">  )</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://mitchellharrison.github.io/projects/tidytuesday_01142025/talks_files/figure-html/build-viz-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="challenges" class="level1">
+<h1>Challenges</h1>
+<p>Although the plot is pretty simple, I used some non-intuitive techniques to place the text and line annotations when the data are dates instead of regular continuous values. I encoded the <code>y</code> axis as a continuous one and used <code>POSIXct</code> objects to place them on the <code>x</code> axis. Feel free to check the code to see how that worked!</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>As always, thanks for reading! Feel free to reach out to me on <a href="https://linkedin.com/in/harrisonme">LinkedIn</a> if you want to connect or ask questions about my work. See you next week!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Data Viz</category>
+  <category>TidyTuesday</category>
+  <guid>https://mitchellharrison.github.io/projects/tidytuesday_01142025/talks.html</guid>
+  <pubDate>Sat, 18 Jan 2025 05:00:00 GMT</pubDate>
+  <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/01142025.png" medium="image" type="image/png" height="83" width="144"/>
+</item>
 <item>
   <title>Cricket Crackers: A Bayesian Approach</title>
   <dc:creator>Mitchell Harrison</dc:creator>
@@ -5522,7 +5991,7 @@ Meat per day
   <category>Data Viz</category>
   <category>Research</category>
   <guid>https://mitchellharrison.github.io/projects/crickets/crickets.html</guid>
-  <pubDate>Tue, 17 Dec 2024 01:09:18 GMT</pubDate>
+  <pubDate>Sat, 18 Jan 2025 15:29:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/crickets.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -8272,7 +8741,7 @@ font-style: inherit;">"**Full model results**"</span>))</span></code></pre></div
   <category>Data Viz</category>
   <category>Research</category>
   <guid>https://mitchellharrison.github.io/projects/gun_violence/gun_violence.html</guid>
-  <pubDate>Tue, 17 Dec 2024 01:09:18 GMT</pubDate>
+  <pubDate>Sat, 18 Jan 2025 15:29:03 GMT</pubDate>
 </item>
 <item>
   <title>Our World in Emissions | TidyTuesday</title>
@@ -8867,7 +9336,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_05212024/emissions.html</guid>
-  <pubDate>Tue, 17 Dec 2024 01:09:18 GMT</pubDate>
+  <pubDate>Sat, 18 Jan 2025 15:29:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -8878,7 +9347,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
   <category>TidyTuesday</category>
   <category>Dashboard</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06042024/cheese.html</guid>
-  <pubDate>Tue, 17 Dec 2024 01:09:18 GMT</pubDate>
+  <pubDate>Sat, 18 Jan 2025 15:29:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06042024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
@@ -9400,7 +9869,7 @@ font-style: inherit;">20</span>))</span>
   <category>Data Viz</category>
   <category>TidyTuesday</category>
   <guid>https://mitchellharrison.github.io/projects/tidytuesday_06112024/pride.html</guid>
-  <pubDate>Tue, 17 Dec 2024 01:09:18 GMT</pubDate>
+  <pubDate>Sat, 18 Jan 2025 15:29:03 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06112024.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>

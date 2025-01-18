@@ -1,0 +1,128 @@
+---
+title: "Posit::Conf 2023 | TidyTuesday"
+author: "Mitchell Harrison"
+date: "01/18/2025"
+categories:
+  - "Data Viz"
+  - "TidyTuesday"
+image: "../../images/thumbnails/projects/tidytuesday/01142025.png"
+---
+
+```{r}
+#| label: load-libs-and-data
+
+library(tidyverse)
+library(lubridate)
+library(ggthemes)
+
+conf23 <- read_csv("data/conf2023.csv")
+conf24 <- read_csv("data/conf2024.csv")
+
+#conf23 <- read_csv("projects/tidytuesday_01142025/data/conf2023.csv")
+#conf24 <- read_csv("projects/tidytuesday_01142025/data/conf2024.csv")
+```
+
+# The Viz
+
+Hello all! This week's 
+[TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-01-14/readme.md)
+brings us the event schedule from the posit::conf events of 2023 and 2024.
+Although there isn't always much in the way of data analysis that we can do with
+a simple list of conference events, I did find a phenomenon that amused me.
+
+At the conference, there are three types of talks: keynote talks to open and
+close both days of the conference, regular talks that occur during the day, and
+very quick lightning talks that cover smaller topics in a very short time
+window. For some reason, all of the lightning talks were scheduled to overlap
+with the only pharma-related main talks at the entire event. So people had to
+choose whether to attend the pharma talks or the lightning talks. I'm not sure
+what the rationale for scheduling it that was is, but here's a plot to
+demonstrate!
+
+```{r}
+#| label: build-viz
+#| fig-width: 7
+#| fig-height: 4
+
+set.seed(103)
+
+new_23 <- conf23 |>
+  distinct(session_type, session_start, .keep_all = TRUE) |>
+  mutate(
+    session_start_time = format(session_start, "%H:%M:%S"),
+    session_start_time = as.POSIXct(session_start_time, format = "%H:%M:%S"),
+    session_end_time = session_start_time + minutes(session_length),
+    date_encoded = if_else(session_date == min(session_date), 1, 2),
+    session_date2 = if_else(session_date == as.POSIXct("2023-09-19"), 0, 1)
+  )
+
+lightning <- new_23 |>
+  filter(session_type == "lightning")
+
+non_lightning <- new_23 |>
+  filter(session_type != "lightning")
+
+new_23 |>
+  ggplot(aes(color = session_type, x = session_start_time, y = session_date2)) + 
+  geom_jitter(data = lightning, size = 2, height = 0.1, width = 0) +
+  geom_point(data = non_lightning, size = 3) +
+  geom_segment(
+    aes(xend = session_end_time),
+    data = non_lightning,
+    linewidth = 1.5
+  ) +
+  geom_rect(
+    xmin = as.POSIXct("17:00:00", format = "%H:%M:%S"),
+    xmax = as.POSIXct("19:20:00", format = "%H:%M:%S"),
+    ymin = 0.33,
+    ymax = 0.67,
+    fill = "#f0f0f0", # theme background color
+    color = NA
+  ) +
+  annotate(
+    geom = "text",
+    x = as.POSIXct("17:00:00", format = "%H:%M:%S"),
+    y = 0.5,
+    label = paste(
+      "Lightning talks took place\nexclusively during these\nPharma-related",
+      "main talks.\nSorry, doc!"
+    ),
+    hjust = "left",
+    color = "#016392",
+    fontface = "bold"
+  ) +
+  annotate(
+    geom = "segment",
+    x = as.POSIXct("16:20:00", format = "%H:%M:%S"),
+    xend = as.POSIXct("16:55:00", format = "%H:%M:%S"),
+    y = 0.14,
+    yend = 0.34,
+    color = "#016392",
+    linewidth = 1
+  ) +
+  theme_fivethirtyeight() +
+  scale_color_wsj() +
+  scale_y_continuous(
+    breaks = c(0, 1),
+    labels = c("Sep 19", "Sep 20")
+  ) +
+  labs(
+    title = "Event schedule - posit::conf(2023)",
+    subtitle = "Hopefully there were no impatient pharmacists there.",
+    color = element_blank()
+  )
+```
+
+# Challenges
+
+Although the plot is pretty simple, I used some non-intuitive techniques to
+place the text and line annotations when the data are dates instead of regular
+continuous values. I encoded the `y` axis as a continuous one and used
+`POSIXct` objects to place them on the `x` axis. Feel free to check the code to
+see how that worked!
+
+# Conclusion
+
+As always, thanks for reading! Feel free to reach out to me on
+[LinkedIn](https://linkedin.com/in/harrisonme) if you want to connect or ask
+questions about my work. See you next week!

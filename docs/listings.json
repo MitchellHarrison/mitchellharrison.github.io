@@ -2,27 +2,23 @@
   {
     "listing": "/tutorials.html",
     "items": [
-      "/tutorials/tidytuesday_05212024.html",
-      "/tutorials/tidytuesday_06112024.html",
+      "/tutorials/math_stat_0.html",
+      "/tutorials/math_stat_1.html",
       "/tutorials/math_stat_2.html",
       "/tutorials/math_stat_3.html",
-      "/tutorials/math_stat_1.html",
-      "/tutorials/math_stat_0.html"
+      "/tutorials/tidytuesday_05212024.html",
+      "/tutorials/tidytuesday_06112024.html"
     ]
   },
   {
     "listing": "/projects.html",
     "items": [
-<<<<<<< HEAD
       "/projects/crickets/crickets.html",
       "/projects/gun_violence/gun_violence.html",
       "/projects/tidytuesday_05212024/emissions.html",
-=======
->>>>>>> 8b44c90a4532480057d7fe4b63659b5c189418e7
       "/projects/tidytuesday_06042024/cheese.html",
       "/projects/tidytuesday_06112024/pride.html",
-      "/projects/tidytuesday_05212024/emissions.html",
-      "/projects/crickets/crickets.html"
+      "/projects/tidytuesday_01142025/talks.html"
     ]
   }
 ]
