@@ -1,0 +1,180 @@
+---
+title: "Death on the Mountains | TidyTuesday"
+author: "Mitchell Harrison"
+date: "01/21/2025"
+categories:
+  - "Data Viz"
+  - "TidyTuesday"
+image: "../../images/thumbnails/projects/tidytuesday/01212025.jpg"
+---
+
+# Introduction
+
+Hello all! Welcome to TidyTuesday! This week, journalist Elizabeth Hawley
+provides us with data that documents mountaineering expeditions in the Nepal
+Himalaya, the mountain range that includes Mount Everest. There were a few
+variables that piqued my interest, so I thought we could build a model to see
+if any of my those variables are related to fatalities during expeditions. Let's
+read and clean the data!
+
+```{r}
+#| label: read-libs-and-data
+
+library(ggthemes)
+library(gt)
+library(tidyverse)
+
+exped <- read_csv(
+  paste0(
+    "https://raw.githubusercontent.com/rfordatascience/tidytuesday/",
+    "main/data/2025/2025-01-21/exped_tidy.csv"
+  )
+) |>
+  janitor::clean_names()
+
+peaks <- read_csv(
+  paste0(
+    "https://raw.githubusercontent.com/rfordatascience/tidytuesday/",
+    "main/data/2025/2025-01-21/peaks_tidy.csv"
+  )
+) |>
+  janitor::clean_names()
+
+climbs <- exped |>
+  left_join(peaks) |>
+  mutate(
+    deaths = mdeaths + hdeaths,
+    is_fatal = if_else(deaths > 0, T, F),
+    season_factor = factor(
+      season_factor,
+      levels = c("Winter", "Spring", "Summer", "Autumn")
+    ),
+    agency = factor(agency)
+  ) |>
+  drop_na(is_fatal)
+```
+
+# Exploratory Analysis
+
+Of course, it wouldn't be TidyTuesday without a little bit of data viz. I'm
+thinking that oxygen use might predict deaths, although I have absolutely no
+domain knowledge in the field of mountaineering. My concern is that oxygen is
+only used after a certain altitude, so oxygen use and mountain height may be
+highly correlated. Let's see if that's the case, adding in the number of days
+that an expedition takes as a second axis.
+
+```{r}
+#| label: vizualize-oxygen-use
+
+climbs |>
+  mutate(o2used = if_else(o2used, "O2 used", "No O2 used")) |>
+  ggplot(aes(x = highpoint, y = totdays, color = o2used, shape = o2used)) +
+  geom_jitter(size = 2.5) +
+  theme_fivethirtyeight() +
+  scale_color_fivethirtyeight() +
+  labs(
+    title = "Higher altitude means oxygen use",
+    subtitle = "Summit height, length of journey, and oxygen",
+    x = "High point (m)",
+    y = "Total days"
+  ) +
+  theme(
+    axis.title = element_text(),
+    legend.title = element_blank()
+  )
+```
+
+So my assumption was correct: oxygen is mostly used at altitudes over 7,500
+meters. I'll add both to the model to see if one is more significant than the
+other. I'm also curious to see if winter expeditions are more lethal, so we'll
+use winter as the baseline season against which we will compare all other
+seasons. I'll also add the high point of the expedition, since we want to hold
+it constant when analyzing the effect of oxygen use.
+
+Before we build our model, let's see how many of our expeditions proved fatal.
+
+# The Model
+
+```{r}
+#| label: visualize-fatalities
+
+climbs |>
+  mutate(is_fatal = if_else(is_fatal, "Fatal", "Non-Fatal")) |>
+  group_by(is_fatal) |>
+  summarise(prop = n() / nrow(climbs)) |>
+  rename(Fatality = "is_fatal", Proportion = "prop") |>
+  gt() |>
+  fmt_number(columns = Proportion, decimals = 3) |>
+  tab_header(md("**Expedition Fatalities**"))
+```
+
+Uh-oh, only 4% of the expeditions were fatal. With such an imbalance between
+the binary outcomes, ordinary logistic regression may struggle with class
+imbalance. Instead, we will use Firth's logistic regression, which is designed
+to combat this exact problem. It will penalize the likelihood function using
+a penalty term related to the
+(Jefferys Prior)[https://en.wikipedia.org/wiki/Jeffreys_prior]. Long story
+short, it will help correct for the class imbalance issue. Let's build the model
+and see what we get!
+
+*Note: For ease of interpretation, I have exponentiated the coefficients.*
+
+```{r}
+#| label: build-model
+#| results: hide
+
+# using Firth's logistic regression to account for few TRUE response values
+model <- logistf::logistf(
+  is_fatal ~ highpoint + season_factor + o2used + totdays, 
+  data = climbs
+)
+
+model_summary <- summary(model)
+results <- tibble(
+  term = names(model_summary$coefficients),
+  coef = exp(model_summary$coefficients),
+  p_value = model_summary$prob
+)
+
+results$term <- c("Intercept", "High Point", "Season | Spring",
+                  "Season | Summer", "Season | Fall", "O2 Used",
+                  "Total Days")
+colnames(results) <- c("Variable", "Coefficients", "P-value")
+```
+
+```{r}
+#| label: display-model
+
+results |>
+  filter(Variable != "Intercept") |>
+  gt() |>
+  fmt_number(columns = c("Coefficients", "P-value"), decimals = 3) |>
+  tab_header(md("**Model Results**"))
+```
+
+# Results
+
+Interpreting logistic regression can be awkward, so let's start with the 
+p-values. At the $\alpha = 0.05$ level, only the use of oxygen shows a
+significant association with the fatality of an expedition. Holding season,
+high point, and total days constant, the use of oxygen increases the probability
+of a fatality by 4.78-fold. Interestingly, season has no statistically
+significant association with fatality when holding other variables constant.
+I assumed that the baseline season (winter) would be significantly more fatal,
+but that's not the case.
+
+However, it's important to recognize the limitations of our model. Oxygen use
+can be caused by many factors. We have already shown that height predicts 
+oxygen use, but so can medical emergencies or other variables that can appear
+during an expedition. It would be worth doing more analysis on oxygen use
+specifically to look for a causal relationship, rather than simple association.
+
+# Conclusion
+
+Thanks for your attention! Firth's logistic regression was new to me, so I got
+to learn from the modeling process *and* from the model itself. Lucky me! I hope
+you got something out of this little analysis project, and if you'd like to ask
+me any questions, feel free to send me a connect request on
+[LinkedIn](https://linkedin.com/in/harrisonme)!
+
+Thanks for your attention, and I'll see you next time!
