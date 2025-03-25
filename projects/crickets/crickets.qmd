@@ -4,8 +4,9 @@ categories:
   - "Bayesian Statistics"
   - "Data Viz"
   - "Research"
-author: "Mitchell Harrison"
+author: "Mitch Harrison"
 image: "../../images/thumbnails/projects/crickets.png"
+date: "October 15, 2024"
 execute: 
   message: false
   warning: false

@@ -1,11 +1,14 @@
 ---
 title: "Posit::Conf 2023 | TidyTuesday"
-author: "Mitchell Harrison"
-date: "01/18/2025"
+author: "Mitch Harrison"
 categories:
   - "Data Viz"
   - "TidyTuesday"
+date: "January 14, 2025"
 image: "../../images/thumbnails/projects/tidytuesday/01142025.png"
+execute: 
+  warning: false
+  message: false
 ---
 
 ```{r}

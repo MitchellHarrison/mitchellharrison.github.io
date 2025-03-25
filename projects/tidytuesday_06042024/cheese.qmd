@@ -5,6 +5,8 @@ categories:
   - "TidyTuesday"
   - "Dashboard"
 format: dashboard
+author: "Mitch Harrison"
+date: "June 4, 2024"
 image: "../../images/thumbnails/projects/tidytuesday/06042024.jpg"
 css: "style.css"
 ---
