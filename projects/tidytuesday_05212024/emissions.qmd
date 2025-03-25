@@ -1,5 +1,5 @@
 ---
-title: "Our World in Emissions | TidyTuesday"
+title: "Our World in Emissions"
 author: "Mitch Harrison"
 categories:
   - "Data Viz"

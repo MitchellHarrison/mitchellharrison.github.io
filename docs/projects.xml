@@ -1252,7 +1252,7 @@ Figure&nbsp;3: Crossing distribution
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/skagway.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Death on the Mountains | TidyTuesday</title>
+  <title>Death on the Mountains</title>
   <dc:creator>Mitch Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/projects/tidytuesday_01212025/mountains.html</link>
   <description><![CDATA[ 
@@ -1570,23 +1570,23 @@ background-color: null;
 font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="qomuexwjqb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qomuexwjqb table {
+<div id="xhpovzthdf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xhpovzthdf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qomuexwjqb thead, #qomuexwjqb tbody, #qomuexwjqb tfoot, #qomuexwjqb tr, #qomuexwjqb td, #qomuexwjqb th {
+#xhpovzthdf thead, #xhpovzthdf tbody, #xhpovzthdf tfoot, #xhpovzthdf tr, #xhpovzthdf td, #xhpovzthdf th {
   border-style: none;
 }
 
-#qomuexwjqb p {
+#xhpovzthdf p {
   margin: 0;
   padding: 0;
 }
 
-#qomuexwjqb .gt_table {
+#xhpovzthdf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1612,12 +1612,12 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-left-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_caption {
+#xhpovzthdf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qomuexwjqb .gt_title {
+#xhpovzthdf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1629,7 +1629,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-bottom-width: 0;
 }
 
-#qomuexwjqb .gt_subtitle {
+#xhpovzthdf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1641,7 +1641,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-top-width: 0;
 }
 
-#qomuexwjqb .gt_heading {
+#xhpovzthdf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1653,13 +1653,13 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-right-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_bottom_border {
+#xhpovzthdf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_col_headings {
+#xhpovzthdf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1674,7 +1674,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-right-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_col_heading {
+#xhpovzthdf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1694,7 +1694,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   overflow-x: hidden;
 }
 
-#qomuexwjqb .gt_column_spanner_outer {
+#xhpovzthdf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1706,15 +1706,15 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   padding-right: 4px;
 }
 
-#qomuexwjqb .gt_column_spanner_outer:first-child {
+#xhpovzthdf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qomuexwjqb .gt_column_spanner_outer:last-child {
+#xhpovzthdf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qomuexwjqb .gt_column_spanner {
+#xhpovzthdf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1726,11 +1726,11 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   width: 100%;
 }
 
-#qomuexwjqb .gt_spanner_row {
+#xhpovzthdf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qomuexwjqb .gt_group_heading {
+#xhpovzthdf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1756,7 +1756,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   text-align: left;
 }
 
-#qomuexwjqb .gt_empty_group_heading {
+#xhpovzthdf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1771,15 +1771,15 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   vertical-align: middle;
 }
 
-#qomuexwjqb .gt_from_md > :first-child {
+#xhpovzthdf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qomuexwjqb .gt_from_md > :last-child {
+#xhpovzthdf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qomuexwjqb .gt_row {
+#xhpovzthdf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1798,7 +1798,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   overflow-x: hidden;
 }
 
-#qomuexwjqb .gt_stub {
+#xhpovzthdf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1811,7 +1811,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   padding-right: 5px;
 }
 
-#qomuexwjqb .gt_stub_row_group {
+#xhpovzthdf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1825,15 +1825,15 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   vertical-align: top;
 }
 
-#qomuexwjqb .gt_row_group_first td {
+#xhpovzthdf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qomuexwjqb .gt_row_group_first th {
+#xhpovzthdf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qomuexwjqb .gt_summary_row {
+#xhpovzthdf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1843,16 +1843,16 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   padding-right: 5px;
 }
 
-#qomuexwjqb .gt_first_summary_row {
+#xhpovzthdf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_first_summary_row.thick {
+#xhpovzthdf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qomuexwjqb .gt_last_summary_row {
+#xhpovzthdf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1862,7 +1862,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-bottom-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_grand_summary_row {
+#xhpovzthdf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1872,7 +1872,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   padding-right: 5px;
 }
 
-#qomuexwjqb .gt_first_grand_summary_row {
+#xhpovzthdf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1882,7 +1882,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-top-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_last_grand_summary_row_top {
+#xhpovzthdf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1892,11 +1892,11 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-bottom-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_striped {
+#xhpovzthdf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qomuexwjqb .gt_table_body {
+#xhpovzthdf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1905,7 +1905,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-bottom-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_footnotes {
+#xhpovzthdf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1919,7 +1919,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-right-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_footnote {
+#xhpovzthdf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1928,7 +1928,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   padding-right: 5px;
 }
 
-#qomuexwjqb .gt_sourcenotes {
+#xhpovzthdf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1942,7 +1942,7 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   border-right-color: #D3D3D3;
 }
 
-#qomuexwjqb .gt_sourcenote {
+#xhpovzthdf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1950,72 +1950,72 @@ font-style: inherit;">"**Expedition Fatalities**"</span>))</span></code></pre></
   padding-right: 5px;
 }
 
-#qomuexwjqb .gt_left {
+#xhpovzthdf .gt_left {
   text-align: left;
 }
 
-#qomuexwjqb .gt_center {
+#xhpovzthdf .gt_center {
   text-align: center;
 }
 
-#qomuexwjqb .gt_right {
+#xhpovzthdf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qomuexwjqb .gt_font_normal {
+#xhpovzthdf .gt_font_normal {
   font-weight: normal;
 }
 
-#qomuexwjqb .gt_font_bold {
+#xhpovzthdf .gt_font_bold {
   font-weight: bold;
 }
 
-#qomuexwjqb .gt_font_italic {
+#xhpovzthdf .gt_font_italic {
   font-style: italic;
 }
 
-#qomuexwjqb .gt_super {
+#xhpovzthdf .gt_super {
   font-size: 65%;
 }
 
-#qomuexwjqb .gt_footnote_marks {
+#xhpovzthdf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qomuexwjqb .gt_asterisk {
+#xhpovzthdf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qomuexwjqb .gt_indent_1 {
+#xhpovzthdf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qomuexwjqb .gt_indent_2 {
+#xhpovzthdf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qomuexwjqb .gt_indent_3 {
+#xhpovzthdf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qomuexwjqb .gt_indent_4 {
+#xhpovzthdf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qomuexwjqb .gt_indent_5 {
+#xhpovzthdf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qomuexwjqb .katex-display {
+#xhpovzthdf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qomuexwjqb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xhpovzthdf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2189,23 +2189,23 @@ background-color: null;
 font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="moftoyoqbm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#moftoyoqbm table {
+<div id="sytgvniqly" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sytgvniqly table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#moftoyoqbm thead, #moftoyoqbm tbody, #moftoyoqbm tfoot, #moftoyoqbm tr, #moftoyoqbm td, #moftoyoqbm th {
+#sytgvniqly thead, #sytgvniqly tbody, #sytgvniqly tfoot, #sytgvniqly tr, #sytgvniqly td, #sytgvniqly th {
   border-style: none;
 }
 
-#moftoyoqbm p {
+#sytgvniqly p {
   margin: 0;
   padding: 0;
 }
 
-#moftoyoqbm .gt_table {
+#sytgvniqly .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2231,12 +2231,12 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-left-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_caption {
+#sytgvniqly .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#moftoyoqbm .gt_title {
+#sytgvniqly .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2248,7 +2248,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#moftoyoqbm .gt_subtitle {
+#sytgvniqly .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2260,7 +2260,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-top-width: 0;
 }
 
-#moftoyoqbm .gt_heading {
+#sytgvniqly .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2272,13 +2272,13 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_bottom_border {
+#sytgvniqly .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_col_headings {
+#sytgvniqly .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2293,7 +2293,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_col_heading {
+#sytgvniqly .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2313,7 +2313,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#moftoyoqbm .gt_column_spanner_outer {
+#sytgvniqly .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2325,15 +2325,15 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   padding-right: 4px;
 }
 
-#moftoyoqbm .gt_column_spanner_outer:first-child {
+#sytgvniqly .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#moftoyoqbm .gt_column_spanner_outer:last-child {
+#sytgvniqly .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#moftoyoqbm .gt_column_spanner {
+#sytgvniqly .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2345,11 +2345,11 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   width: 100%;
 }
 
-#moftoyoqbm .gt_spanner_row {
+#sytgvniqly .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#moftoyoqbm .gt_group_heading {
+#sytgvniqly .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2375,7 +2375,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   text-align: left;
 }
 
-#moftoyoqbm .gt_empty_group_heading {
+#sytgvniqly .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2390,15 +2390,15 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   vertical-align: middle;
 }
 
-#moftoyoqbm .gt_from_md > :first-child {
+#sytgvniqly .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#moftoyoqbm .gt_from_md > :last-child {
+#sytgvniqly .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#moftoyoqbm .gt_row {
+#sytgvniqly .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2417,7 +2417,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#moftoyoqbm .gt_stub {
+#sytgvniqly .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2430,7 +2430,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   padding-right: 5px;
 }
 
-#moftoyoqbm .gt_stub_row_group {
+#sytgvniqly .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2444,15 +2444,15 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   vertical-align: top;
 }
 
-#moftoyoqbm .gt_row_group_first td {
+#sytgvniqly .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#moftoyoqbm .gt_row_group_first th {
+#sytgvniqly .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#moftoyoqbm .gt_summary_row {
+#sytgvniqly .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2462,16 +2462,16 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   padding-right: 5px;
 }
 
-#moftoyoqbm .gt_first_summary_row {
+#sytgvniqly .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_first_summary_row.thick {
+#sytgvniqly .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#moftoyoqbm .gt_last_summary_row {
+#sytgvniqly .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2481,7 +2481,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_grand_summary_row {
+#sytgvniqly .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2491,7 +2491,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   padding-right: 5px;
 }
 
-#moftoyoqbm .gt_first_grand_summary_row {
+#sytgvniqly .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2501,7 +2501,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_last_grand_summary_row_top {
+#sytgvniqly .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2511,11 +2511,11 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_striped {
+#sytgvniqly .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#moftoyoqbm .gt_table_body {
+#sytgvniqly .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2524,7 +2524,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_footnotes {
+#sytgvniqly .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2538,7 +2538,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_footnote {
+#sytgvniqly .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2547,7 +2547,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   padding-right: 5px;
 }
 
-#moftoyoqbm .gt_sourcenotes {
+#sytgvniqly .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2561,7 +2561,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#moftoyoqbm .gt_sourcenote {
+#sytgvniqly .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2569,72 +2569,72 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   padding-right: 5px;
 }
 
-#moftoyoqbm .gt_left {
+#sytgvniqly .gt_left {
   text-align: left;
 }
 
-#moftoyoqbm .gt_center {
+#sytgvniqly .gt_center {
   text-align: center;
 }
 
-#moftoyoqbm .gt_right {
+#sytgvniqly .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#moftoyoqbm .gt_font_normal {
+#sytgvniqly .gt_font_normal {
   font-weight: normal;
 }
 
-#moftoyoqbm .gt_font_bold {
+#sytgvniqly .gt_font_bold {
   font-weight: bold;
 }
 
-#moftoyoqbm .gt_font_italic {
+#sytgvniqly .gt_font_italic {
   font-style: italic;
 }
 
-#moftoyoqbm .gt_super {
+#sytgvniqly .gt_super {
   font-size: 65%;
 }
 
-#moftoyoqbm .gt_footnote_marks {
+#sytgvniqly .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#moftoyoqbm .gt_asterisk {
+#sytgvniqly .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#moftoyoqbm .gt_indent_1 {
+#sytgvniqly .gt_indent_1 {
   text-indent: 5px;
 }
 
-#moftoyoqbm .gt_indent_2 {
+#sytgvniqly .gt_indent_2 {
   text-indent: 10px;
 }
 
-#moftoyoqbm .gt_indent_3 {
+#sytgvniqly .gt_indent_3 {
   text-indent: 15px;
 }
 
-#moftoyoqbm .gt_indent_4 {
+#sytgvniqly .gt_indent_4 {
   text-indent: 20px;
 }
 
-#moftoyoqbm .gt_indent_5 {
+#sytgvniqly .gt_indent_5 {
   text-indent: 25px;
 }
 
-#moftoyoqbm .katex-display {
+#sytgvniqly .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#moftoyoqbm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sytgvniqly div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2709,7 +2709,7 @@ font-style: inherit;">"**Model Results**"</span>))</span></code></pre></div>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/01212025.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Posit::Conf 2023 | TidyTuesday</title>
+  <title>Posit::Conf 2023</title>
   <dc:creator>Mitch Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/projects/tidytuesday_01142025/talks.html</link>
   <description><![CDATA[ 
@@ -11441,7 +11441,7 @@ Meat per day
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/crickets.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
-  <title>Campus Pride Index | TidyTuesday</title>
+  <title>Campus Pride Index</title>
   <dc:creator>Mitch Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/projects/tidytuesday_06112024/pride.html</link>
   <description><![CDATA[ 
@@ -11453,490 +11453,6 @@ Meat per day
 <h1>Welcome!</h1>
 <p>Happy pride month! On this fine TidyTuesday afternoon, we will see how different types of colleges and universities handle LGBTQ+ inclusion! The Campus Pride Index tracks safety, inclusivity, and LGBTQ+ policies/programs at universities across the United States. Results are on a 1-5 scale (with higher numbers being most inclusive), and colleges are grouped by various discrete categories. Today, we’ll build a stacked horizontal bar chart to see the distribution of scores for some of those categories. I’ll use the <code>ggchicklet</code> package and some custom fonts for easy aesthetic changes, and we’ll be done! If you want to see a step-by-step tutorial explaining the code, click <a href="../../tutorials/tidytuesday_06112024.html">here</a>.</p>
 <div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Click here for code</summary>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(tidyverse)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(gglgbtq)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(ggchicklet)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(ggthemes)</span>
-<span id="cb1-5"></span>
-<span id="cb1-6"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># load custom fonts for the plot -----------------------------------------------</span></span>
-<span id="cb1-7"></span>
-<span id="cb1-8">sysfonts<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">font_add_google</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Galada"</span>)</span>
-<span id="cb1-9">sysfonts<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">font_add_google</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Lato"</span>)</span>
-<span id="cb1-10">showtext<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">showtext_auto</span>()</span>
-<span id="cb1-11"></span>
-<span id="cb1-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># load the data ----------------------------------------------------------------</span></span>
-<span id="cb1-13"></span>
-<span id="cb1-14">pride_schools <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">read_csv</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">paste0</span>(</span>
-<span id="cb1-15">  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/"</span>,</span>
-<span id="cb1-16">  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"2024/2024-06-11/pride_index.csv"</span></span>
-<span id="cb1-17">))</span>
-<span id="cb1-18"></span>
-<span id="cb1-19">pride_tags <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">read_csv</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">paste0</span>(</span>
-<span id="cb1-20">  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/"</span>,</span>
-<span id="cb1-21">  <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"2024/2024-06-11/pride_index_tags.csv"</span></span>
-<span id="cb1-22">))</span>
-<span id="cb1-23"></span>
-<span id="cb1-24"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># format data for plotting -----------------------------------------------------</span></span>
-<span id="cb1-25"></span>
-<span id="cb1-26">uni_types <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> pride_schools <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-27">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">left_join</span>(pride_tags) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-28">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(rating, public, private, community, liberal_arts, technical,</span>
-<span id="cb1-29">         religious, military, hbcu, hispanic_serving, aapi_serving,</span>
-<span id="cb1-30">         other_minority_serving) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb1-31">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">everything</span>(), <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">replace_na</span>(., <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">FALSE</span>))) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-32">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">cols =</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">!</span>rating, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"type"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-33">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(value <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-34">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(</span>
-<span id="cb1-35">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">type =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">str_replace_all</span>(type, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"_"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">" "</span>),</span>
-<span id="cb1-36">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">type =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">str_to_title</span>(type),</span>
-<span id="cb1-37">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">type =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">str_replace</span>(type, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Aapi"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"AAPI"</span>)</span>
-<span id="cb1-38">  )</span>
-<span id="cb1-39"></span>
-<span id="cb1-40"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># factor levels for ordering bars/fills ----------------------------------------</span></span>
-<span id="cb1-41"></span>
-<span id="cb1-42">uni_levs <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> uni_types <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-43">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">group_by</span>(type) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-44">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">count =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-45">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">desc</span>(count)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-46">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pull</span>(type)</span>
-<span id="cb1-47"></span>
-<span id="cb1-48">rating_levs <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"1 - 1.5"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"2 - 2.5"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"3 - 3.5"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"4 - 4.5"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"5"</span>)</span>
-<span id="cb1-49"></span>
-<span id="cb1-50"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># build the plot! --------------------------------------------------------------</span></span>
-<span id="cb1-51"></span>
-<span id="cb1-52">uni_types <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-53">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(</span>
-<span id="cb1-54">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">score =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">case_when</span>(</span>
-<span id="cb1-55">      rating <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>],</span>
-<span id="cb1-56">      rating <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>],</span>
-<span id="cb1-57">      rating <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>],</span>
-<span id="cb1-58">      rating <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span>],</span>
-<span id="cb1-59">      <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> rating_levs[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>] </span>
-<span id="cb1-60">    ),</span>
-<span id="cb1-61">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">score =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(score, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">levels =</span> rating_levs)</span>
-<span id="cb1-62">  ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-63">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">group_by</span>(type, score) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-64">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">count =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">n</span>(), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-65">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">type =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">factor</span>(type, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rev</span>(uni_levs))) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-66">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> type, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> count, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> score)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb1-67">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_chicklet</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">position =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">position_stack</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">reverse =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.6</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb1-68">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">coord_flip</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb1-69">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_fivethirtyeight</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb1-70">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_fill_manual</span>(</span>
-<span id="cb1-71">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">palette_lgbtq</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"rainbow"</span>),</span>
-<span id="cb1-72">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">guide =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">guide_legend</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">reverse =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-73">  ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb1-74">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(</span>
-<span id="cb1-75">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Campus Pride Index Scores"</span>,</span>
-<span id="cb1-76">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Higher scores mean increased LGBTQ-inclusive policies/programs"</span>,</span>
-<span id="cb1-77">  ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb1-78">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme</span>(</span>
-<span id="cb1-79">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">text =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"white"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Lato"</span>) ,</span>
-<span id="cb1-80">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Galada"</span>),</span>
-<span id="cb1-81">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"black"</span>),</span>
-<span id="cb1-82">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">panel.background =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"black"</span>),</span>
-<span id="cb1-83">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">panel.grid.major.y =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_blank</span>(),</span>
-<span id="cb1-84">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">legend.background =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"black"</span>),</span>
-<span id="cb1-85">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">legend.title =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_blank</span>(),</span>
-<span id="cb1-86">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">legend.direction =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"vertical"</span>,</span>
-<span id="cb1-87">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">legend.position =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.9</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span>),</span>
-<span id="cb1-88">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">axis.text.y =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">margin =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">margin</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">r =</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">20</span>))</span>
-<span id="cb1-89">  )</span></code></pre></div>
-</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -11975,7 +11491,7 @@ font-style: inherit;">20</span>))</span>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06042024.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Our World in Emissions | TidyTuesday</title>
+  <title>Our World in Emissions</title>
   <dc:creator>Mitch Harrison</dc:creator>
   <link>https://mitchellharrison.github.io/projects/tidytuesday_05212024/emissions.html</link>
   <description><![CDATA[ 

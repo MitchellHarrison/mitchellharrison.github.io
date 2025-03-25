@@ -1,7 +1,6 @@
 ---
-title: "Death on the Mountains | TidyTuesday"
+title: "Death on the Mountains"
 author: "Mitch Harrison"
-date: "01/21/2025"
 categories:
   - "Data Viz"
   - "TidyTuesday"

@@ -1,5 +1,5 @@
 ---
-title: "Posit::Conf 2023 | TidyTuesday"
+title: "Posit::Conf 2023"
 author: "Mitch Harrison"
 categories:
   - "Data Viz"
