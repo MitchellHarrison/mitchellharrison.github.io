@@ -1,12 +1,12 @@
 ---
-title: "Where do American Visitors Come From?"
-subtitle: "Inbound entries into America through land ports of entry"
+title: "America's Gates and the Fentanyl Crisis"
+subtitle: "An analysis of US land port traffic and the opioid epidemic"
 categories:
   - "Data Viz"
   - "Research"
   - "Geospatial"
 author: "Mitch Harrison"
-date: "March 24, 2025"
+date: "March 25, 2025"
 image: "../../images/thumbnails/projects/skagway.jpg"
 execute: 
   warning: false
@@ -21,11 +21,19 @@ library(plotly)
 library(sf)
 library(tidyverse)
 
-#border <- read_csv("projects/border_crossings/crossings.csv") |>
-border <- read_csv("../../projects/border_crossings/crossings.csv") |>
+# colors for data viz
+BLUE <- "#3c91c2"
+YELLOW <- "#bbbf43"
+RED <- "#d13f5a"
+
+#border <- read_csv("projects/border_crossings/data/crossings.csv") |>
+border <- read_csv("../../projects/border_crossings/data/crossings.csv") |>
   janitor::clean_names()
 
-# separate out 2024
+#od <- read_csv("projects/border_crossings/data/overdoses.csv")
+od <- read_csv("../../projects/border_crossings/data/overdoses.csv")
+
+# modest data cleaning
 border <- border |>
   separate(date, into = c("month", "year"), sep = "-") |>
   mutate(
@@ -38,9 +46,28 @@ border <- border |>
     )
   )
 
+# filter out 2024 data for in-line reporting below
 border24 <- border |>
   filter(year == 2024)
 
+p_pov <- border24 |>
+  group_by(measure) |>
+  summarise(total = sum(value)) |>
+  filter(
+    !str_detect(measure, "Passenger"),
+    !str_detect(measure, "Pedestrian")
+  ) |>
+  mutate(
+    measure = if_else(str_detect(measure, "Personal"), measure, "Non-POV")
+  ) |>
+  group_by(measure) |>
+  summarise(total = sum(total)) |>
+  pivot_wider(names_from = measure, values_from = total) |>
+  setNames(c("non_pov", "pov")) |>
+  mutate(p_pov = pov / (non_pov + pov)) |>
+  pull(p_pov)
+
+# aggregate some 2024-specific data
 most_common <- border24 |>
   group_by(port_code, measure) |>
   summarize(total_value = sum(value, na.rm = TRUE), .groups = "drop") |>
@@ -69,7 +96,7 @@ and First Nation explorer
 route through what would become the Alaska-Canada border. Billy Moore liked what
 he saw and purchased the coastal land now home to the gold rush town of Skagway,
 Alaska. With its modest present-day population of around 1,200 permanent 
-residents, Skagway hosts over one million annual tourists. 
+residents, modern Skagway hosts over one million annual tourists. 
 
 Although Billy Moore and Skookum Jim had to conquer forests, mountains, and 
 wildlife to arrive at the remote land where Skagway now lies, modern tourists 
@@ -85,10 +112,18 @@ visiting by bus, the Skagway port of entry into the US boasts a unique feature:
 it is the only land port of entry through which more people enter the US by bus
 than any other method.
 
-This article will examine every land port of entry into the US, the methods with
-which crossings are conducted, and where those crossings occur.	I will also 
-touch on the impact of this data on current politics and illicit drug 
-trafficking.  
+Every American port of entry has a story. For Skagway, it's explorers taming the
+wilderness to make room for a future bus route. Vanceboro, Maine, is one of only
+two majority-rail entrances. Only two ports (both along the southern border) are
+majority pedestrian. The rest, in true North American fashion, are dominated by
+privately-owned cars.
+
+But more than tourists come through our borders. Illicit drugs, trafficked 
+persons, and other illegal imports make it into the US through land ports of
+entry every day. In this report, we will investigate land traffic trends going
+back over  two decades to see if we can uncover clues to what may be
+responsible for the increase in opioid deaths (specifically fentanyl) that
+America is currently combating.
 
 # The Data
 
@@ -104,111 +139,32 @@ Before we look at the data, we need to define a crossing. The BTS defines a
 crossing as a single vehicle (or pedestrian) crossing into the US a single time.
 If, for example, a single truck goes between the US and Mexico multiple times to
 pick up and deliver goods, each entry into the US is a separate crossing. These
-crossings could be tourist, immigrants, or American citizens returning home.
+crossings could be foreign tourists, immigrants, or American citizens returning 
+home.
 
-Now that we have our background and definitions, let's get to know our traffic!
+Additionally, we will bring in overdose data from the NIH. 
+[That data](https://nida.nih.gov/research-topics/trends-statistics/overdose-death-rates#Download),
+published from 1999 to 2022 (so far), will help us build a more comprehensive
+picture of the modern opioid epidemic.
+
+Now that we have our background and definitions, let's get to know our borders.
 
 # Data Analysis
 
-## Total crossings
+## Today's crossings
 
-Traffic across our land borders has become a hot topic in our politics. 
-President Trump has 
-[imposed tariffs](https://apnews.com/article/trump-tariffs-mexico-canada-b19e004dddb579c373b247037e04424b?taid=67c60d3c0119c30001f7fd9b) 
-on both Mexico and Canada in an attempt to reduce the flow of illicit drugs 
-(specifically fentanyl) and trafficked people into the US. Because most fentanyl
-is smuggled into the US 
-[by American citizens](https://www.cato.org/blog/fentanyl-smuggled-us-citizens-us-citizens-not-asylum-seekers), 
-it is worth investigating total crossings instead of crossings made by 
-immigrants. Figure @fig-crossings-over-time explores our total inbound crossings
-per year in all land ports in the US.
+Before we explore our past, let's get to know our present. In 2024, there were 
+`r scales::comma(sum(border24$value))` border crossings across every American 
+land port. Over `r round(p_pov*100, 0)`% of the vehicles that crossed were 
+personal vehicles, like your car or mine. Although there are
+`r length(unique(border$port_code))` unique ports, not all entrances are created
+equal. Let's look at a map to see where most of our inbound traffic comes from,
+and which types of traffic are most common there. @fig-leaflet-map is an
+interactive map showing the traffic coming through our land ports in 2024.
 
-```{r}
-#| label: fig-crossings-over-time
-#| fig-cap: "Total crossing trends"
-
-RED <- "#d13f5a"
-
-# build plot
-border |>
-  filter(year < 2025) |>
-  group_by(year) |>
-  summarise(crossings = sum(value)) |>
-  plot_ly() |>
-  add_trace(
-    x = ~year, 
-    y = ~crossings, 
-    type = "scatter", 
-    mode = "lines+markers",
-    line = list(width = 4, color = RED),
-    marker = list(size = 11, color = RED),
-    hovertemplate = "<i>Year</i>: %{x}<br><i>Crossings</i>: %{y:,.0f}",
-    name = ""
-  ) |>
-  layout(
-    title = "Border crossings into the US through land ports (1996-2024)",
-    xaxis = list(title = ""),
-    yaxis = list(title = "Total Crossings"),
-    dragmode = FALSE
-  ) |>
-  config(displayModeBar = FALSE)
-```
-
-There are a few interesting notes from our border crossing history. First, we 
-saw a rapid and steady decrease in border crossings after 2000. That could be 
-related to decreased international travel by American citizens following the 
-9/11 attacks and 
-[increased security](https://www.cfr.org/timeline/us-postwar-immigration-policy),
-but without data to back that hypothesis, I am just speculating. 
-
-After 2011, we see a slow increase in crossings until the pronounced drop during
-the COVID-19 pandemic. It's more difficult to point to direct policy changes 
-that explain that increase during both the Obama and Trump administrations, so 
-I will reserve my speculation. Interestingly, we have effectively returned to 
-pre-COVID levels.
-
-## Crossing distribution
-
-```{r}
-#| label: fig-country-distribution
-#| fig-cap: "Crossing distribution"
-
-BLUE <- "#3c91c2"
-
-border |>
-  filter(year < 2025) |>
-  group_by(year, country) |>
-  summarise(crossings = sum(value), .groups = "drop") |>
-  pivot_wider(names_from = country, values_from = crossings) |>
-  mutate(
-    p_canada = Canada / (Canada + Mexico),
-    p_mex = Mexico / (Canada + Mexico)
-  ) |>
-  plot_ly(
-    x = ~year, 
-    y = ~p_mex,
-    type = "scatter",
-    mode = "lines+markers",
-    line = list(width = 4, color = RED),
-    marker = list(size = 11, color = RED),
-    name = "Mexico"
-  ) |>
-  add_trace(
-    y = ~p_canada, 
-    line = list(width = 4, color = BLUE),
-    marker = list(size = 11, color = BLUE),
-    hovertemplate = "<i>Year</i>: %{x}<br><i>Proportion</i>: %{y:,.3f}",
-    name = "Canada"
-  ) |>
-  layout(
-    title = "Proportion of all crossings by country of origin",
-    xaxis = list(title = ""),
-    yaxis = list(title = "Proportion of Crossings"),
-    dragmode = FALSE
-  ) |>
-  config(displayModeBar = FALSE)
-```
-
+::: {.callout-tip}
+Feel free to click on any circle for additional data.
+:::
 
 ```{r}
 #| label: fig-leaflet-map
@@ -216,8 +172,18 @@ border |>
 
 # custom color palette  
 color_palette <- colorFactor(
-  palette = ggthemes::colorblind_pal()(length(unique(crossings24$most_common))),
+  palette = c(BLUE, "yellow", RED, "black"),
   domain = crossings24$most_common
+)
+
+# custom CSS for styling the map title
+map_title <- paste(
+  "<div class='leaflet-control'",
+  "style='padding-top: 0px;",
+  "padding-bottom: 8px;",
+  "padding-left: 11px;",
+  "font-size: 22px;'>",
+  "<b>Inbound Border Crossings (2024)</b></div>"
 )
 
 # build the map
@@ -234,7 +200,9 @@ leaflet(crossings24) |>
     popup = ~paste0(
       "<strong>Port: </strong>", port_name,
       "<br><strong>Most Common Method: </strong>", most_common,
-      "<br><strong>Total Crossings (2024): </strong>", scales::comma(crossings)
+      "<br><strong>Total Crossings: </strong>", 
+      # format X,XXX,XXX instead of XXXXXXX
+      scales::comma(crossings)
     ),
     color = ~color_palette(most_common)
   ) |>
@@ -243,5 +211,236 @@ leaflet(crossings24) |>
     pal = color_palette,
     values = ~most_common,
     title = "Most Common Method of Crossing"
-  )
+  ) |>
+  # add custom title box to the map
+  addControl(map_title, position = "topright")
 ```
+
+That sea of red you're seeing shows how dominant personally owned vehicles are 
+at nearly every land port. Of our two borders, there was significantly more 
+traffic from the south; the only high-traffic entrances from the north are
+Buffalo, Detroit, and Blaine (outside of Vancouver). However, the San Ysidro
+port of entry in southern California outnumbered all crossings from those three
+ports combined. The majority of our land traffic very clearly comes from Mexico
+and from privately owned vehicles.
+
+## Total crossings
+
+Traffic across our land borders has become a hot topic in our politics. 
+President Trump has 
+[imposed tariffs](https://apnews.com/article/trump-tariffs-mexico-canada-b19e004dddb579c373b247037e04424b?taid=67c60d3c0119c30001f7fd9b) 
+on both Mexico and Canada in an attempt to reduce the flow of illicit drugs 
+(specifically fentanyl) and trafficked people into the US. Because most fentanyl
+is smuggled into the US 
+[by American citizens](https://www.cato.org/blog/fentanyl-smuggled-us-citizens-us-citizens-not-asylum-seekers), 
+it is worth investigating total crossings instead of crossings made by 
+immigrants. @fig-crossings-over-time explores our total inbound crossings
+per year in all land ports in the US.
+
+```{r}
+#| label: fig-crossings-over-time
+#| fig-cap: "Total crossings"
+
+# build plot
+border |>
+  filter(year < 2025) |>
+  group_by(year) |>
+  summarise(crossings = sum(value)) |>
+  plot_ly() |>
+  add_trace(
+    x = ~year, 
+    y = ~crossings, 
+    type = "scatter", 
+    mode = "lines+markers",
+    line = list(width = 4, color = RED),
+    marker = list(size = 11, color = RED),
+    hovertemplate = "<b>Crossings</b>: %{y:,.0f}",
+    name = ""
+  ) |>
+  layout(
+    title = "Border crossings into the US through land ports (1996-2024)",
+    xaxis = list(title = ""),
+    yaxis = list(title = "Total Crossings"),
+    dragmode = FALSE,
+    hovermode = "x unified"
+  ) |>
+  config(displayModeBar = FALSE)
+```
+
+There are a few interesting notes from our border crossing history. First, we 
+saw a rapid and steady decrease in border crossings after 2000. That could be 
+related to decreased international travel by American citizens following the 
+9/11 attacks and 
+[increased security](https://www.cfr.org/timeline/us-postwar-immigration-policy),
+but without data to back that hypothesis, we can only speculate. 
+
+After 2011, we see a slow increase in crossings until the pronounced drop during
+the COVID-19 pandemic. It's more difficult to point to direct policy changes 
+that explain that increase during both the Obama and Trump administrations, so 
+I will reserve my speculation. Interestingly, we have effectively returned to 
+pre-COVID levels.
+
+::: {.callout-note}
+Observe the y-axis scale in @fig-crossings-over-time. Even during the drop in
+crossings during the pandemic, we saw over 200 million unique crossings.
+Although that's much lower than is typical, it is still significant in absolute
+number.
+:::
+
+## Crossing distribution
+
+Since effectively all fentanyl imports 
+[come through the southern border](https://www.bbc.com/news/articles/cvg93nn1e6go) 
+and via US citizens, it is worth exploring the distribution of crossings between
+Canada and Mexico. @fig-country-distribution examines the evolution of that
+distribution since 1996.
+
+```{r}
+#| label: fig-country-distribution
+#| fig-cap: "Crossing distribution"
+
+# get proportion of overdoses done with opioids
+od_prop <- od |>
+  mutate(p_opioid = opioid_deaths / total_deaths)
+
+# note for Canadian border measures annotation
+canada_note <- list(
+  x = 2021,
+  y = 0.47,
+  text = "<b>Canadian COVID measures</b>",
+  showarrow = FALSE,
+  textangle = 270,
+  font = list(
+    color = "rgba(0, 0, 0, 0.2)",
+    size = 14
+  )
+)
+
+# build the plot
+border |>
+  filter(year < 2025) |>
+  group_by(year, country) |>
+  summarise(crossings = sum(value), .groups = "drop") |>
+  pivot_wider(names_from = country, values_from = crossings) |>
+  mutate(
+    crossings = Canada + Mexico,
+    p_canada = Canada / crossings,
+    p_mex = Mexico / crossings
+  ) |>
+  left_join(od_prop) |>
+  
+  # Mexico line
+  plot_ly(
+    x = ~year, 
+    y = ~p_mex,
+    type = "scatter",
+    mode = "lines+markers",
+    line = list(width = 4, color = RED),
+    marker = list(size = 11, color = RED),
+    hovertemplate = "%{y:.3f}",
+    name = "<b>Mexico</b>"
+  ) |>
+  
+  # Canada line
+  add_trace(
+    y = ~p_canada,
+    line = list(width = 4, color = BLUE),
+    marker = list(
+      size = 11, 
+      color = BLUE,
+      symbol = "square"
+    ),
+    hovertemplate = "%{y:.3f}",
+    name = "<b>Canada</b>"
+  ) |>
+  
+  # opioid line
+  add_trace(
+    y = ~p_opioid,
+    line = list(width = 4, color = YELLOW),
+    marker = list(
+      size = 11, 
+      color = YELLOW,
+      symbol = "diamond"
+    ),
+    hovertemplate = "%{y:.3f}",
+    name = "<b>Opioid OD\nProportion</b>"
+  ) |>
+  
+  layout(
+    title = "Border crossing proportions and opioid deaths",
+    xaxis = list(title = ""),
+    yaxis = list(title = "Proportion of Crossings"),
+    dragmode = FALSE,
+    
+    # add mouse-over functionality across both lines at once
+    hovermode = "x unified",
+    
+    # Canadian border closure annotation bar
+    shapes = list(
+      list(type = "rect", fillcolor = "gray", line = list(color = "gray"),
+      opacity = 0.2,
+      y0 = 0.05,
+      y1 = 0.95,
+      x0 = 2020,
+      x1 = 2022,
+      layer = "below"
+    )),
+    annotations = canada_note
+  ) |>
+  config(displayModeBar = FALSE)
+```
+
+Even as @fig-crossings-over-time shows us total crossings have fluctuated by the
+hundreds of millions since 1997, the proportion of those crossings coming from
+Canada and Mexico have been remarkably consistent. Besides the
+[Canadian travel](https://travel.gc.ca/travel-covid) measures causing dwindling
+crossings during the pandemic, about three of every four crossings have come
+from Mexico every year since 1997.
+
+While 
+[opioid deaths](https://www.cdc.gov/nchs/products/databriefs/db522.htm#:~:text=After%20the%20age-adjusted%20rate,5.7%25%20from%2019.4%20to%2018.3.)
+have been growing as a proportion of all overdose deaths since 1999, the
+proportion of crossings from each border remains consistent, and total land
+crossings have stagnated (save COVID-era declines). With total traffic not
+growing and the proportion of crossings coming from the south constant, factors
+outside of these datasets are likely responsible for the increase in opioid
+deaths. The 
+[per-dose lethality of fentanyl](https://www.dea.gov/resources/facts-about-fentanyl),
+[industry-manufactured opioid addictions](https://pmc.ncbi.nlm.nih.gov/articles/PMC7479783/),
+and other socioeconomic issues are more likely culprits.
+
+# Conclusion
+
+We have shown that, since at least 1995, southern border crossings have 
+surpassed northern ones by approximately three-to-one. However, total traffic 
+over land has dwindled or held constant in the same period, while the proportion
+of overdose deaths caused by opioids has increased.
+
+Since almost all 
+([89%](https://usafacts.org/answers/how-much-fentanyl-is-seized-at-us-borders/country/united-states/))
+of illicit fentanyl comes from legal land ports of entry and 
+([90%](https://www.cbp.gov/border-security/frontline-against-fentanyl)) from US
+citizens, analyzing otherwise legal border crossings is a worthwhile endeavor.
+This analysis shows that while opioid deaths spike, land traffic of the type 
+that typically imports fentanyl (US citizens crossing through legal ports of
+entry to the south) has not. Non-border issues are likely to blame for the
+current crisis.
+
+Combating the fentanyl crisis will require an ongoing, multi-faceted approach. 
+While border security is essential, mainly due to the 
+[comparatively small amount](https://www.yalemedicine.org/news/fentanyl-driving-overdoses#:~:text=One%20reason%20is%20that%20because,the%20symptoms%20of%20opioid%20withdrawal.)
+of fentanyl that can kill large numbers of civilians, decreasing border traffic
+is unlikely to make a significant positive impact. The Centers for Disease 
+Control (CDC)
+[recommends](https://www.cdc.gov/overdose-prevention/about/fentanyl.html)
+using fentanyl test strips to prevent taking drugs laced with
+fentanyl and using naloxone (Narcan) to stop overdoses after they begin. Federal
+funds could easily subsidize free community access to these resources while
+increasing education on effectively using them.
+
+I hope this analysis has been insightful for those interested in data analysis
+and visualization or the fentanyl crisis and border traffic. If you have any
+questions or comments, feel free to reach out to me on 
+[LinkedIn](https://linkedin.com/in/harrisonme). I'm always open to connecting to
+my readers, be they like-minded or not. As always, thank you for reading.

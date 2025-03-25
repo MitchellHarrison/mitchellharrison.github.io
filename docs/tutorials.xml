@@ -10,7 +10,7 @@
 <atom:link href="https://mitchellharrison.github.io/tutorials.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Tue, 25 Mar 2025 04:54:09 GMT</lastBuildDate>
+<lastBuildDate>Tue, 25 Mar 2025 18:57:49 GMT</lastBuildDate>
 <item>
   <title>Hello, statistics. | Mathematical Statistics 0</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -49,7 +49,7 @@
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_0.html</guid>
-  <pubDate>Tue, 25 Mar 2025 04:54:09 GMT</pubDate>
+  <pubDate>Tue, 25 Mar 2025 18:57:49 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/0.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -138,7 +138,7 @@ Definition
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_1.html</guid>
-  <pubDate>Tue, 25 Mar 2025 04:54:09 GMT</pubDate>
+  <pubDate>Tue, 25 Mar 2025 18:57:49 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/1.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -620,7 +620,7 @@ font-style: inherit;">element_line</span>()</span>
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_2.html</guid>
-  <pubDate>Tue, 25 Mar 2025 04:54:09 GMT</pubDate>
+  <pubDate>Tue, 25 Mar 2025 18:57:49 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/2.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -685,7 +685,7 @@ Definition
   <category>Statistics</category>
   <category>Mathematical Statistics</category>
   <guid>https://mitchellharrison.github.io/tutorials/math_stat_3.html</guid>
-  <pubDate>Tue, 25 Mar 2025 04:54:09 GMT</pubDate>
+  <pubDate>Tue, 25 Mar 2025 18:57:49 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/mathematical_statistics/3.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -2606,7 +2606,7 @@ font-style: inherit;">fill =</span> BG_COLOR)</span>
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_05212024.html</guid>
-  <pubDate>Tue, 25 Mar 2025 04:54:09 GMT</pubDate>
+  <pubDate>Tue, 25 Mar 2025 18:57:49 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/05212024.png" medium="image" type="image/png" height="108" width="144"/>
 </item>
 <item>
@@ -3559,7 +3559,7 @@ font-style: inherit;">20</span>))</span>
  ]]></description>
   <category>Data Viz</category>
   <guid>https://mitchellharrison.github.io/tutorials/tidytuesday_06112024.html</guid>
-  <pubDate>Tue, 25 Mar 2025 04:54:09 GMT</pubDate>
+  <pubDate>Tue, 25 Mar 2025 18:57:49 GMT</pubDate>
   <media:content url="https://mitchellharrison.github.io/images/thumbnails/projects/tidytuesday/06112024.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
