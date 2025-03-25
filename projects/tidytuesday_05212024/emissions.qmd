@@ -4,6 +4,7 @@ author: "Mitch Harrison"
 categories:
   - "Data Viz"
   - "TidyTuesday"
+date: "May 21, 2024"
 image: "../../images/thumbnails/projects/tidytuesday/05212024.png"
 ---
 Hello, all! Welcome to TidyTuesday. This week, as climate analysts often do, we 

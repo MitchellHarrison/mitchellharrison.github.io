@@ -13,13 +13,14 @@
   {
     "listing": "/projects.html",
     "items": [
-      "/projects/gun_violence/gun_violence.html",
-      "/projects/tidytuesday_06042024/cheese.html",
-      "/projects/tidytuesday_06112024/pride.html",
-      "/projects/tidytuesday_05212024/emissions.html",
-      "/projects/crickets/crickets.html",
+      "/projects/border_crossings/crossings.html",
       "/projects/tidytuesday_01212025/mountains.html",
-      "/projects/tidytuesday_01142025/talks.html"
+      "/projects/tidytuesday_01142025/talks.html",
+      "/projects/gun_violence/gun_violence.html",
+      "/projects/crickets/crickets.html",
+      "/projects/tidytuesday_06112024/pride.html",
+      "/projects/tidytuesday_06042024/cheese.html",
+      "/projects/tidytuesday_05212024/emissions.html"
     ]
   }
 ]

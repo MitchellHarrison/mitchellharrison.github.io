@@ -1,0 +1,247 @@
+---
+title: "Where do American Visitors Come From?"
+subtitle: "Inbound entries into America through land ports of entry"
+categories:
+  - "Data Viz"
+  - "Research"
+  - "Geospatial"
+author: "Mitch Harrison"
+date: "March 24, 2025"
+image: "../../images/thumbnails/projects/skagway.jpg"
+execute: 
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: import-and-clean-data
+
+library(leaflet)
+library(plotly)
+library(sf)
+library(tidyverse)
+
+#border <- read_csv("projects/border_crossings/crossings.csv") |>
+border <- read_csv("../../projects/border_crossings/crossings.csv") |>
+  janitor::clean_names()
+
+# separate out 2024
+border <- border |>
+  separate(date, into = c("month", "year"), sep = "-") |>
+  mutate(
+    year = as.numeric(year), 
+    year = if_else(year > 25, year + 1900, year + 2000),
+    country = case_when(
+      border == "US-Canada Border" ~ "Canada",
+      border == "US-Mexico Border" ~ "Mexico",
+      T ~ NA
+    )
+  )
+
+border24 <- border |>
+  filter(year == 2024)
+
+most_common <- border24 |>
+  group_by(port_code, measure) |>
+  summarize(total_value = sum(value, na.rm = TRUE), .groups = "drop") |>
+  arrange(port_code, desc(total_value)) |>
+  group_by(port_code) |>
+  slice(1) |>
+  select(port_code, most_common = measure)
+
+ports <- border24 |>
+  select(port_code, port_name, state, latitude, longitude, country) |>
+  distinct()
+
+crossings24 <- border24 |>
+  group_by(port_code) |>
+  summarise(crossings = sum(value)) |>
+  left_join(ports) |>
+  left_join(most_common)
+```
+
+# Introduction
+
+In 1887, steamship captain 
+[William "Billy" Moore](https://en.wikipedia.org/wiki/William_Moore_(steamship_captain))
+and First Nation explorer 
+["Skookum Jim" Mason](https://en.wikipedia.org/wiki/Keish) hiked the White Pass 
+route through what would become the Alaska-Canada border. Billy Moore liked what
+he saw and purchased the coastal land now home to the gold rush town of Skagway,
+Alaska. With its modest present-day population of around 1,200 permanent 
+residents, Skagway hosts over one million annual tourists. 
+
+Although Billy Moore and Skookum Jim had to conquer forests, mountains, and 
+wildlife to arrive at the remote land where Skagway now lies, modern tourists 
+have much simpler transit options. American citizens can drive a few miles north
+of [Juneau](https://en.wikipedia.org/wiki/Juneau,_Alaska) (Alaska's capital) to 
+arrive via the Klondike Highway. Canadian tourists have two additional options:
+take the bus or the train south, across the Canadian border, and directly into 
+downtown Skagway.
+
+Of the Canadian tourists visiting Skagway, the majority come via the bus route 
+south from the Yukon Territory. Because of the massive flood of tourists 
+visiting by bus, the Skagway port of entry into the US boasts a unique feature:
+it is the only land port of entry through which more people enter the US by bus
+than any other method.
+
+This article will examine every land port of entry into the US, the methods with
+which crossings are conducted, and where those crossings occur.	I will also 
+touch on the impact of this data on current politics and illicit drug 
+trafficking.  
+
+# The Data
+
+The US Bureau of Transportation Statistics (BTS) is a statistical agency under 
+the US Department of Transportation (DoT). The BTS publishes 
+[border crossing data](https://catalog.data.gov/dataset/border-crossing-entry-data-683ae)
+through land ports of entry. Maritime and aircraft crossings are handled by 
+other agencies and thus aren't included in the data. The data includes the 
+geographic position of the ports, the number of crossings in those ports, and 
+the method of each crossing.
+
+Before we look at the data, we need to define a crossing. The BTS defines a 
+crossing as a single vehicle (or pedestrian) crossing into the US a single time.
+If, for example, a single truck goes between the US and Mexico multiple times to
+pick up and deliver goods, each entry into the US is a separate crossing. These
+crossings could be tourist, immigrants, or American citizens returning home.
+
+Now that we have our background and definitions, let's get to know our traffic!
+
+# Data Analysis
+
+## Total crossings
+
+Traffic across our land borders has become a hot topic in our politics. 
+President Trump has 
+[imposed tariffs](https://apnews.com/article/trump-tariffs-mexico-canada-b19e004dddb579c373b247037e04424b?taid=67c60d3c0119c30001f7fd9b) 
+on both Mexico and Canada in an attempt to reduce the flow of illicit drugs 
+(specifically fentanyl) and trafficked people into the US. Because most fentanyl
+is smuggled into the US 
+[by American citizens](https://www.cato.org/blog/fentanyl-smuggled-us-citizens-us-citizens-not-asylum-seekers), 
+it is worth investigating total crossings instead of crossings made by 
+immigrants. Figure @fig-crossings-over-time explores our total inbound crossings
+per year in all land ports in the US.
+
+```{r}
+#| label: fig-crossings-over-time
+#| fig-cap: "Total crossing trends"
+
+RED <- "#d13f5a"
+
+# build plot
+border |>
+  filter(year < 2025) |>
+  group_by(year) |>
+  summarise(crossings = sum(value)) |>
+  plot_ly() |>
+  add_trace(
+    x = ~year, 
+    y = ~crossings, 
+    type = "scatter", 
+    mode = "lines+markers",
+    line = list(width = 4, color = RED),
+    marker = list(size = 11, color = RED),
+    hovertemplate = "<i>Year</i>: %{x}<br><i>Crossings</i>: %{y:,.0f}",
+    name = ""
+  ) |>
+  layout(
+    title = "Border crossings into the US through land ports (1996-2024)",
+    xaxis = list(title = ""),
+    yaxis = list(title = "Total Crossings"),
+    dragmode = FALSE
+  ) |>
+  config(displayModeBar = FALSE)
+```
+
+There are a few interesting notes from our border crossing history. First, we 
+saw a rapid and steady decrease in border crossings after 2000. That could be 
+related to decreased international travel by American citizens following the 
+9/11 attacks and 
+[increased security](https://www.cfr.org/timeline/us-postwar-immigration-policy),
+but without data to back that hypothesis, I am just speculating. 
+
+After 2011, we see a slow increase in crossings until the pronounced drop during
+the COVID-19 pandemic. It's more difficult to point to direct policy changes 
+that explain that increase during both the Obama and Trump administrations, so 
+I will reserve my speculation. Interestingly, we have effectively returned to 
+pre-COVID levels.
+
+## Crossing distribution
+
+```{r}
+#| label: fig-country-distribution
+#| fig-cap: "Crossing distribution"
+
+BLUE <- "#3c91c2"
+
+border |>
+  filter(year < 2025) |>
+  group_by(year, country) |>
+  summarise(crossings = sum(value), .groups = "drop") |>
+  pivot_wider(names_from = country, values_from = crossings) |>
+  mutate(
+    p_canada = Canada / (Canada + Mexico),
+    p_mex = Mexico / (Canada + Mexico)
+  ) |>
+  plot_ly(
+    x = ~year, 
+    y = ~p_mex,
+    type = "scatter",
+    mode = "lines+markers",
+    line = list(width = 4, color = RED),
+    marker = list(size = 11, color = RED),
+    name = "Mexico"
+  ) |>
+  add_trace(
+    y = ~p_canada, 
+    line = list(width = 4, color = BLUE),
+    marker = list(size = 11, color = BLUE),
+    hovertemplate = "<i>Year</i>: %{x}<br><i>Proportion</i>: %{y:,.3f}",
+    name = "Canada"
+  ) |>
+  layout(
+    title = "Proportion of all crossings by country of origin",
+    xaxis = list(title = ""),
+    yaxis = list(title = "Proportion of Crossings"),
+    dragmode = FALSE
+  ) |>
+  config(displayModeBar = FALSE)
+```
+
+
+```{r}
+#| label: fig-leaflet-map
+#| fig-cap: "Crossing locations"
+
+# custom color palette  
+color_palette <- colorFactor(
+  palette = ggthemes::colorblind_pal()(length(unique(crossings24$most_common))),
+  domain = crossings24$most_common
+)
+
+# build the map
+leaflet(crossings24) |>
+  addTiles() |>
+  addCircleMarkers(
+    lng = ~longitude,
+    lat = ~latitude,
+    # set a minimum circle size of 3 (helps with legibility)
+    radius = ~pmax(sqrt(crossings) / 200, 3),
+    fill = TRUE,
+    stroke = FALSE,
+    fillOpacity = 0.7, 
+    popup = ~paste0(
+      "<strong>Port: </strong>", port_name,
+      "<br><strong>Most Common Method: </strong>", most_common,
+      "<br><strong>Total Crossings (2024): </strong>", scales::comma(crossings)
+    ),
+    color = ~color_palette(most_common)
+  ) |>
+  addLegend(
+    "bottomright",
+    pal = color_palette,
+    values = ~most_common,
+    title = "Most Common Method of Crossing"
+  )
+```

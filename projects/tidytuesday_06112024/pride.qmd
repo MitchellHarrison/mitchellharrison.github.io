@@ -1,9 +1,10 @@
 ---
 title: "Campus Pride Index | TidyTuesday"
-author: "Mitchell Harrison"
+author: "Mitch Harrison"
 categories:
   - "Data Viz"
   - "TidyTuesday"
+date: "June 11, 2024"
 image: "../../images/thumbnails/projects/tidytuesday/06112024.jpg"
 ---
 
