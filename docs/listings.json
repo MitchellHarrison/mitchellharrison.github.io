@@ -13,14 +13,15 @@
   {
     "listing": "/projects.html",
     "items": [
+      "/projects/tidytuesday_04012025_pokemon/pokemon.html",
       "/projects/border_crossings/crossings.html",
-      "/projects/tidytuesday_01212025/mountains.html",
-      "/projects/tidytuesday_01142025/talks.html",
+      "/projects/tidytuesday_01212025_mountains/mountains.html",
+      "/projects/tidytuesday_01142025_positconf/talks.html",
       "/projects/gun_violence/gun_violence.html",
       "/projects/crickets/crickets.html",
-      "/projects/tidytuesday_06112024/pride.html",
-      "/projects/tidytuesday_06042024/cheese.html",
-      "/projects/tidytuesday_05212024/emissions.html"
+      "/projects/tidytuesday_06112024_campuspride/pride.html",
+      "/projects/tidytuesday_06042024_cheese/cheese.html",
+      "/projects/tidytuesday_05212024_emissions/emissions.html"
     ]
   }
 ]

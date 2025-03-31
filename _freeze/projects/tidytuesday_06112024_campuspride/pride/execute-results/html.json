@@ -1,0 +1,17 @@
+{
+  "hash": "703e46b4a561c188f8734cebc76edb9c",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Campus Pride Index\"\nauthor: \"Mitch Harrison\"\ncategories:\n  - \"Data Viz\"\n  - \"TidyTuesday\"\ndate: \"June 11, 2024\"\nimage: \"../../images/thumbnails/projects/tidytuesday/06112024.jpg\"\n---\n\n\n\n\n\n\n# Welcome!\n\nHappy pride month! On this fine TidyTuesday afternoon, we will see how different \ntypes of colleges and universities handle LGBTQ+ inclusion! The Campus Pride \nIndex tracks safety, inclusivity, and LGBTQ+ policies/programs at universities \nacross the United States. Results are on a 1-5 scale (with higher numbers being \nmost inclusive), and colleges are grouped by various discrete categories. Today, \nwe'll build a stacked horizontal bar chart to see the distribution of scores for \nsome of those categories. I'll use the `ggchicklet` package and some custom \nfonts for easy aesthetic changes, and we'll be done! If you want to see a \nstep-by-step tutorial explaining the code, click \n[here](../../tutorials/tidytuesday_06112024.qmd).\n\n\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](pride_files/figure-html/plot-pride-1.png){fig-align='center' width=960}\n:::\n:::\n\n::: {.cell}\n\n:::\n\n\n\n\n\n\n# Conclusion\n\nThere we have it! Seeing very few 1s is a good sign, but there is always room \nfor progress. The top three types of colleges by number (public, private, and \nliberal arts) are highly inclusive, while community colleges (where I started my \neducational journey) have a long way to go.\n\nIf you have any questions or suggestions for improvements, the best way to reach \nme is on [Discord](https://discord.gg/vF6W2bdKFH)! And, of course, if you want \nto support this work financially, you can \n[buy me a coffee](https://buymeacoffee.com/mitchellharrison)!\n\nThanks for reading, and I'll see you next week!",
+    "supporting": [
+      "pride_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

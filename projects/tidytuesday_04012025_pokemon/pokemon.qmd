@@ -1,0 +1,34 @@
+---
+title: "I built a PokeDex with R Shiny"
+categories:
+  - "Data Viz"
+  - "TidyTuesday"
+  - "Dashboard"
+  - "Shiny"
+author: "Mitch Harrison"
+date: "April 1, 2025"
+image: "../../images/thumbnails/projects/tidytuesday/04012025.jpg"
+---
+
+Welcome to my favorite TidyTuesday so far! Click
+[here](https://qmre3f-mitch0harrison.shinyapps.io/r-pokedex/) to use the app
+on its own dedicated web page, or just interact with it below. See you next
+week!
+
+:::{.column-screen-inset}
+
+<div style="
+  width: 100%; 
+  height: 70vh;
+  display: flex; 
+  justify-content: center; 
+  padding: 0; 
+  margin: 0;">
+  <iframe 
+    src="https://qmre3f-mitch0harrison.shinyapps.io/r-pokedex/" 
+    style="width: 80vw; height: 70vh; border: none;">
+  </iframe>
+</div>
+
+:::
+
