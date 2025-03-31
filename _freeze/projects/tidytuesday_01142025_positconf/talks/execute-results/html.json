@@ -1,0 +1,17 @@
+{
+  "hash": "c4f76cdb8330cea42d6ee87c979f560a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Posit::Conf 2023\"\nauthor: \"Mitch Harrison\"\ncategories:\n  - \"Data Viz\"\n  - \"TidyTuesday\"\ndate: \"January 14, 2025\"\nimage: \"../../images/thumbnails/projects/tidytuesday/01142025.png\"\nexecute: \n  warning: false\n  message: false\n---\n\n::: {.cell}\n\n:::\n\n\n\n\n\n\n# The Viz\n\nHello all! This week's \n[TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-01-14/readme.md)\nbrings us the event schedule from the posit::conf events of 2023 and 2024.\nAlthough there isn't always much in the way of data analysis that we can do with\na simple list of conference events, I did find a phenomenon that amused me.\n\nAt the conference, there are three types of talks: keynote talks to open and\nclose both days of the conference, regular talks that occur during the day, and\nvery quick lightning talks that cover smaller topics in a very short time\nwindow. For some reason, all of the lightning talks were scheduled to overlap\nwith the only pharma-related main talks at the entire event. So people had to\nchoose whether to attend the pharma talks or the lightning talks. I'm not sure\nwhat the rationale for scheduling it that was is, but here's a plot to\ndemonstrate!\n\n\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](talks_files/figure-html/build-viz-1.png){width=672}\n:::\n:::\n\n\n\n\n\n\n# Challenges\n\nAlthough the plot is pretty simple, I used some non-intuitive techniques to\nplace the text and line annotations when the data are dates instead of regular\ncontinuous values. I encoded the `y` axis as a continuous one and used\n`POSIXct` objects to place them on the `x` axis. Feel free to check the code to\nsee how that worked!\n\n# Conclusion\n\nAs always, thanks for reading! Feel free to reach out to me on\n[LinkedIn](https://linkedin.com/in/harrisonme) if you want to connect or ask\nquestions about my work. See you next week!",
+    "supporting": [
+      "talks_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
