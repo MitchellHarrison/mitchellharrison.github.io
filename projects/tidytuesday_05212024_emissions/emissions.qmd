@@ -86,7 +86,7 @@ emis |>
   ) +
   annotate(
     geom = "rect",
-    xmin = 1950.5,
+    xmin = 1944.5,
     xmax = 1993.5,
     ymin = 23500,
     ymax = 35800,
