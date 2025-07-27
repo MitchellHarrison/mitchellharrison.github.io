@@ -13,6 +13,7 @@
   {
     "listing": "/projects.html",
     "items": [
+      "/projects/durham/durham.html",
       "/projects/tidytuesday_04012025_pokemon/pokemon.html",
       "/projects/border_crossings/crossings.html",
       "/projects/tidytuesday_01212025_mountains/mountains.html",

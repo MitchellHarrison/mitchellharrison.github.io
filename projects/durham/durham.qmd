@@ -1,0 +1,203 @@
+---
+title: "Durham P.D. Reputational Changes Following BLM"
+author: "Mitch Harrison"
+date: "July 24, 2025"
+categories:
+  - "Data Viz"
+  - "Research"
+execute: 
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: read-libs-and-data
+
+library(tidyverse)
+library(patchwork)
+
+#durham_2018 <- read_csv("projects/durham/data/durham2018.csv") |>
+durham_2018 <- read_csv("data/durham2018.csv") |>
+  janitor::clean_names() |>
+  select(matches("q7_01_1"), "asian", "white", "native_american", "black",
+         "latino", "other")
+
+#durham_2022 <- readxl::read_xlsx("projects/durham/data/durham2022.xlsx") |>
+durham_2022 <- readxl::read_xlsx("data/durham2022.xlsx") |>
+  janitor::clean_names() |>
+  select(
+    matches("q7_01_1"), 
+    matches("q31"), 
+    matches("q32_01"), 
+    matches("q32_02"), 
+    matches("q32_03"), 
+    matches("q32_04"), 
+    matches("q32_05"), 
+    matches("q32_06")
+  )
+
+colnames(durham_2018) <- c("police_relationship", "asian", "white",
+                           "native_american", "black", "hispanic", "other")
+colnames(durham_2022) <- c("police_relationship", "hispanic", "asian", "black",
+                           "native_american", "white", "native_hawaiian", 
+                           "other")
+
+# 1 = Yes, 2 = no --------------------------------------------------------------
+durham_2018 <- durham_2018 |>
+  mutate(
+    year = 2018,
+    across(where(is.numeric), ~ na_if(., 9))
+  )
+
+durham_2022 <- durham_2022 |>
+  mutate(
+    other = if_else(native_hawaiian == 1, 1, other),
+    year = 2022,
+    across(where(is.numeric), ~ na_if(., 9))
+  ) |>
+  select(!native_hawaiian)
+```
+
+The nationwide Black Lives Matter (BLM) protests were widely attended in Durham,
+a [disproportionately black city](https://datausa.io/profile/geo/durham-nc/#:~:text=The%205%20largest%20ethnic%20groups,(Hispanic)%20(3.86%25).) in North Carolina. Although initial responses by
+Durham PD lacked substantive policy or funding changes, the following years 
+began to show moderate progress towards meeting the demands of the BLM 
+advocates.
+
+Every year, the city of Durham sends a robust satisfaction survey to all its 
+residents (of which I used to be one). The questions range from opinions on 
+transportation, public parks, policing, and more. Demographic questions in the 
+survey allow us to see how Durham PD's reputation changed within different 
+racial groups before and after widespread BLM protests in Durham.
+
+The primary policy shift brought about by protesters' demands was establishing 
+the [HEART program](https://www.durhamnc.gov/4576/Community-Safety) to support 
+regular policing efforts in Durham. In short, the 
+HEART program seeks to reduce the potential of police violence by adding social
+workers and mental health experts to the 9-1-1 call centers, giving unarmed 
+response options for calls for which armed police are unlikely to be necessary. 
+Since HEART began, they have handled over 
+[32,000 calls](https://app.powerbigov.us/view?r=eyJrIjoiMWQ1YzViMGYtYmI1MC00NWM3LTg1NWUtMjdjNzk3NWNlYzU0IiwidCI6IjI5N2RlZjgyLTk0MzktNDM4OC1hODA4LTM1NDhhNGVjZjQ3ZCJ9&pageName=ReportSection7606ef27f6ee056e6f9f), 
+with only 0.02% of calls 
+ultimately requiring traditional police backup. Although HEART has been widely 
+successful, Durham PD's reputational shifts remain mixed. Figure 1 explores 
+those changes.
+
+```{r}
+#| label: build-plot
+#| fig-width: 12
+#| fig-height: 5
+
+durham_2018_long <- durham_2018 |>
+  pivot_longer(
+    cols = asian:other, 
+    names_to = "race", 
+    values_to = "race_value"
+  ) |>
+  filter(!is.na(race_value))
+
+durham_2022_long <- durham_2022 |>
+  pivot_longer(
+    cols = hispanic:other, 
+    names_to = "race", 
+    values_to = "race_value"
+  ) |>
+  filter(!is.na(race_value))
+
+combined <- bind_rows(durham_2018_long, durham_2022_long) |>
+  filter(!is.na(police_relationship))  # remove missing responses
+
+summary <- combined |>
+  mutate(
+    race = if_else(race %in% c("black", "white", "hispanic"), race, "Other")
+  ) |>
+  group_by(year, race, police_relationship) |>
+  summarise(n = n(), .groups = "drop") |>
+  group_by(year, race) |>
+  mutate(prop = n / sum(n))
+
+summary$race <- str_to_title(summary$race)
+
+summary <- summary |>
+  mutate(
+    race = str_to_title(race),
+    race = factor(race, levels = c("Black", "White", "Hispanic", "Other")),
+    year = factor(year, levels = c(2022, 2018)),
+    police_relationship = factor(police_relationship, levels = 5:1)
+  )
+
+summary |>
+  filter(!is.na(race)) |>
+  ggplot(aes(x = year, y = prop, fill = police_relationship)) +
+  geom_col(position = "stack", width = 0.6) +
+  coord_flip() +
+  facet_wrap(~race, ncol = 1, switch = "both") +
+  scale_fill_brewer(
+    palette = "RdBu",
+    direction = -1, 
+    labels = rev(c(
+      "Very Dissatisfied",
+      "Dissatisfied",
+      "Neutral",
+      "Satisfied",
+      "Very Satisfied"
+    ))
+  ) +
+  labs(
+    title = paste0(
+      "How satisfied are you with the overall police relationship ",
+      "with your community?"
+    ),
+    subtitle = "Durham Resident Satisfaction Surveys (2018, 2022)",
+    x = NULL,
+    y = element_blank(),
+    fill = element_blank()
+  ) +
+  ggthemes::theme_clean() +
+  theme(
+    strip.text = element_text(size = 11, face = "bold"),
+    strip.placement = "outside",
+    legend.position = "bottom",
+    legend.background = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.line.x = element_blank(),
+    plot.background = element_rect(fill = "white"),
+    panel.background = element_blank(),
+    plot.title = element_text(size = 18),
+    plot.subtitle = element_text(size = 14)
+  ) +
+  guides(fill = guide_legend(reverse = T))
+
+ggsave("plot.png", width = 12, height = 6)
+```
+
+The success of Durham's attempts to repair its relationship with black 
+communities depends on the goals of Durham's policy shifts. If the objective was
+to diminish negative feelings towards police, Durham has seen modest success. 
+Black communities are the only ones in which fewer members report negative 
+feelings towards police in 2022 than in 2018. However, positive sentiment has 
+also declined in the same communities, resulting in a growing indifference 
+towards Durham PD among black communities.
+
+Both increasingly negative and decreasingly positive sentiments were most 
+pronounced in white communities. There are many potential explanations for those
+shifts, including economic shifts, changes to national mood towards policing, 
+shifts in who responds to the survey, and more. However, for the sake of 
+brevity, we will leave those confounding factors unexplored.
+
+Like many other major American police forces, Durham PD has a long way to go. 
+As it stands, fewer than half of all racial groups in Durham are satisfied with
+their community's relationship with its police force. Even with the success of 
+the HEART program, moods towards Durham PD continue to cool on average. A 
+national re-exploration of policing could be to blame, but it is the 
+responsibility of municipal leadership to combat those national currents. 
+Although HEART has handled over 32,000 calls instead of Durham PD, the city 
+[has not reduced police funding](https://abc11.com/post/defund-the-police-budgets-mental-health-crime-stats/12043536/), 
+a key demand of the BLM movement. As 
+[violent crime rates shrink](https://www.durhamnc.gov/ArchiveCenter/ViewFile/Item/7368) 
+year-over-year in Durham, police funding continues to grow. Durham
+is fortunate to have a strong statistical justification for a reduction in 
+police budget. Still, city leadership continues to drag its feet, and without 
+continued public pressure, broader policing change may be unlikely in the near 
+future.

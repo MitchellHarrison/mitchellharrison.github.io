@@ -1,0 +1,17 @@
+{
+  "hash": "bac2babb20ac675a99d789ff7a90b618",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Durham Policing Changes Following BLM\"\nauthor: \"Mitch Harrison\"\ndate: \"July 24, 2025\"\nformat: pdf\nexecute: \n  echo: false\n---\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n::: {.cell-output-display}\n![](durham_files/figure-pdf/unnamed-chunk-2-1.pdf)\n:::\n:::",
+    "supporting": [
+      "durham_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}

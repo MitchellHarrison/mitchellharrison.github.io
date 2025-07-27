@@ -9,8 +9,746 @@
 <link>https://mitchellharrison.github.io/projects.html</link>
 <atom:link href="https://mitchellharrison.github.io/projects.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.57</generator>
-<lastBuildDate>Tue, 01 Apr 2025 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.6.42</generator>
+<lastBuildDate>Thu, 24 Jul 2025 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Durham P.D. Reputational Changes Following BLM</title>
+  <dc:creator>Mitch Harrison</dc:creator>
+  <link>https://mitchellharrison.github.io/projects/durham/durham.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(patchwork)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#durham_2018 &lt;- read_csv("projects/durham/data/durham2018.csv") |&gt;</span></span>
+<span id="cb1-5">durham_2018 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data/durham2018.csv"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-6">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q7_01_1"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"asian"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"native_american"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>,</span>
+<span id="cb1-8">         <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"latino"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"other"</span>)</span>
+<span id="cb1-9"></span>
+<span id="cb1-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#durham_2022 &lt;- readxl::read_xlsx("projects/durham/data/durham2022.xlsx") |&gt;</span></span>
+<span id="cb1-11">durham_2022 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> readxl<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_xlsx</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data/durham2022.xlsx"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-12">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(</span>
+<span id="cb1-14">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q7_01_1"</span>), </span>
+<span id="cb1-15">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q31"</span>), </span>
+<span id="cb1-16">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q32_01"</span>), </span>
+<span id="cb1-17">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q32_02"</span>), </span>
+<span id="cb1-18">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q32_03"</span>), </span>
+<span id="cb1-19">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q32_04"</span>), </span>
+<span id="cb1-20">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q32_05"</span>), </span>
+<span id="cb1-21">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matches</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q32_06"</span>)</span>
+<span id="cb1-22">  )</span>
+<span id="cb1-23"></span>
+<span id="cb1-24"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(durham_2018) <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"police_relationship"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"asian"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>,</span>
+<span id="cb1-25">                           <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"native_american"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"hispanic"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"other"</span>)</span>
+<span id="cb1-26"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(durham_2022) <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"police_relationship"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"hispanic"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"asian"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>,</span>
+<span id="cb1-27">                           <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"native_american"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"native_hawaiian"</span>, </span>
+<span id="cb1-28">                           <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"other"</span>)</span>
+<span id="cb1-29"></span>
+<span id="cb1-30"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1 = Yes, 2 = no --------------------------------------------------------------</span></span>
+<span id="cb1-31">durham_2018 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> durham_2018 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-32">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb1-33">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">year =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2018</span>,</span>
+<span id="cb1-34">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">where</span>(is.numeric), <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">na_if</span>(., <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>))</span>
+<span id="cb1-35">  )</span>
+<span id="cb1-36"></span>
+<span id="cb1-37">durham_2022 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> durham_2022 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-38">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb1-39">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">other =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(native_hawaiian <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, other),</span>
+<span id="cb1-40">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">year =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2022</span>,</span>
+<span id="cb1-41">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">where</span>(is.numeric), <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">na_if</span>(., <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>))</span>
+<span id="cb1-42">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-43">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>native_hawaiian)</span></code></pre></div>
+</details>
+</div>
+<p>The nationwide Black Lives Matter (BLM) protests were widely attended in Durham, a <a href="https://datausa.io/profile/geo/durham-nc/#:~:text=The%205%20largest%20ethnic%20groups,(Hispanic)%20(3.86%25).">disproportionately black city</a> in North Carolina. Although initial responses by Durham PD lacked substantive policy or funding changes, the following years began to show moderate progress towards meeting the demands of the BLM advocates.</p>
+<p>Every year, the city of Durham sends a robust satisfaction survey to all its residents (of which I used to be one). The questions range from opinions on transportation, public parks, policing, and more. Demographic questions in the survey allow us to see how Durham PD’s reputation changed within different racial groups before and after widespread BLM protests in Durham.</p>
+<p>The primary policy shift brought about by protesters’ demands was establishing the <a href="https://www.durhamnc.gov/4576/Community-Safety">HEART program</a> to support regular policing efforts in Durham. In short, the HEART program seeks to reduce the potential of police violence by adding social workers and mental health experts to the 9-1-1 call centers, giving unarmed response options for calls for which armed police are unlikely to be necessary. Since HEART began, they have handled over <a href="https://app.powerbigov.us/view?r=eyJrIjoiMWQ1YzViMGYtYmI1MC00NWM3LTg1NWUtMjdjNzk3NWNlYzU0IiwidCI6IjI5N2RlZjgyLTk0MzktNDM4OC1hODA4LTM1NDhhNGVjZjQ3ZCJ9&amp;pageName=ReportSection7606ef27f6ee056e6f9f">32,000 calls</a>, with only 0.02% of calls ultimately requiring traditional police backup. Although HEART has been widely successful, Durham PD’s reputational shifts remain mixed. Figure 1 explores those changes.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">durham_2018_long <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> durham_2018 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(</span>
+<span id="cb2-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> asian<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>other, </span>
+<span id="cb2-4">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"race"</span>, </span>
+<span id="cb2-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"race_value"</span></span>
+<span id="cb2-6">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(race_value))</span>
+<span id="cb2-8"></span>
+<span id="cb2-9">durham_2022_long <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> durham_2022 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(</span>
+<span id="cb2-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> hispanic<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>other, </span>
+<span id="cb2-12">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"race"</span>, </span>
+<span id="cb2-13">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"race_value"</span></span>
+<span id="cb2-14">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(race_value))</span>
+<span id="cb2-16"></span>
+<span id="cb2-17">combined <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bind_rows</span>(durham_2018_long, durham_2022_long) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(police_relationship))  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># remove missing responses</span></span>
+<span id="cb2-19"></span>
+<span id="cb2-20">summary <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> combined <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-21">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb2-22">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">race =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(race <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"hispanic"</span>), race, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Other"</span>)</span>
+<span id="cb2-23">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-24">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, race, police_relationship) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-25">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>(), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.groups =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"drop"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-26">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(year, race) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-27">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">prop =</span> n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(n))</span>
+<span id="cb2-28"></span>
+<span id="cb2-29">summary<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>race <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_to_title</span>(summary<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>race)</span>
+<span id="cb2-30"></span>
+<span id="cb2-31">summary <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> summary <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-32">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb2-33">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">race =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_to_title</span>(race),</span>
+<span id="cb2-34">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">race =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(race, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Black"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"White"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Hispanic"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Other"</span>)),</span>
+<span id="cb2-35">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">year =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2022</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2018</span>)),</span>
+<span id="cb2-36">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">police_relationship =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(police_relationship, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-37">  )</span>
+<span id="cb2-38"></span>
+<span id="cb2-39">summary <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-40">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(race)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-41">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> year, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> prop, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> police_relationship)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-42">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_col</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"stack"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-43">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_flip</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-44">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">facet_wrap</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span>race, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">switch =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"both"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-45">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_brewer</span>(</span>
+<span id="cb2-46">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">palette =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"RdBu"</span>,</span>
+<span id="cb2-47">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">direction =</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, </span>
+<span id="cb2-48">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rev</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb2-49">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Very Dissatisfied"</span>,</span>
+<span id="cb2-50">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Dissatisfied"</span>,</span>
+<span id="cb2-51">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Neutral"</span>,</span>
+<span id="cb2-52">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Satisfied"</span>,</span>
+<span id="cb2-53">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Very Satisfied"</span></span>
+<span id="cb2-54">    ))</span>
+<span id="cb2-55">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-56">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb2-57">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(</span>
+<span id="cb2-58">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"How satisfied are you with the overall police relationship "</span>,</span>
+<span id="cb2-59">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"with your community?"</span></span>
+<span id="cb2-60">    ),</span>
+<span id="cb2-61">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Durham Resident Satisfaction Surveys (2018, 2022)"</span>,</span>
+<span id="cb2-62">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>,</span>
+<span id="cb2-63">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb2-64">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>()</span>
+<span id="cb2-65">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-66">  ggthemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_clean</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-67">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb2-68">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">strip.text =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">face =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bold"</span>),</span>
+<span id="cb2-69">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">strip.placement =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"outside"</span>,</span>
+<span id="cb2-70">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bottom"</span>,</span>
+<span id="cb2-71">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb2-72">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.ticks.x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb2-73">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.text.x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb2-74">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.line.x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb2-75">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_rect</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>),</span>
+<span id="cb2-76">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.background =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb2-77">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>),</span>
+<span id="cb2-78">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.subtitle =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">14</span>)</span>
+<span id="cb2-79">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-80">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">guides</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">guide_legend</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">reverse =</span> T))</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://mitchellharrison.github.io/projects/durham/durham_files/figure-html/build-plot-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Click here for code</summary>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggsave</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"plot.png"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">height =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>)</span></code></pre></div>
+</details>
+</div>
+<p>The success of Durham’s attempts to repair its relationship with black communities depends on the goals of Durham’s policy shifts. If the objective was to diminish negative feelings towards police, Durham has seen modest success. Black communities are the only ones in which fewer members report negative feelings towards police in 2022 than in 2018. However, positive sentiment has also declined in the same communities, resulting in a growing indifference towards Durham PD among black communities.</p>
+<p>Both increasingly negative and decreasingly positive sentiments were most pronounced in white communities. There are many potential explanations for those shifts, including economic shifts, changes to national mood towards policing, shifts in who responds to the survey, and more. However, for the sake of brevity, we will leave those confounding factors unexplored.</p>
+<p>Like many other major American police forces, Durham PD has a long way to go. As it stands, fewer than half of all racial groups in Durham are satisfied with their community’s relationship with its police force. Even with the success of the HEART program, moods towards Durham PD continue to cool on average. A national re-exploration of policing could be to blame, but it is the responsibility of municipal leadership to combat those national currents. Although HEART has handled over 32,000 calls instead of Durham PD, the city <a href="https://abc11.com/post/defund-the-police-budgets-mental-health-crime-stats/12043536/">has not reduced police funding</a>, a key demand of the BLM movement. As <a href="https://www.durhamnc.gov/ArchiveCenter/ViewFile/Item/7368">violent crime rates shrink</a> year-over-year in Durham, police funding continues to grow. Durham is fortunate to have a strong statistical justification for a reduction in police budget. Still, city leadership continues to drag its feet, and without continued public pressure, broader policing change may be unlikely in the near future.</p>
+
+
+
+ ]]></description>
+  <category>Data Viz</category>
+  <category>Research</category>
+  <guid>https://mitchellharrison.github.io/projects/durham/durham.html</guid>
+  <pubDate>Thu, 24 Jul 2025 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>I built a PokeDex with R Shiny</title>
   <dc:creator>Mitch Harrison</dc:creator>
@@ -6250,10 +6988,10 @@ font-style: inherit;">"**Environmental Summary Stats**"</span>))</span></code></
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Environmental Summary Stats</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
 <th id="Minimum" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Minimum</th>
 <th id="Maximum" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Maximum</th>
@@ -6955,10 +7693,10 @@ font-style: inherit;">"**Random sample: reproduction dataset**"</span>))</span><
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Random sample: reproduction dataset</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="species" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">species</th>
 <th id="paired_adults" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">paired_adults</th>
 <th id="date_of_laying" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">date_of_laying</th>
@@ -8225,10 +8963,10 @@ font-style: inherit;">"Upper"</span></span>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>95% Posterior CI: eggs hatched per day</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="species" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Species</th>
 <th id="lower" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Lower</th>
 <th id="upper" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Upper</th>
@@ -8757,10 +9495,10 @@ font-style: inherit;">"**Random sample: growth dataset**"</span>))</span></code>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="9" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Random sample: growth dataset</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="species" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">species</th>
 <th id="individuals" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">individuals</th>
 <th id="date_of_hatching" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">date_of_hatching</th>
@@ -10054,10 +10792,10 @@ font-style: inherit;">"Upper bound"</span></span>
 
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Posterior 95% CI: per-cricket growth rate</strong></th>
 </tr>
-<tr class="odd gt_col_headings">
+<tr class="gt_col_headings even">
 <th id="species" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Species</th>
 <th id="lower" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Lower bound</th>
 <th id="upper" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Upper bound</th>
@@ -10958,10 +11696,10 @@ font-style: inherit;">13</span></span>
 <col style="width: 14%">
 </colgroup>
 <thead>
-<tr class="header gt_heading">
+<tr class="gt_heading header">
 <th colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Posterior 95% confidence intervals</strong></th>
 </tr>
-<tr class="odd gt_col_headings gt_spanner_row">
+<tr class="gt_col_headings gt_spanner_row even">
 <th rowspan="2" id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
 <th colspan="2" id="Growth rate
 (per-cricket)" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
@@ -10974,7 +11712,7 @@ Eggs hatched
 Meat per day
 </div></th>
 </tr>
-<tr class="header gt_col_headings">
+<tr class="gt_col_headings header">
 <th id="lower.x" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Lower</th>
 <th id="upper.x" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Upper</th>
 <th id="lower.y" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Lower</th>
